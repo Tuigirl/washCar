@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>确认支付</title>
+  <meta charset="UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/layer/layer.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/textMiddle.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/carInsurance/iscroll.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/velocity/1.4.1/velocity.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.0.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css"/>
+
+<link rel="stylesheet" href="__APIROOT__/css/api/common.css"/>
+
+<link href="/Public/static/packaged-assets/Xiaochengxu/css/CarViolation\confirmOrder.ac5d81a7.css" rel="stylesheet"><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/./js/vendor.63bfe990.js"></script><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/js/CarViolation\confirmOrder.9a7c7412.js"></script></head>
+<body id="confirmOrder">
+    <div id="all-box" v-cloak>
+        <header></header>
+        <!-- 确认支付列表 -->
+        <transition-group
+          tag="ul" id="wrapper" class="con"
+          appear
+          appear-active-class="animated flipInX"
+        >
+            <li
+              v-for="item in items.illegal_info"
+              v-bind:key="item.SecondaryUniqueCode"
+              @click="ViewDetails(item.SecondaryUniqueCode)"
+            >
+                <h2>{{ items.license_number }}</h2>
+                <section>
+                    <div class="address">{{ '['+item.LocationName+']' }} {{ item.Location }}</div>
+                    <div class="time"><span class="c-A1">时间：</span>{{ item.Time }}</div>
+                    <div class="reason">
+                        <span class="c-A1">原因：</span><span class="reason-s">{{ item.Reason }}</span>
+                        <span class="arrow"><img src="/Public/static/packaged-assets/Xiaochengxu/img/arrow_right-63962e85.png"></span>
+                    </div>
+                    <div class="toll">
+                        <span class="c-A1">办理服务费：</span>{{ '¥ '+(item.Poundage||'0.00') }}
+                    </div>
+                    <div class="fine">
+                        <span class="c-A1">罚款：</span>{{ '¥ '+item.count||'0.00' }}
+                        <!-- <span class="c-A1">扣分：</span>{{ (item.Degree||0)+' 分' }} -->
+                    </div>
+                </section>
+            </li>
+        </transition-group>
+
+        <ul class="foot_button">
+            <li>共计： ¥{{ payment_amount }}元</li>
+            <li role="button" @click="clk_submit">支付</li>
+        </ul>
+    </div>
+    <div id="data" class="d-n"><{$item}></div>
+</body>
+</html>

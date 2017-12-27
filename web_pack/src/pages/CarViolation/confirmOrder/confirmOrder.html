@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>确认支付</title>
+  <%- include src/components/header/ViolationHeader %>
+</head>
+<body id="confirmOrder">
+    <div id="all-box" v-cloak>
+        <header></header>
+        <!-- 确认支付列表 -->
+        <transition-group
+          tag="ul" id="wrapper" class="con"
+          appear
+          appear-active-class="animated flipInX"
+        >
+            <li
+              v-for="item in items.illegal_info"
+              v-bind:key="item.SecondaryUniqueCode"
+              @click="ViewDetails(item.SecondaryUniqueCode)"
+            >
+                <h2>{{ items.license_number }}</h2>
+                <section>
+                    <div class="address">{{ '['+item.LocationName+']' }} {{ item.Location }}</div>
+                    <div class="time"><span class="c-A1">时间：</span>{{ item.Time }}</div>
+                    <div class="reason">
+                        <span class="c-A1">原因：</span><span class="reason-s">{{ item.Reason }}</span>
+                        <span class="arrow"><img src="../../../assets/img/api/arrow_right.png"></span>
+                    </div>
+                    <div class="toll">
+                        <span class="c-A1">办理服务费：</span>{{ '¥ '+(item.Poundage||'0.00') }}
+                    </div>
+                    <div class="fine">
+                        <span class="c-A1">罚款：</span>{{ '¥ '+item.count||'0.00' }}
+                        <!-- <span class="c-A1">扣分：</span>{{ (item.Degree||0)+' 分' }} -->
+                    </div>
+                </section>
+            </li>
+        </transition-group>
+
+        <ul class="foot_button">
+            <li>共计： ¥{{ payment_amount }}元</li>
+            <li role="button" @click="clk_submit">支付</li>
+        </ul>
+    </div>
+    <div id="data" class="d-n"><{$item}></div>
+</body>
+</html>

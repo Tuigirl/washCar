@@ -1,0 +1,274 @@
+.header_con .right p {
+	font-size:12px;
+}
+.first-part {
+    background: url(../../../img/api/money_bg.png) no-repeat center center;
+    background-size: cover;
+	width:100%;
+	margin-bottom: 10px;
+	padding-bottom: 2.231rem;
+	overflow:hidden;
+}
+body{
+	background:#F0F0F0 ;
+}
+.con{
+	overflow: hidden!important;
+}
+.con_body{
+	padding:9px 11px 0px 11px;
+	background: #F0F0F0;
+}
+.money-title{
+	color:white;
+	font-size:1rem;
+	line-height:1rem;
+	text-align:center;
+	margin-top:1.308rem;
+}
+.money-container{
+    margin: auto 2rem;
+    padding-top: 1.7rem;
+    padding-bottom: 1.5rem;
+	border-bottom: 1px dashed rgba(255,255,255,.3);
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+    -webkit-align-items: baseline;
+	align-items: baseline;
+}
+.money-cell{
+	position:relative;
+	margin: 0 auto;
+}
+.money-cell .label-rmb, .money-cell .point-money{
+	position:absolute;
+	font-size:13px;
+	width:47px;
+	color:#C18E00;
+}
+.money-cell .label-rmb{
+	top:0px;
+	left:-47px;
+	text-align:right;
+}
+.money-cell .point-money{
+	bottom:3px;
+	right:-47px;
+	text-align:left
+}
+.money-cell #currentMoney{
+	font-size:3.846rem;
+	line-height:3.846rem;
+	color:white;
+	overflow:hidden;
+}
+
+/*本月收益、本月提现*/
+.income_expenses{
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+    -webkit-justify-content: center;
+	justify-content: center;
+	color: #C18E00;
+	line-height: 2rem;
+	padding-top: 1.5rem;
+}
+.income_expenses li{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 1;          /* Chrome */
+    flex: 1;
+	text-align: center;
+}
+
+.income_expenses li span{
+	font-size: 1.538rem;
+	color: white;
+}
+
+/*账单*/
+.bill-cell:last-child{
+	border:none;
+}
+.second-part{
+	border:none;
+	position:relative;
+	top: 0;
+}
+.bill-title{
+	height:40px;
+	background:#F7F7F7;
+	text-align:center;
+	font-size:1rem;
+	line-height:40px;
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+}
+.bill-title a{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 1;          /* Chrome */
+    flex: 1;
+	color: #A1A1A1;
+	position: relative;
+}
+.bill-title a:not(:last-child):after{
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 0;
+	margin-top: -7px;
+	width: 1px;
+	height: 14px;
+	background-color: #EAEAEA;
+}
+.bill-title-select{
+	color: #fb0 !important;
+}
+.bill-body{
+	position:relative;
+	background:white;
+	overflow-y:auto;
+}
+#jiazai{
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-25px;
+	margin-left:-25px;
+
+
+}
+.inhand .bill-price span{
+	color: #DEDC3D;
+}
+div.bill-cell{
+	margin:0 1.23rem;
+	padding: 0 2rem;
+	border-bottom:1px dashed #E5E5E5;
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+    height: 5rem;
+    -webkit-align-items: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+section.bill-cell{
+	color: #A1A1A1;
+	font-size: 0.846rem;
+	text-align: center;
+	padding: 3px 0;
+}
+.bill-intro{
+    -webkit-box-flex: 2;
+      	-webkit-flex: 2;
+            	flex: 2;
+}
+.bill-null{
+	text-align: center;
+	color: #A1A1A1;
+	position: absolute;
+	margin-top: -23%;
+    top: 33%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    display: none;
+}
+
+.bill-null img{
+	width: 28%;
+}
+
+p.name{
+	color:#595959;
+    font-size: 1rem;
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+p.name span{
+	display: inline-block;
+	margin-left: 5px;
+	width: 2.8rem;
+	height: 1rem;
+	line-height: 1rem;
+	text-align: center;
+	font-size: 0.75rem;
+	border-width: 1px;
+	border-style: solid;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.time{
+	color:#A1A1A1;
+	font-size:0.687rem;
+}
+.bill-price{
+	color:#A1A1A1;
+	font-size:0.687rem;
+	text-align:right;
+	position: relative;
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 1;          /* Chrome */
+    flex: 1;
+}
+.bill-price img{
+	position: absolute;
+	top: 50%;
+	margin-top: -8px;
+	right: -26px;
+}
+.add,.cut,.cut-warit,.outcome,.income,.waitcome{
+    font-size:1.16rem;
+}
+.add,.cut, .cut-warit,.cut-wait{
+    padding-right: 4px;
+}
+
+.income,.cut{
+    color:#FF5A60;
+}
+.outcome,.add{
+	/*color:#9ACD58;*/
+	color:#595959;
+}
+.waitcome, .cut-wait{
+    color: #DEDC3D;
+}
+.withdrawals-bar{
+    position: fixed;
+    left: 11px;
+    right: 11px;
+    bottom: 10px;
+    background: #FFBB00;
+    color: white;
+    text-align: center;
+    padding: 14px 0;
+    border: 0;
+    font-size: 15px;
+    z-index: 100;
+}
+.withdrawals-mask{
+	width: 100%;
+	height: 10px;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	background-color: #F0F0F0;
+}
+.withdrawals{
+	letter-spacing: 8px;
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+    -webkit-align-items: center;
+	align-items: center;
+    -webkit-justify-content: center;
+	justify-content: center;
+}

@@ -1,0 +1,682 @@
+.no_buy span {
+    float: right;
+    display: inline-block;
+}
+
+body, form {
+    background-color: #f0f0f0;
+}
+.con{
+    -webkit-overflow-scrolling: touch;
+}
+.con_body {
+    position: relative;
+    margin-bottom: 10px;
+    border: 4px solid #fff;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.price_number {
+    margin-left: 8px;
+    color: #898989;
+    font-size: 1.08rem;
+    vertical-align: top;
+}
+
+.total_money img, .total_moneys img {
+    width: 50px;
+    height: 15px;
+    margin-left: 8px;
+}
+
+.total_money {
+    height: 42px;
+    line-height: 42px;
+    overflow: hidden;
+    width: calc(100% + 2px);
+    margin-left: -1px;
+}
+
+.state-disc {
+    background: #ff5a60;
+    height: 42px;
+    width: 100%;
+}
+
+.total_moneys {
+    height: auto;
+    line-height: 25px;
+    padding: 10px 28px 10px 15px;
+    text-align: right;
+    overflow: hidden;
+    background-color: white;
+}
+.total_moneys .total_number:before{
+    margin-top: -3px;
+    font-size: 0.8rem;
+}
+
+.total_moneys .total_number, .total_money .total_number {
+    color: #2d3841;
+    font-size: 1.462rem;
+}
+
+.total_money .left, .total_moneys .left {
+    width: 40%;
+    float: left;
+    text-align: left;
+    padding-left: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.total_money .right, .total_moneys .right {
+    width: 60%;
+    float: right;
+    text-align: right;
+    padding-right: 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.total_money .offer-fail-l, .offer-fail-m, .offer-fail-r {
+    background: #ff5a60;
+    float: left;
+    height: 42px;
+}
+
+.total_money .offer-fail-l {
+    width: 24%;
+}
+
+.total_money .offer-fail-m {
+    width: 76%;
+}
+
+.total_money .wait-hebao:nth-child(1) {
+    -webkit-box-flex: 2;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 2;
+    /* Chrome */
+    flex: 2;
+}
+
+.total_money .wait-hebao:nth-child(2) {
+    -webkit-box-flex: 4;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 4;
+    /* Chrome */
+    flex: 4;
+}
+
+.total_money .wait-hebao:nth-child(3) {
+    -webkit-box-flex: 1.4;
+    /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 1.4;
+    /* Chrome */
+    flex: 1.4;
+}
+
+.offer-fail-m {
+    width: 58%;
+    color: #fff;
+    text-align: left;
+    line-height: 18px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-align-content: center;
+    align-content: center;
+}
+
+.offer-fail-m div {
+    height: 18px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.offer-fail-m p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    ~display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    line-height: 42px;
+    padding-right: 7.5%;
+}
+
+.offer-fail-m p a {
+    color: #fff;
+}
+
+.offer-fail-r {
+    display: none;
+    width: 30%;
+    padding-right: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.offer-fail-r button {
+    height: 29px;
+    width: 76px;
+    background: #fff;
+    color: #2d3841;
+    border-radius: 2px;
+    font-size: 1rem;
+}
+
+
+/*.total_money span,.total_moneys span{
+    color:#e4393c;
+}*/
+
+.total_money .right p, .total_moneys .right p {
+    font-size: 1.17rem;
+}
+
+.con_body_item {
+    height: 50px;
+    border: none;
+    font-size: 1rem;
+    padding-left: 16px;
+    padding-right: 28px;
+    background-color: white;
+}
+
+.con_body_item dt {
+    height: 50px;
+    line-height: 50px;
+    width: 74%;
+    color: #595959;
+}
+
+.con_body_item dd {
+    width: 26%;
+    height: 50px;
+    line-height: 50px;
+}
+
+.con_body {
+    padding: 0px;
+}
+
+.con_body .con_body_item {
+    padding: 0px 10px 0 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-color: #eee;
+}
+
+.price {
+    width: 65%;
+    float: left;
+    height: 60px;
+    line-height: 60px;
+}
+
+.price img {
+    height: 1.2rem;
+    display: inline-block;
+}
+
+.price span {
+    width: 80%;
+    float: left;
+}
+
+.price div {
+    float: left;
+    width: 40%;
+}
+
+.choose {
+    height: 60px;
+}
+
+.widthprice {
+    width: 35%;
+    float: left;
+}
+
+.freeIcon {
+    width: 54px;
+    height: 16px;
+    margin-left: 8px;
+    margin-top: 12px;
+}
+
+.insurance_name {
+    /*float: left;*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.brand_name {
+    padding: 0 10px;
+    height: 54px;
+    line-height: 54px;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 1.154rem;
+    background-color: white;
+}
+
+.brand_name > div:nth-child(1) {
+    float: left;
+    width: 40%;
+/*    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;*/
+}
+
+.brand_name span.last-insure {
+    font-size: 0.8462rem;
+    color: #a1a1a1;
+    float: left;
+    height: 17px;
+    line-height: 17px;
+    width: 53px;
+    background: #01d1c1;
+    border-radius: 4px;
+    margin-top: 19px;
+    color: #fff;
+    text-align: center;
+}
+
+@media (max-width: 320px) {
+    .brand_name > div:nth-child(1) {
+        width: 43%;
+    }
+    dl[data-type="biz"] {
+        padding-left: 25px !important;
+    }
+}
+
+.brand_name > div:nth-child(1) img {
+    border-radius: 50%;
+    width: 2.4rem;
+    border: 1px #d2d2d2 solid;
+    vertical-align: middle;
+    margin-top: -4px;
+}
+
+.brand_name > div:nth-child(1) span {
+    padding-left: 1rem;
+}
+
+.order-time {
+    color: #ccc;
+    float: right;
+    font-size: 12px;
+}
+
+
+/*.con{
+    background:#fff;
+}*/
+
+.offer_sus .insur_wrap {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.offer_fail .insur_wrap, .offer_ing .insur_wrap {
+    padding: 10px 30px 10px 25px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+
+/* ¼ÓÔØ²ã */
+
+.add-bg01 {
+    animation: scale .5s;
+    -webkit-animation: scale .5s;
+}
+
+.load-bg {
+    width: 22rem;
+    position: fixed;
+    left: 50%;
+    margin-left: -11rem;
+    top: 25%;
+    bottom: 25%;
+    background: #fff;
+    z-index: 99999;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 5px;
+    overflow: hidden;
+    transform-origin: center center;
+    -webkit-transform-origin: center center;
+    display: none;
+}
+
+@keyframes scale {
+    from {
+        transform: scale(0.1);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@-webkit-keyframes scale {
+    from {
+        transform: scale(0.1);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+/*弹框提示*/
+.load-bg h1 {
+    font-size: 17px;
+    height: 12%;
+    text-align: center;
+    border-bottom: 1px solid #e5e5e5;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    position: relative;
+}
+
+.load-bg h1 span {
+    padding-right: 12px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -7.5px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.text-desc {
+    padding: 6.33% 8.67% 12%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.text-desc > div:first-child {
+    text-align: justify;
+    line-height: 18px;
+    overflow-y: auto;
+    max-height: 11rem;
+}
+@media (max-height: 595px) {
+    .text-desc > div:first-child {
+        max-height: 8rem;
+    }
+}
+
+.text-desc .tishi {
+    width: 82.66%;
+    position: absolute;
+    top: 100%;
+    margin-top: -8.5rem;
+    line-height: 1.5rem;
+    left: 8.67%;
+    right: 8.67%;
+    border-top: 1px solid #E5E5E5;
+}
+.text-desc .tishi h5{
+    color: #A1A1A1;
+    position: absolute;
+    top: 0;
+    left: 17.5%;
+    right: 17.5%;
+    margin-top: -0.423rem;
+    text-align: center;
+    width: 65%;
+    font-size: 0.846rem;
+    line-height: 0.846rem;
+    background-color: white;
+    font-weight: 100;
+}
+.text-desc .tishi a{
+    display: block;
+    min-height: 3rem;
+    margin-top: 2rem;
+    color: white;
+    background: #FB0 url(../../../img/api/dial.png) 16.5% center no-repeat;
+    background-size: 2.154rem;
+    padding: 0.846rem 33%;
+    white-space: nowrap;
+}/*----end*/
+
+.baodan-price {
+    color: #a1a1a1;
+}
+
+.sum-insurance {
+    float: left;
+    color: #a1a1a1;
+    font-size: 0.846rem;
+    padding-top: 4px;
+}
+.sale-price{
+  position: relative;
+}
+.sale-price img{
+  position: absolute;
+  right: -2rem;
+  top: 50%;
+  margin-top: -1rem;
+  width: 1rem;
+  height: 1rem;
+  padding: 0.5rem;
+}
+.discount-price {
+    display: none;
+}
+
+.discount-price b, i.normal b {
+    color: #a1a1a1;
+    font-size: 0.846rem;
+}
+
+.insure-wait {
+    width: 11.692rem;
+    height: 10.923rem;
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -5.846rem;
+    margin-top: -5.462rem;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: none;
+    z-index: 9999;
+}
+
+.insure-wait .progress-hint {
+    line-height: 3.5rem;
+    transform: scale(.8);
+    color: #A1A1A1;
+    text-align: center;
+}
+
+/*商业险------*/
+.company_info .shangYe {
+    position: relative;
+}
+
+.company_info .shangYe img.gray_arrow {
+    display: none;
+    position: absolute;
+    height: 10px;
+    top: 100%;
+    left: 50%;
+    margin-top: -10px;
+    margin-left: -12px;
+}
+
+.company_info .shangYe img.biz_arrow {
+    position: absolute;
+    height: 13px;
+    top: 50%;
+    left: 95%;
+    margin-top: -6px;
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+}
+
+.company_info dl[data-type="biz"] {
+    line-height: 40px;
+    padding-left: 45px;
+    height: 40px;
+    background: #f7f7f7;
+    display: none;
+}
+
+dl.con_body_item[data-type='biz'] dt{
+    line-height:40px;
+    height:40px;
+    font-size: 0.846rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+/*    -webkit-align-items: center;
+    align-items: center;*/
+}
+
+.company_info dl[data-type="biz"] dd {
+    line-height: 40px;
+    height: 40px;
+}/*------end*/
+
+@media (max-width: 360px) {
+    .company_info dl[data-type="biz"] {
+        padding-left: 25px !important;
+    }
+    .freeIcon {
+        width: 4.2rem;
+        margin-left: 4px;
+    }
+    .price_number {
+        margin-left: 4px;
+    }
+}
+
+ul.con_body_item {
+    background: #fff no-repeat scroll 0 0;
+    border-bottom: 1px solid #f4f4f4;
+    box-sizing: border-box;
+    line-height: 60px;
+    padding: 0 10px;
+    width: 100%;
+    color: red;
+}
+
+.no_buy {
+    height: 30px;
+    line-height: 30px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#descs h4 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.total_number:before {
+    content: "￥";
+    display: inline-block;
+    color: #A1A1A1;
+    font-size: 0.7rem;
+    vertical-align: top;
+    margin-top: -1px;
+}
+
+.total_number + span {
+    color: #a1a1a1 !important;
+    font-size: 0.7em;
+}
+
+.total_moneys .total_number + span, .total_money .total_number + span {
+    transform-origin: 100% 100%;
+}
+
+.HeBaoStatu {
+    padding-left: 24%;
+    height: 42px;
+    line-height: 42px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.923rem;
+    color: white;
+    position: relative;
+}
+
+.HeBaoStatu img {
+    float: right;
+    margin-right: 1.385rem;
+    width: 10px;
+    height: 16px;
+    margin-top: 13px;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+}
+
+.HeBaoStatu .iwarnSuccess {
+    background: url(../../../img/api/iwarnSuccess.png) center center no-repeat;
+    background-size: 85%;
+    width: 8rem;
+    height: 100%;
+    position: absolute;
+    left: -6%;
+    top: 0;
+}
+
+.company_info {
+    margin: 0 8px;
+    border-left: 1px solid #e5e5e5;
+    border-right: 1px solid #e5e5e5;
+}
+.chunk-parcel:not(:first-child){
+  margin-top: 0.385rem;
+  border-top: 1px solid #EBEBEB;
+}
+.chunk-parcel{
+  background-color: #FAFAFA;
+  padding-bottom: 1.231rem;
+}
+.separate {
+    border-top: 0;
+    border-bottom: 0;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 10px;
+    color: #a1a1a1;
+    font-size: 0.8462rem;
+}

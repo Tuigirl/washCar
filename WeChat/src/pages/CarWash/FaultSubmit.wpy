@@ -1,0 +1,147 @@
+<style lang="stylus">
+@import '../../styles/_variables'
+.vux-x-textarea
+  padding 0!important
+  textarea,
+  .weui-textarea-counter
+    background-color lighten(body-background-color, 50%)!important
+  textarea
+    font-size 12px
+    &::-webkit-input-placeholder
+      color lighten(deault-placeholder-color, 7%)
+    & + .weui-textarea-counter
+      font-size 9px
+</style>
+
+<style lang="stylus" scoped>
+@import '../../styles/_variables'
+.checker-item
+  height auto
+  width auto
+  border-radius 2px
+  border 1px solid border-line-color
+  color lighten(deault-placeholder-color, 7%)
+  font-size 12px
+  padding 3px 11px
+  margin-bottom mg = 10px
+  white-space nowrap
+  &:not(:last-child)
+    margin-right mg
+.checker-item-active
+  border-color lighten(color-yellow, 1%)
+  color lighten(color-yellow, 1%)
+  background-color lighten(color-yellow, 90%)
+.checker-item-disabled
+  border-color lighten(border-line-color, 10%)
+  color lighten(deault-placeholder-color, 50%)
+  background-color lighten(deault-placeholder-color, 90%)
+
+.container
+  .above__box
+    padding 0 12px 10px
+    background-color white
+    .title
+      line-height 35px
+    .issue
+      min-height 90px
+      background-color lighten(body-background-color, 50%)
+      border 1px solid border-line-color
+      padding 6px 11px
+      box-sizing border-box
+      position relative
+.page__footer
+  padding 0 10px
+  box-sizing border-box
+  button
+    border 1px solid lighten(#D49B00, 7%)!important
+    font-size 18px!important
+    height 46px!important
+    line-height 46px!important
+    border-radius 5px!important
+</style>
+<template lang="pug">
+  section(class='container')
+    Scroller(ref="myScroller" height='-71' lock-x scrollbar-y)
+      div(class='above__box')
+        div(class='title') 故障申报
+        checker(
+          v-model='issueValue'
+          default-item-class='checker-item'
+          selected-item-class='checker-item-active'
+          disabled-item-class='checker-item-disabled')
+          checker-item(
+            :key='index'
+            v-for='(item, index) in issueTags'
+            :value='item') {{ item }}
+          group(class='issue', gutter='0')
+            x-textarea(
+              v-model='desc'
+              :max='300'
+              :height='62'
+              :show-counter='!false'
+              placeholder='请您在次描述问题')
+    div(class='page__footer')
+      x-button(text='提交', @click.native='submitHandler')
+</template>
+
+<script>
+import { mapState } from 'vuex'
+import { Scroller, XButton, Checker, CheckerItem, Group, XTextarea } from 'vux'
+import XHeader from '@/components/x-header'
+
+const issueTags = ['无法使用', '没有电', '没有水', '水管损坏', '水压不足', '其他']
+
+export default {
+  name: 'CarWash__FaultSubmit',
+
+  components: {
+    Scroller, XButton, Checker, CheckerItem, Group, XTextarea,
+    XHeader
+  },
+
+  data() {
+    return {
+      issueValue: '无法使用',
+      issueTags,
+      desc: ''
+    }
+  },
+
+  computed: {
+    ...mapState(['openid']),
+    ...mapState('CarWashData', ['orderid']),
+    _desc() {
+      return this.issueValue === '其他' ? this.desc : this.issueValue
+    }
+  },
+
+  methods: {
+    submitHandler() {
+      if (this.issueValue === '其他' && this.desc.length === 0) {
+        this.$vux.toast.show({
+          type: 'text',
+          isShowMask: true,
+          text: '请填写描述信息',
+          position: 'middle',
+          width: '12.5em'
+        })
+      } else {
+        let params = {
+          openid: this.openid,
+          orderid: this.orderid,
+          desc: this._desc
+        }
+        this.$http.post('/index.php/Wechat/WashCar/orderFeedBack', params)
+          .then(res => {
+            if (res.code === 0) {
+              this.$vux.alert.show({
+                content: '提交成功',
+                onHide: () => WeixinJSBridge && WeixinJSBridge.call('closeWindow') // 关闭浏览器窗口
+              })
+            }
+          })
+      }
+    }
+  }
+}
+</script>

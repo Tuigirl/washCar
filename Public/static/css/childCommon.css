@@ -1,0 +1,49 @@
+body {
+	list-style-type: none;
+	padding: 0px;
+	font-family:"微软雅黑";
+}
+input[type="checkbox"]{
+    border:0;
+}
+.d-n{display: none;}
+#wait {
+	background:repeat scroll 0 0 ;
+	background-color:#C2C2C2;
+    height: 8000px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 9998;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+	display:none;
+}
+#wait img {
+	left: 60%;
+    margin-left: -200px;
+    position: fixed;
+    top: 45%;
+    z-index: 9999;
+}
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+.clear{
+	clear:both;
+	display:block;
+}
+.star{
+    color:red;
+}
+select{
+    border-radius:4px;
+    width:85px;
+    height:28px;
+}

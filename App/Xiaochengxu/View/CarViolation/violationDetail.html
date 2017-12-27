@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>违章详情</title>
+  <meta charset="UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/layer/layer.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/textMiddle.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/carInsurance/iscroll.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/velocity/1.4.1/velocity.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.0.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css"/>
+
+<link rel="stylesheet" href="__APIROOT__/css/api/common.css"/>
+
+<link href="/Public/static/packaged-assets/Xiaochengxu/css/CarViolation\violationDetail.ac5d81a7.css" rel="stylesheet"><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/./js/vendor.63bfe990.js"></script><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/js/CarViolation\violationDetail.c6c0b2b7.js"></script></head>
+<body id="violationDetail">
+    <div id="all-box" v-cloak>
+        <header></header>
+        <!-- 违章详情 content -->
+        <ul id="wrapper" class="con">
+            <li>
+                <section :style="{background: item.Degree > 0&&'#F8F8F8'}">
+                    <div class="address">
+                        <template v-if="item.LocationName.length>3">
+                            {{ '['+item.LocationName+']'+item.Location }}
+                        </template>
+                        <template v-else>
+                            <span class="city" v-bind:style="{left: city_left}">{{ '['+item.LocationName+']' }}</span>
+                            {{ item.Location }}
+                        </template>
+                    </div>
+                    <div class="time"><span class="c-A1">时间：</span>{{ item.Time }}</div>
+                    <div class="reason">
+                        <span class="c-A1">原因：</span><span class="reason-s">{{ item.Reason }}</span>
+                    </div>
+                    <div class="code">
+                        <span class="c-A1">代码：</span>{{ item.Code }}
+                    </div>
+                    <div class="fine">
+                        <span class="c-A1">罚款：</span>{{ '¥ '+(item.count||'0.00') }}
+                        <template v-if="item.Degree > 0">
+                          <span class="c-A1">扣分：</span>{{ (item.Degree||0)+' 分' }}
+                        </template>
+                    </div>
+                    <div class="hint" v-if="item.Degree > 0">{{ item.CanprocessMsg }}</div>
+                </section>
+            </li>
+        </ul>
+        <ul class="foot_button" @click="clk_submit" v-show="is_support_online_pay">
+            <li role="button">去办理</li>
+        </ul>
+    </div>
+    <div class="d-n" id="data"><{$item}></div>
+</body>
+</html>

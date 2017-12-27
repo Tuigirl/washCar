@@ -1,0 +1,56 @@
+<style lang="stylus" scoped>
+.x-popup
+  position fixed
+  left 0
+  right 0
+  bottom 0
+  z-index 1001
+  background-color transparent
+  .x-popup__title
+    font-size 15px
+    line-height 15px
+    padding 20px 15px
+  .x-popup__content
+    margin 0 37px
+  .x-popup__button
+    height 50px
+    font-size 14px
+    background-color white
+</style>
+
+<template lang="pug">
+  section
+    transition(
+      enter-active-class="animated fadeInUpBig"
+      leave-active-class="animated fadeOutDownBig"
+      mode="out-in"
+    )
+      div(class='x-popup', :style='{ background: background }', v-if='visible')
+        div(class='x-popup__title') {{ title }}
+        div(class='x-popup__content')
+          slot(name='content')
+        x-button(class='x-popup__button', @click.native='closePopupTap') 取消
+    XMask(:show.sync='visible', @tap="closePopupTap")
+</template>
+
+<script>
+import { XButton } from 'vux'
+import XMask from './x-mask'
+
+export default {
+  name: 'XPopup',
+  components: { XButton, XMask },
+
+  props: {
+    visible: Boolean,
+    title: String,
+    background: String
+  },
+
+  methods: {
+    closePopupTap() {
+      this.$emit('update:visible', false)
+    }
+  }
+}
+</script>

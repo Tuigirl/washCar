@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>违章查询结果</title>
+  <meta charset="UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/layer/layer.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/textMiddle.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/carInsurance/iscroll.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/velocity/1.4.1/velocity.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.0.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css"/>
+
+<link rel="stylesheet" href="__APIROOT__/css/api/common.css"/>
+
+<link href="/Public/static/packaged-assets/Xiaochengxu/css/CarViolation\violationList.ac5d81a7.css" rel="stylesheet"><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/./js/vendor.63bfe990.js"></script><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/js/CarViolation\violationList.06ed8a53.js"></script></head>
+<body>
+    <div id="all-box" v-cloak>
+        <header></header>
+        <!-- 查询 有违章展示 -->
+        <transition-group
+          v-show="!!items.illegal_info.length"
+          tag="ul" id="wrapper" class="con"
+          appear
+          appear-active-class="animated flipInX"
+        >
+            <li
+              v-for="(item,index) in items.illegal_info"
+              :key="index"
+              @click="ViewDetails(item)"
+            >
+                <div class="cleared" v-if="isCleared(item)">
+                    <img src="/Public/static/packaged-assets/Xiaochengxu/img/YBL_icon-f53aab05.png">
+                </div>
+                <section :style="{background: item.Degree > 0&&'#F8F8F8'}">
+                    <div class="address">{{ '['+item.LocationName+']' }} {{ item.Location }}</div>
+                    <div class="time"><span class="c-A1">时间：</span>{{ item.Time }}</div>
+                    <div class="reason">
+                        <span class="select" @click.stop="clk_select(index)" :class="{ no_click: item.Degree > 0||isCleared(item) }">
+                            <img src="/Public/static/packaged-assets/Xiaochengxu/img/select_no-cf5341e9.png" v-show="item.is_select">
+                            <img src="/Public/static/packaged-assets/Xiaochengxu/img/select_yes-fd47f837.png" v-show="!item.is_select">
+                        </span>
+                        <div>
+                            <span class="c-A1">原因：</span><span class="reason-s">{{ item.Reason }}</span>
+                        </div>
+                        <span class="arrow">
+                            <img src="/Public/static/packaged-assets/Xiaochengxu/img/arrow_right-63962e85.png">
+                        </span>
+                    </div>
+                    <div class="fine">
+                        <span class="c-A1">罚款：</span>{{ '¥ '+(item.count||'0.00') }}
+                        <template v-if="item.Degree > 0">
+                          <span class="c-A1">扣分：</span>{{ (item.Degree||0)+' 分' }}
+                        </template>
+                    </div>
+                    <div class="hint" v-if="item.Degree > 0">{{ item.CanprocessMsg }}</div>
+                </section>
+            </li>
+        </transition-group>
+        <ul class="foot_button" v-show="!!items.illegal_info.length">
+            <li class="select_all" @click="clk_selectAll">
+                <span v-show="!is_selectAll"><img src="/Public/static/packaged-assets/Xiaochengxu/img/selectAll_no-c2c810bf.png"></span>
+                <span v-show="is_selectAll"><img src="/Public/static/packaged-assets/Xiaochengxu/img/selectAll_yes-606e94f8.png"></span>
+                <span>全选</span>
+            </li>
+            <li>违章 <animated-integer v-bind:value="payment_info[0]"></animated-integer></li>
+            <li>罚款 <animated-integer v-bind:value="payment_info[1]"></animated-integer></li>
+            <!-- <li>扣分 <animated-integer v-bind:value="payment_info[2]"></animated-integer></li> -->
+            <li role="button" @click="clk_submit">罚款代缴</li>
+        </ul>
+
+        <!-- 查询 无违章的展示 -->
+        <ul id="NoList" v-show="!items.illegal_info.length">
+            <li><img src="/Public/static/packaged-assets/Xiaochengxu/img/no_violation-b594fcb3.png"/></li>
+            <li>该车辆暂无违章记录</li>
+        </ul>
+    </div>
+    <input type="hidden" id="session_id" value="<{$session_id}>">
+    <div class="d-n" id="data"><{$item}></div>
+</body>
+</html>

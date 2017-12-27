@@ -1,0 +1,260 @@
+html{
+    height:100%;
+}
+table,td,dd{
+    margin:0;
+    padding:0;
+}
+body{
+    background-color: #F7F7F7;
+}
+.con{
+    margin: 0 0.769rem;
+}
+.con_body {
+    padding: 1rem 1.2rem;
+}
+.con_body dl dt{
+    width:30%;
+}
+.con_body dl dd{
+    width:70%;
+}
+
+/* 支付成功状态 */
+.con_head{
+    height:45px;
+    background: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.con_head > div{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 1;          /* Chrome */
+    flex: 1;
+    -webkit-align-content: center;
+    align-content: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    width: 1%;
+}
+.brand_name{
+    margin: 0 0.846rem;
+    padding: 2.615rem 0;
+    border-bottom: 1px solid #E5E5E5;
+}
+.brand_name img{
+    display: block;
+    margin: 0 auto;
+    width: 5.538rem;
+    height: 5.538rem;
+    border: 3px solid #E5E5E5;
+    border-radius: 50%;
+}
+.brand_name span{
+    display: block;
+    text-align: center;
+    padding-top: .8rem;
+}
+
+.foot_button{
+    font-size: 1rem;
+}
+section{
+    background-color: white;
+    border: 1px solid #E5E5E5;
+    margin-bottom: 0.615rem;
+    font-size: 0.923rem;
+}
+
+.tit-header{
+    color: #a1a1a1;
+    height: 30px;
+    line-height: 30px;
+    font-size: 0.923rem;
+    text-align: center;
+    background-color: #f7f7f7;
+    box-sizing: border-box;
+}
+.con > .tit-header{
+    text-align: left;
+}
+.con_body_item{
+    border:none;
+}
+.box .con_body_item{
+    height:auto;
+    overflow: hidden;
+    line-height:30px;
+}
+.box .con_body_item dt{
+    height:30px;
+    line-height:30px;
+}
+.box .con_body_item dd{
+    height:30px;
+    overflow: hidden;
+    line-height:30px;
+}
+.box .con_body_item dd.multi-row{
+    height: auto;
+    text-align: justify;
+    word-break: break-all;
+    letter-spacing: 2px;
+    line-height: 16px;
+    padding-top: 7px;
+    text-justify:inter-ideograph;
+}
+
+.total_number{
+    color: #595959;
+    font-size: 1.153rem;
+}
+.total_payment{/*支付金额*/
+    color: #D74646;
+    font-size: 1.45rem !important;
+}
+.total_payment:before{
+    transform-origin: 100% 0 0 !important;
+}/*----end*/
+
+.total_number:before {
+    content: "￥";
+    font-size: 1.153rem;
+    display: inline-block;
+    color: #A1A1A1;
+    transform-origin: 100% 40% 0;
+    transform: scale(.6);
+}
+.total_number + span{
+    color: #A1A1A1;
+    display: inline-block;
+    font-size: 0.846rem;
+    line-height: 0.846rem;
+}
+.company_info{
+    background-color: white;
+    border-bottom: 1px solid #E5E5E5;
+}
+.company_info dl[data-down="biz"]{
+    line-height: 40px;
+    padding-left: 45px;
+    display: none;
+    height: 40px;
+    background: rgb(247, 247, 247);
+}
+.company_info dl[data-down="biz"] dt{
+    line-height: 40px;
+    height: 40px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.company_info dl[data-down="biz"] dd{
+    line-height: 40px;
+    height: 40px;
+}
+
+.company_info .con_body_item{
+    height:50px;
+    border:none;
+    padding-left: 16px;
+    padding-right: 28px;
+}
+.company_info .con_body_item dt{
+    width: 65%;
+    height: 50px;
+}
+.company_info .con_body_item dd{
+    width: 35%;
+    height: 50px;
+}
+.company_info .shangYe{
+    position: relative;
+}
+.company_info .shangYe img.gray_arrow{
+    display:none;
+    position: absolute;
+    height: 10px;
+    top: 100%;
+    left: 50%;
+    margin-top: -10px;
+    margin-left: -12px;
+}
+.company_info .shangYe img.biz_arrow{
+    position: absolute;
+    height: 13px;
+    top: 50%;
+    left: 95%;
+    margin-top: -6px;
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+}
+
+.insurance_name span{
+    color: #a1a1a1;
+}
+.freeIcon{
+    width:4.2rem;
+    margin-left:8px;
+    vertical-align: text-top;
+}
+.price_number{
+    margin-left: 8px;
+    vertical-align: top;
+}
+
+.total_money{
+    padding:1.231rem 28px 1.692rem 16px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: baseline;
+    -webkit-align-items: baseline;
+    align-items: baseline;
+}
+.total_money > div{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 1;          /* Chrome */
+    flex: 1;
+    width: 1%;
+}
+.total_money > div.amounts{
+    text-align: right;
+    -webkit-box-flex: 2;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 2;          /* Chrome */
+    flex: 2;
+}
+.total_money > div.amounts p{
+    text-align: left;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.total_money{
+    color:#a1a1a1;
+}
+
+@media (max-width: 360px) {
+    .company_info dl[data-down="biz"]{
+        padding-left: 25px !important;
+    }
+    .total_number{
+        font-size: 1.1rem;
+    }
+    .total_payment{/*支付金额*/
+        font-size: 1.25rem !important;
+    }
+    .freeIcon{
+        width:3.85rem;
+        margin-left:4px;
+    }
+    .price_number{
+        margin-left: 4px;
+    }
+}

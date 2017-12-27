@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>违章订单</title>
+  <meta charset="UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/layer/layer.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/textMiddle.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/carInsurance/iscroll.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/velocity/1.4.1/velocity.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css"/>
+
+<link rel="stylesheet" href="__APIROOT__/css/api/common.css"/>
+
+<link href="/Public/static/packaged-assets/Xiaochengxu/css/CarViolation\orderList.b89c3937.css" rel="stylesheet"><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/./js/vendor.30fdf11b.js"></script><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/js/CarViolation\orderList.63501523.js"></script></head>
+<body>
+    <div id="all-box" v-cloak>
+        <header v-show="!isWechat">
+            <div class="header_con">
+                <div class="left">
+                    <img src="/Public/static/packaged-assets/Xiaochengxu/img/back_arrow-e95377d1.png" width="12px" @click="close"/>
+                </div>
+                <div class="middle"><h1>代缴订单</h1></div>
+                <div class="right"></div>
+
+                <ul class="choose-items" @click="SwitchTab($event)">
+                    <li :class="{yellow:current_tabIndex==0}"><span>全部</span></li>
+                    <li :class="{yellow:current_tabIndex==1,'news-circle':news_circle}"><span>办理中</span></li>
+                    <li :class="{yellow:current_tabIndex==2}"><span>已完成</span></li>
+                    <li :class="{yellow:current_tabIndex==3}"><span>已退款</span></li>
+                </ul>
+            </div>
+        </header>
+
+        <div
+          id="wrapper"
+          class="con"
+          bind-module="iscroll"
+          :style="{top: isWechat&&'0px'}"
+        >
+
+            <div id="scroller" v-show="computedList.length>0">
+                <!-- 下拉刷新 -->
+                <div id="pullDown">
+                    <span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新...</span>
+                </div>
+
+                <!-- 订单内容 -->
+                <!-- <transition-group
+                  tag="ul" id="pullCon"
+                  appear
+                  appear-active-class="animated flipInX"
+                  enter-active-class="animated lightSpeedIn"
+                > -->
+                <!-- 订单内容 -->
+                <transition-group
+                  tag="ul" id="pullCon"
+                  :css="false"
+                  appear
+                  @before-appear="beforeEnter"
+                  @appear="enter"
+                  @after-appear="refIscroll"
+                  @before-enter="beforeEnter"
+                  @enter="enter"
+                  @after-enter="refIscroll"
+                  @leave="leave"
+                  @after-leave="refIscroll"
+                >
+                    <li
+                      :key="index"
+                      :data-status="item.orderStatus"
+                      v-for="(item, index) in computedList"
+                      v-if="isWechat||item.orderStatus!=0"
+                      @click="ViewDetails(item)"
+                    >
+                        <section class="order-head">
+                            <h3 class="c-36">
+                                {{ item.license_number.substr(0, 1)+ '·' + item.license_number.substr(1, item.license_number.length - 1) }}
+                            </h3>
+                            <div >
+                              <span v-if="item.orderStatus==0&&item.isDiffShow" class="c-A1">
+                                剩余{{ Math.floor(item.diff / 60) }}分{{ item.diff % 60 }}秒
+                              </span>
+                              <span :style="{color:order_status(item.orderStatus).color}">
+                                {{ order_status(item.orderStatus).text }}
+                              </span>
+                            </div>
+                        </section>
+                        <section class="order-info">
+                            <div class="fine">
+                              <div>
+                                <span class="c-A1">违章：</span>{{ item.num }}
+                                <span class="c-A1">罚款：</span>{{ '¥ '+(item.fine||'0.00') }}
+                              </div>
+                              <span
+                                class="pay_btn"
+                                v-if="item.orderStatus==0"
+                                @click.stop="go_wx_pay(item.violation_order_id)"
+                              >
+                                支付
+                              </span>
+                            </div>
+                            <div class="toll">
+                                <span class="c-A1">办理服务费：</span>
+                                <span class="c-59">{{ '¥ '+(item.poundage||'0.00') }}</span>
+                            </div>
+                            <div class="payment-amount">
+                                <span class="c-A1">支付金额：</span>
+                                <span class="c-36">{{ '¥ '+(item.actualAmount||'0.00') }}</span>
+                            </div>
+                        </section>
+                        <section class="predict c-A1" v-if="item.orderStatus==1">
+                            (预计3~5个工作日完成)
+                        </section>
+                    </li>
+                </transition-group>
+
+                <!-- 上拉加载 -->
+                <div id="pullUp">
+                    <span class="pullUpIcon"></span><span class="pullUpLabel">加载更多...</span>
+                </div>
+            </div>
+
+            <div class="order-wrap" v-show="computedList.length==0">
+                <div class="no_order">
+                    <img src="/Public/static/packaged-assets/Xiaochengxu/img/no_order-af5207b6.png" />
+                    <p>您当前没有订单哦</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="data" class="d-n"><{$item}></div>
+    <input id="session_id" type="hidden" value="<{$session_id}>">
+    <input id="open_id" type="hidden" value="<{$open_id}>">
+<body>
+</html>

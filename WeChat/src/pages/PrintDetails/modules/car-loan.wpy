@@ -1,0 +1,53 @@
+<template>
+  <section v-if="isShowLoan">
+    <div class="h5">
+      <span>汽车抵押贷款</span>
+      <button @click="goToPage('carGuaranty')" v-show="WebViewConfig.is_show === 1">办理</button>
+    </div>
+    <div class="card car_used">
+      <div class="up_container">
+        <div class="list">
+          <div class="nm">
+            <span>凭您的爱车，预计可获得</span>
+            <span class="strong c_yellow">
+              {{ _price }}
+            </span>
+            <span>的车辆抵押贷款额度。</span>
+          </div>
+        </div>
+        <block v-if="city_id == 128">
+          <div class="list">
+            <div>驾遇合作伙伴久鼎车贷 押手续不押车。</div>
+          </div>
+          <div class="list">
+            <div>贷款一：等额本息9厘。110%放款。</div>
+          </div>
+          <div class="list">
+            <div>贷款二：先息后本1.6。满成放款。</div>
+          </div>
+        </block>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+import mixin from '@/mixins/print-details.js'
+import { numberComma } from 'vux'
+
+export default {
+  name: 'PrintDetails__CarLoan',
+
+  mixins: [mixin],
+
+  props: ['WebViewConfig'],
+
+  computed: {
+    _price() {
+      if (this.isShowLoan && this.carLoan)
+        return this.f(numberComma(Math.round(this.carLoan.max * 0.9)))
+      return ''
+    }
+  }
+}
+</script>

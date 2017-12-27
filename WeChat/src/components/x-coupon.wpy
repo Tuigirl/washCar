@@ -1,0 +1,108 @@
+<style lang="stylus" scoped>
+@import '../styles/_variables'
+.x-coupon
+  height h = 70px
+  display flex
+  justify-content space-between
+  position relative
+  img
+    position absolute
+    z-index -1
+    &.background
+      width 100%
+      height h
+    &.new-user
+      right 0
+      top 0
+      width 65px
+      height 36px
+  .x-coupon__value
+    flex 1
+    display flex
+    align-items center
+    justify-content center
+    color white
+    span.x-coupon__value__youhui
+      font-size 20px
+    span.x-coupon__value__money
+      font-size 45px
+      line-height 45px
+    span
+      position relative
+      &::before
+        content '¥'
+        position absolute
+        transform scale(.4)
+        transform-origin 100% 50% 0
+        left -25px
+        top 50%
+        width w = 18px
+        line-height w
+  .x-coupon__desc
+    flex 0 1 calc(100% - 100% / 3)
+    display flex
+    flex-direction column
+    justify-content space-between
+    padding 8px 15px
+    box-sizing border-box
+    .x-coupon__desc__title
+      font-size 13px
+      display flex
+      align-items center
+      .caryu
+        display inline-block
+        font-size h = 10px
+        line-height h
+        padding 3px
+        margin-right 5px
+        color white
+        border-radius 2px
+        background-color color-yellow
+    .x-coupon__desc__time,
+    .x-coupon__desc__condition
+      font-size 10px
+      color deault-placeholder-color
+  .x-coupon__confirm
+    position absolute
+    right 11px
+    bottom 5px
+    color color-yellow
+    font-size 11px
+    padding 2px 8px
+    border 1px solid color-yellow
+    border-radius 10px
+</style>
+
+<template lang="pug">
+  div(class='x-coupon', @click='confirmHandler(value, desc)')
+    img(class="background", src='../assets/tehui.png' v-if="value.money === 5.99")
+    img(class="background", src='../assets/Caryu-xzyhj@2x.png' v-else)
+    img(class="new-user", src='../assets/new-user.png' v-if='newUser')
+    div(class='x-coupon__value')
+      span(class="x-coupon__value__youhui", v-if="value.money === 5.99") 超值优惠
+      span(class="x-coupon__value__money", v-else) {{ value.money }}
+    div(class='x-coupon__desc')
+      div(class='x-coupon__desc__title')
+        span(class='caryu') 驾遇
+        span {{ desc.title }}
+      div(class='x-coupon__desc__time') {{ desc.start_time + '-' + desc.over_time }}
+      div(class='x-coupon__desc__condition') {{ desc.condition || '仅限此账号使用' }}
+    div(class='x-coupon__confirm') 立即使用
+</template>
+
+<script>
+export default {
+  name: 'XCoupon',
+  props: {
+    value: Object,
+    desc: Object,
+    newUser: [Boolean, Number]
+  },
+
+  methods: {
+    confirmHandler(value, desc) {
+      this.$emit('select', value, desc)
+    }
+  }
+}
+</script>

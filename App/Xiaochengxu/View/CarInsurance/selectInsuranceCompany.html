@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>获取报价</title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/layer/layer.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/textMiddle.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/carInsurance/iscroll.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/velocity/1.4.1/velocity.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.0.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css"/>
+
+<link rel="stylesheet" href="__APIROOT__/css/api/carInsurance/common.css"/>
+
+  <link href="/Public/static/packaged-assets/Xiaochengxu/css/CarInsurance\selectInsuranceCompany.7e184e89.css" rel="stylesheet"><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/./js/vendor.63bfe990.js"></script><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/js/CarInsurance\selectInsuranceCompany.226250b2.js"></script></head>
+  <script>
+  function timer(intDiff,dec){
+
+    window.setInterval(function(){
+      var day=0,
+      hour=0,
+      minute=0,
+      second=0;//时间默认值
+      if(intDiff > 0){
+        day = Math.floor(intDiff / (60 * 60 * 24));
+        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+      }
+      if (minute <= 9) minute = '0' + minute;
+      if (second <= 9) second = '0' + second;
+      var html ="还剩"+hour+'时'+minute+'分'+second+'秒',
+      sum = hour + minute + second;
+      if(hour==0 && minute==0 && second==0){
+        var mydate = new Date();
+        var Y=mydate.getFullYear(); //获取完整的年份(4位,1970-????)
+        var M=mydate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+        var D=mydate.getDate(); //获取当前日(1-31)
+        var H=mydate.getHours(); //获取当前小时数(0-23)
+        var Ms=mydate.getMinutes(); //获取当前分钟数(0-59)
+        html=Y+"/"+M+"/"+D+" "+H+":"+Ms;
+      }
+      $("#"+dec).html(html);
+      if (sum<=0) {
+        var p = $("#"+dec).hide().parents('.company_info'),
+        t = !p.find('#right').size()?p.find('.discount-price span:last-child'):p.find('#right');
+
+        // t.html('<img class="insuranceStatus fl" src="/Public/static/packaged-assets/Xiaochengxu/img/shixiao-d901992c.png">');
+      }
+      intDiff--;
+    }, 1000);
+  }
+  </script>
+        <body>
+            <div id="second_hand">
+                <header>
+                    <div class="header_con">
+                        <div class="header_top">
+                            <div class="left">
+                                <if condition=' $type eq "list" '>
+                                    <a href="<{:U('CarInsuranceOrder/orderList',array('val'=>1,'search_type'=>$search_type,'session_id'=>$session_id))}>"><img src="/Public/static/packaged-assets/Xiaochengxu/img/back_arrow-e95377d1.png" width="12"/></a>
+                                <else />
+                                    <a href="javascript:history.go(-1)" id="form"><img src="/Public/static/packaged-assets/Xiaochengxu/img/back_arrow-e95377d1.png" width="12"/></a>
+                               </if>
+                            </div>
+                            <div class="middle">
+                                <h1><{$license_number}></h1>
+                            </div>
+                            <if condition='$model eq 2'>
+                            <div class="right" id="eye" onclick="eyeToggle(this)">
+                                <img
+                                  src="/Public/static/packaged-assets/Xiaochengxu/img/closeEye-8acdd3a5.png"
+                                  data-on="/Public/static/packaged-assets/Xiaochengxu/img/openEye-50ac8166.png"
+                                  data-off="/Public/static/packaged-assets/Xiaochengxu/img/closeEye-8acdd3a5.png"
+                                />
+                            </div>
+                            </if>
+                        </div>
+                    </div>
+                </header>
+                <div class="con">
+                    <form action="">
+                    	<!-- 报价成功 -->
+                    <foreach name="order_list_bak" item="item" key="key">
+                        <div class="chunk-parcel">
+                            <if condition='$key eq 0'>
+                                <div class="separate" data-id="<{$item.order_id}>" data-uwStatus="<{$item.underwri_status}>" data-status="<{$item.status}>">订单号：<{$item.order_id}></div>
+                            <else/>
+                                <div class="separate" data-id="<{$item.order_id}>" data-uwStatus="<{$item.underwri_status}>" data-status="<{$item.status}>">订单号：<{$item.order_id}></div>
+                            </if>
+                            <if condition='$item.status eq 4'>
+                            	<!-- 次订单待支付 -->
+                                <if condition='$status eq 4'>
+                                	<!-- 主订单已失效 -->
+                                <div class="company_info offer_sus" data-type="timeout" data-bizNum="<{$biz_num}>" data-BizTotal="<{$item.BizTotal}>" data-id="<{$item.order_id}>">
+                                <else/>
+                                <div class="company_info offer_sus" data-type="success" data-bizNum="<{$biz_num}>" data-BizTotal="<{$item.BizTotal}>" data-id="<{$item.order_id}>">
+                                </if>
+                            <elseif condition='$item.status eq 2'/>
+                            	<!-- 次订单待核保 -->
+                                <div class="company_info offer_sus" data-bizNum="<{$biz_num}>" data-BizTotal="<{$item.BizTotal}>" data-id="<{$item.order_id}>">
+                            <else/>
+                                <div class="company_info offer_sus" data-bizNum="<{$biz_num}>" data-BizTotal="<{$item.BizTotal}>" data-id="<{$item.order_id}>">
+                            </if>
+                            <if condition='$item.source eq 1'>
+                                <div class="brand_name">
+                                        <div>
+                                            <img src="/Public/static/packaged-assets/Xiaochengxu/img/cpic_active-1aaa2abf.png" class="mark">
+                                            <span><{$item.sourceName}></span>
+                                        </div>
+                                        <div class="order-time" id="dec<{$key}>">
+                                            <script>
+                                                timer(parseInt("<{$item.createTime}>"),'dec<{$key}>');
+                                            </script>
+                                        </div>
+                                        <if condition='$sources eq 1'>
+                                            <span class="last-insure">上次投保</span>
+                                        </if>
+                                </div>
+                            <elseif condition='$item.source eq 2'/>
+                                <div class="brand_name">
+                                    <div>
+                                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/paic_active-f0f12e12.png" class="mark">
+                                        <span><{$item.sourceName}></span>
+                                    </div>
+                                    <div class="order-time" id="dec<{$key}>">
+                                        <script>
+                                            timer(parseInt("<{$item.createTime}>"),'dec<{$key}>');
+                                        </script>
+                                    </div>
+                                    <if condition='$sources eq 2'>
+                                        <span class="last-insure">上次投保</span>
+                                    </if>
+	                    	    </div>
+                            <else/>
+                                <div class="brand_name">
+                                    <div>
+                                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/picc_active-91f58cdf.png" class="mark">
+                                        <span><{$item.sourceName}></span>
+                                    </div>
+                                    <div class="order-time" id="dec<{$key}>">
+                                        <script>
+                                            timer(parseInt("<{$item.createTime}>"),'dec<{$key}>');
+                                        </script>
+                                    </div>
+                                    <if condition='$sources eq 4'>
+                                        <span class="last-insure">上次投保</span>
+                                    </if>
+	                    	    </div>
+                            </if>
+
+	                    	<div class="insur_wrap">
+
+                                    <foreach name="item.insurance" item="items" key="keys">
+                                        <!-- 交强/车船 -->
+                                        <if condition="$items.insuranceCode eq 'JQXCCS'">
+                                        <dl class="con_body_item" data-type="JQXCCS">
+                                        <!-- 商业险 -->
+                                        <else/>
+                                        <dl class="con_body_item" data-type="biz">
+                                        </if>
+		                                    <dt>
+
+                                                <if condition='$item.status eq 4'>
+                                                        <div class="insurance_name"><{$items.insuranceName}></div>
+                                                    <else/>
+
+                                                        <div class="insurance_name"><{$items.insuranceName}></div>
+                                                </if>
+                                                <if condition='$items.isDeductible eq 1'>
+                                                    <img class="freeIcon" src="/Public/static/packaged-assets/Xiaochengxu/img/free_icon-edd20457.png" alt=""/>
+                                                </if>
+		                                        <span class="price_number">
+                                                    <if condition="$items.source eq 'BLX'">
+                                                    <{$items.itemCode}>
+                                                    <else/>
+                                                    <if condition='$items.amount neq 1'>
+                                                        <if condition='$items.amount eq 2000'>
+                                                            <if condition="$items.insuranceCode neq 'SheShui'">
+                                                                2千
+                                                            </if>
+                                                        <elseif condition='$items.amount eq 5000'/>
+                                                        5千
+                                                        <elseif condition='$items.amount eq 10000'/>
+                                                        1万
+                                                        <elseif condition='$items.amount eq 20000'/>
+                                                        2万
+                                                        <elseif condition='$items.amount eq 30000'/>
+                                                        3万
+                                                        <elseif condition='$items.amount eq 40000'/>
+                                                        4万
+                                                        <elseif condition='$items.amount eq 50000'/>
+                                                        5万
+                                                        <elseif condition='$items.amount eq 100000'/>
+                                                        10万
+                                                        <elseif condition='$items.amount eq 150000'/>
+                                                        15万
+                                                        <elseif condition='$items.amount eq 200000'/>
+                                                        20万
+                                                        <elseif condition='$items.amount eq 300000'/>
+                                                        30万
+                                                        <elseif condition='$items.amount eq 500000'/>
+                                                        50万
+                                                        <elseif condition='$items.amount eq 1000000'/>
+                                                        100万
+                                                        <elseif condition='$items.amount eq 1500000'/>
+                                                        150万
+                                                        <elseif condition='$items.amount eq 2000000'/>
+                                                        200万
+                                                        <elseif condition='$items.amount eq 2500000'/>
+                                                        250万
+                                                        </if>
+                                                    </if>
+                                                </if>
+                                                </span>
+		                                    </dt>
+		                                    <dd data-console="<{$item.status}>,<{$item.underwri_status}>,<{$items['premium']}>,<{$item.desc}>">
+                                                <if condition='($item.underwri_status eq -1 AND $items["premium"] eq 0)'>
+                                                    <span  class="total_number" style="color:#a1a1a1">----.--</span>
+                                                <else/>
+                                                    <span class="total_number">
+                                                        <{$items['premium']+$items['deductiblePremium']}>
+                                                    </span>
+                                                </if>
+		                                    </dd>
+		                                </dl>
+                                    </foreach>
+		                    </div>
+
+                        <if condition='$item.status neq 0'>
+                            <div class="total_moneys">
+                                <div class="sum-insurance">
+                                    共选择 <{$insurance_count}> 种车险
+                                </div>
+                                <i class="normal">
+                                    <b>
+                                        保单金额：
+                                    </b>
+                                    <if condition='($item.underwri_status eq -1 AND $items["premium"] eq 0)'>
+                                        <span class="total_number" style="color:#a1a1a1 !important">----.--</span>
+                                    <else/>
+                                        <span class="total_number">
+                                            <{$item.total_amount}>
+                                        </span>
+                                    </if>
+                                </i>
+
+                                <p class="discount-price sale-price">
+                                    <b style="color:#a1a1a1;font-size:0.846rem">
+                                        出售金额：
+                                    </b>
+                                    <if condition='($item.underwri_status eq -1 AND $items["premium"] eq 0)'>
+                                        <span class="total_number" style="color:#a1a1a1 !important">----.--</span>
+                                    <else/>
+                                        <span class="total_number">
+                                            <{$item.shopPay}>
+                                        </span>
+                                    </if>
+                                    <if condition="$model neq 1">
+                                      <img class="doubt" src="/Public/static/packaged-assets/Xiaochengxu/img/vjzt_icon_msg-f7a11296.png">
+                                    </if>
+                                </p>
+
+                                <p class="discount-price">
+                                    <b style="color:#a1a1a1;font-size:0.846rem">
+                                        折扣金额：
+                                    </b>
+                                    <if condition='($item.underwri_status eq -1 AND $items["premium"] eq 0)'>
+                                        <span class="total_number" style="color:#a1a1a1 !important">----.--</span>
+                                    <else/>
+                                        <span class="total_number">
+                                            <{$item.payAmount}>
+                                        </span>
+                                    </if>
+                                </p>
+                            </div>
+
+
+                            <div class="total_money">
+                                <if condition='$item.underwri_status eq 1'>
+                                    <!-- 核保成功 -->
+                                    <if condition="$item.danger_mark eq 1">
+                                        <!-- 高风险状态 -->
+                                        <div class="HeBaoStatu" style="background:#9ACD58" @click="isActiveGoToPage && goToPage('<{$item.order_id}>','<{$search_type}>','<{$license_number}>')">
+                                            <div class="iwarnSuccess"></div>
+                                            核保成功
+                                            <img src="/Public/static/image/api/w-b.png">
+                                        </div>
+                                        <!-- 正常状态 -->
+                                        <else/>
+                                        <div class="HeBaoStatu" style="background:#9ACD58 url(/Public/static/image/api/botton-duigou.png)  2.23rem center no-repeat;background-size: 1.308rem;" @click="isActiveGoToPage && goToPage('<{$item.order_id}>','<{$search_type}>','<{$license_number}>')">
+                                            核保成功<img src="/Public/static/image/api/w-b.png">
+                                        </div>
+                                    </if>
+
+                                    <!-- 人工核保中 -->
+                                <elseif condition='$item.status eq 2 AND $item.underwri_status eq 3'/>
+                                    <div class="HeBaoStatu" style="background:#dedc3d url(/Public/static/image/api/loading.gif) 2.23rem center no-repeat;background-size: 1.308rem;">
+                                        核保中：已转入人工核保，请稍候
+                                    </div>
+                                    <!-- 自动核保 -->
+                                  <elseif condition='($item.status eq 2 AND $item.underwri_status eq -1)'/>
+
+								   <div class="HeBaoStatu" style="background:#dedc3d url(/Public/static/image/api/loading.gif) 2.23rem center no-repeat;background-size: 1.308rem;">
+                                        核保中：请稍候
+                                    </div>
+
+                                    <!-- 报价失败 -->
+                               <elseif condition='($item.status eq 3 AND $item.underwri_status eq -1)'/>
+                                    <div class="state-disc">
+                                        <div class="offer-fail-l" style="background:#FF5A60 url('__APIROOT__/image/api/close.png') center center no-repeat;background-size:1rem;">
+                                        </div>
+                                        <div class="offer-fail-m" onclick="explain('<{$item.desc}>')">
+                                            <p class="two-lines">
+                                                报价失败：<{$item.desc}>
+                                            </p>
+                                        </div>
+                                        <div class="offer-fail-r"></div>
+                                    </div>
+                                    <!-- 未到投保期 -->
+                               <elseif condition='($item.status eq 6 AND $item.underwri_status eq -1)||($item.status eq 3 AND $item.underwri_status eq 2)'/>
+                                    <div class="HeBaoStatu" style="background:#969696 url(/Public/static/image/api/wrog.png) 2.23rem center no-repeat;background-size: 1.308rem;">
+                                        未到投保期，无法进行核保
+                                    </div>
+                                    <!-- 核保失败 -->
+                               <elseif condition='($item.status eq 3 AND $item.underwri_status neq -1)'/>
+                                    <div class="state-disc">
+                                        <div class="offer-fail-l" style="background:#ff5a60 url('__APIROOT__/image/api/close.png') center center no-repeat;background-size:1rem;">
+                                        </div>
+                                        <div class="offer-fail-m" onclick="explain('<{$item.desc}>')">
+                                            <p class="two-lines">
+                                                核保失败：<{$item.desc}>
+                                            </p>
+                                        </div>
+                                        <div class="offer-fail-r"></div>
+                                    </div>
+
+
+                                </if>
+                            </div>
+
+                        <else/>
+                                <if condition='$item.status eq 4 || $item.status eq 2'>
+                                <div class="total_moneys">
+                                <else/>
+                                <div class="total_money">
+                                </if>
+
+                                <if condition='$item.status eq 0'>
+                                    <div class="right yellow">
+                                        初始
+                                    </div>
+                                <elseif condition='$item.status eq 1' />
+                                <!-- 获取报价信息失败 -->
+                                    <div class="state-disc">
+                                        <div class="offer-fail-l" style="background:#ff5a60 url('__APIROOT__/image/api/close.png') center center no-repeat;background-size:1rem;">
+                                        </div>
+                                        <div class="offer-fail-m" onclick="explain('<{$item.desc}>')">
+                                            <p class="two-lines">
+                                                核保失败：<{$item.desc}>
+                                            </p>
+                                            <div style="height:0;"></div>
+                                        </div>
+                                        <div class="offer-fail-r"></div>
+                                    </div>
+                                <elseif condition='$item.status eq 4 || $item.status eq 2||$item.status eq 3||$item.status eq 5'/>
+                                    <p class="baodan-price">
+                                        <div class="sum-insurance">
+                                            共选择 <{$insurance_count}> 种车险
+                                        </div>
+                                        <i class="normal"><b>保单金额：</b>
+                                            <span class="total_number"><{$item.total_amount}></span>
+                                        </i>
+                                    </p>
+                                    <p class="discount-price">
+                                        <b>折扣金额：</b>
+                                        <span class="total_number" style="color:#a1a1a1 !important"><{$item.shopPay}></span>
+                                    </p>
+                                </if>
+                            </div>
+                        </if>
+
+                	</div>
+                </div>
+            </foreach>
+
+
+                    </form>
+                </div>
+               <!--  <a onclick="submitFm();"><div class="foot_button">填写投保人信息</div></a> -->
+                 <form id="form1" name="form1" action="<{:U('CarInsurance/selectInsuranceType')}>" method="post">
+                    <input name="tys" value="1"  type="hidden"/>
+                    <input name="license_number" value="<{$license_number}>"  type="hidden"/>
+                    <input name="session_id" value="<{$session_id}>"  type="hidden"/>
+                    <input name="insuranceArr" value="<{$insuranceArr}>"  type="hidden"/>
+                    <input name="type" value="selecompanyTYpe"  type="hidden"/>
+                    <input name="sources" value="<{$sources}>"  type="hidden"/>
+                </form>
+            </div>
+            <div class="mask"></div>
+            <div class="load-bg">
+                <h1><div>失败原因</div><span><img src="/Public/static/packaged-assets/Xiaochengxu/img/mask-close-040a0a7f.png" width="15px;" /></span></h1>
+                <div class="text-desc">
+                    <div id="descs" data-name="<{$salesman.user_name}>" data-mobile="<{$salesman.mobile}>">
+                    </div>
+                </div>
+            </div>
+<script type="text/javascript">
+var session_id = '<{$session_id}>', search_type = '<{$search_type}>', license_number = '<{$license_number}>';
+var methods = {underwri: "<{:U('underwri')}>"};
+$(function(){
+    $(".two-lines").each(function(){
+        var a = $(this)[0].clientHeight;
+        var b = $(this)[0].scrollHeight;
+
+        if(a>=b-1){
+            $(this).parent('.offer-fail-m').siblings('.offer-fail-r').hide();
+        }else{
+            $(this).parent('.offer-fail-m').siblings('.offer-fail-r').show();
+
+        }
+    })
+
+    $("#form").click(function(){
+        $("#form1").submit();
+    });
+
+});
+
+
+function explain(desc, flag){
+    var failTit = '失败原因',
+        name = $("#descs").attr('data-name'),//获取业务员姓名
+        mobile = $("#descs").attr('data-mobile');//获取业务员手机号
+    if (flag) {
+        desc = '<div>'+ desc+'</div>';
+        failTit = '风险提示';
+    }else {
+        desc = '<div>'+ desc+'<section class="tishi"><h5>请联系业务员进行人工报价</h5><a href="tel:'+ mobile +'"><p>'+ name +'</p><p>'+ mobile +'</p></a></section></div>';
+    }
+
+    $("#descs").html(desc);
+    $('.mask').fadeIn(200);
+    $('.load-bg').show(300).addClass('add-bg01').find('h1 div').html(failTit);
+}
+
+function jump(order_id){
+    var jsond='{"order_id":"'+order_id+'","search_type":\"<{$search_type}>\","license_number":\"<{$license_number}>\"}';
+    location.href = 'caryu::type=UploadPic?'+jsond;
+}
+
+function closeMask(){
+    $('.mask').hide();
+    $('.load-bg').hide();
+}
+
+$(function () {
+    /*无眼睛 需要显示保单和折扣*/
+    var model="<{$model}>";
+    if(model==1){
+        $('.discount-price').slideToggle(0);
+    }
+});
+
+$(function(){
+    $('.load-bg h1 span, .mask').click(function(){
+        $('.load-bg').hide(300,function () {
+            $('.mask').fadeOut(200);
+        });
+
+    });
+});
+
+</script>
+</html>

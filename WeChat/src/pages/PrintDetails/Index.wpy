@@ -1,0 +1,287 @@
+<style lang="stylus" scoped>
+.page__body
+  &::after
+    content ''
+    display block
+    height 6px
+    margin 0 13px
+    background transparent url('../../assets/print-details/white-triangle.png') repeat no-repeat
+    background-size auto 100%
+</style>
+<style lang="stylus">
+@import '../../styles/_variables'
+@import '../../styles/_util'
+.nm
+  white-space normal!important
+
+.container
+  margin: 0
+  padding: 0
+  font-size 12px
+  background: #ffc82f url(http://meili.caryu.com/Public/static/packaged-assets/Insurance/img/zebra-9fad7117.png) no-repeat 12% -1% local;
+  background-size: 40px 270px
+.bar
+  position relative
+  &::before,
+  &::after
+    content: ''
+    position: absolute
+    z-index auto
+    top: -6px
+  &::before
+    left 1%
+    width 98%
+    background-color: #823c00
+    height: 14px
+    border-radius: 8px
+  &::after
+    margin-top:4px
+    left 2%
+    width 96%
+    background-color: #603200
+    height: 6px
+    border-radius: 3px
+.page__body
+  padding 15px 0 30px
+.car_info, .h5, .card
+  margin-left 13px
+  margin-right 13px
+.h5, .card
+  padding-left 12px
+  padding-right 12px
+.h5
+  display flex
+  align-items center
+  justify-content space-between
+  font-size 16px
+  background-color white
+  line-height 46px
+  position relative
+  &:not(:nth-of-type(1)):before
+    content ''
+    display block
+    width 95%
+    height 1px
+    top 0
+    left 2.5%
+    border-top 1px dashed #ccc
+    position absolute
+  span
+    color color-yellow
+    solid-dot(color-yellow)
+  button
+    margin 0
+    padding 0
+    font-size 11px
+    background-color color-yellow
+    color white
+    border-color transparent
+    background-color color-yellow
+    width 41px
+    height 21px
+    border-radius 5px
+.card
+  background-color white
+  padding 0 12px 15px
+  .strong
+    font-size 14px
+  & > div
+    display flex
+    flex-direction column
+    justify-content center
+    .list
+      display flex
+      align-items center
+      padding 0 15px
+      min-height 25px
+  &:not(.car_insurance) .up_container,
+  &:not(.car_insurance) .down_container
+    border-left 1px solid cell-border-color
+    border-right 1px solid cell-border-color
+    border-bottom 1px solid cell-border-color
+    &.up_container
+      border-top 1px solid cell-border-color
+      background-color cell-even-bg-color
+    &.down_container
+      background-color cell-odd-bg-color
+    .nm
+      padding-top pt = 5px
+      padding-bottom pt
+      .fact
+        padding-top pt
+  &.car_insurance
+    .up_container .list
+      display flex
+      justify-content center
+      align-items: center
+      white-space: nowrap
+      border-left 1px solid cell-border-color
+      border-top 1px solid cell-border-color
+      border-right 1px solid cell-border-color
+      &:last-child
+        border-bottom 1px solid cell-border-color
+      &:nth-child(odd)
+        background-color cell-odd-bg-color
+      &:nth-child(even)
+        background-color cell-even-bg-color
+      & > div
+        &:nth-child(2)
+          width: 53px
+          height: 16px
+          margin-left: 10px
+        &:nth-child(3)
+          flex: 1
+          text-align: right
+        text:first-child
+          color #B7B7B7
+        img
+          width 100%
+          height 100%
+    .down_container
+      flex-direction row
+      justify-content space-around
+      .list
+        flex-direction column
+        margin-top 0
+        view
+          margin-right 0
+          margin-top 5px
+  &.car_violation
+    .up_container .list
+      &:not(:first-child)
+        margin-top 5px
+      &:first-child
+        margin-top 2px
+      &:last-child
+        margin-bottom 6px
+        margin-top 18px
+  &.car_used
+    .up_container .list
+      text-ellipsis()
+</style>
+
+<template lang="pug">
+  section(class='container', v-show="isLoad")
+    Scroller(ref="myScroller" lock-x scrollbar-y)
+      div(class='page__body')
+        CarInfo(ref='CarInfo', :license_number='QUERY.license_number')
+        CarInsurance(ref='CarInsurance', :WebViewConfig='WebViewConfig.carInsurance')
+        CarViolation(ref='CarViolation', :WebViewConfig='WebViewConfig.carViolation')
+        CarUsed(ref='CarUsed', :WebViewConfig='WebViewConfig.sencondHand')
+        CarLoan(ref='CarLoan', :WebViewConfig='WebViewConfig.carGuaranty')
+</template>
+
+<script>
+import { Scroller } from 'vux'
+import { mapState } from 'vuex'
+import mixin from '@/mixins/print-details.js'
+import CarInfo from './modules/car-info'
+import CarInsurance from './modules/car-insurance'
+import CarViolation from './modules/car-violation'
+import CarUsed from './modules/car-used'
+import CarLoan from './modules/car-loan'
+import axios from 'axios'
+import { values } from 'lodash'
+
+export default {
+  name: 'PrintDetails',
+
+  components: { Scroller, CarInfo, CarInsurance, CarViolation, CarUsed, CarLoan },
+
+  mixins: [mixin],
+
+  data() {
+    return {
+      isLoad: false,
+      WebViewConfig: {
+        carInsurance: { is_show: 0, query: '' },
+        carViolation: { is_show: 1, query: '' },
+        sencondHand: { is_show: 1, query: '' },
+        carGuaranty: { is_show: 0, query: '' }
+      }
+    }
+  },
+
+  computed: {
+    ...mapState(['QUERY'])
+  },
+
+  methods: {
+    updata(insurance, violation, used) {
+      let { CarInfo, CarUsed, CarLoan, CarInsurance, CarViolation } = this.$refs
+      return {
+        insurance() {
+          /* -------------------车险 & 车型信息---------------- */
+          let data = insurance.data
+          if (insurance.code === 0) {
+            CarUsed.car_model = CarInfo.car_model = data.model
+            CarInfo.carInfo = data
+            CarInfo.lastRenewal = data.lastRenewal
+            CarInfo.lastInsuranceCompany = data.lastInsuranceCompany
+            if (CarInsurance.isShowInsurance = data.insurancedata && data.insurancedata.length > 0) {
+              CarInsurance.carInsurance = data.insurancedata.map(item => {
+                item.amountF = CarInsurance.insureAmount(item.amount)
+                return item
+              })
+            }
+          }
+        },
+        violation() {
+          /* -------------------车违章---------------- */
+          let data = violation.data
+          if (violation.code === 0) {
+            if (CarViolation.isShowViolation = data.newest)
+              CarViolation.carViolation = data
+          }
+        },
+        used() {
+          /* -------------------二手车 & 车抵贷---------------- */
+          let data = used.data
+          if (used.code === 0) {
+            if (CarLoan.isShowLoan = CarUsed.isShowUsed = data.max > 0)
+              CarLoan.carLoan = CarUsed.carUsed = data
+          }
+        }
+      }
+    },
+
+    getCarInsurance(license_number) {
+      return this.$http.post('/index.php/Wechat/CarInfo/getCarInfo', { license_number })
+    },
+
+    getCarViolation(license_number) {
+      return this.$http.post('/index.php/Wechat/CarInfo/getCarViolation', { license_number })
+    },
+
+    getUsed(license_number) {
+      return this.$http.post('/index.php/Wechat/CarInfo/getEvalPrice', { license_number })
+    },
+
+    async getWebViewConfig({ orderid, license_number }) {
+      let result = await this.$http.post('/index.php/Wechat/Config/getPrintInfo', { orderid, license_number })
+      if (result.code === 0) {
+        values(this.WebViewConfig).forEach(item => item.query = result.data)
+      }
+    }
+  },
+
+
+  created() {
+    let ln = this.QUERY.license_number
+    this.getWebViewConfig({
+      orderid: this.QUERY.orderid,
+      license_number: this.QUERY.license_number
+    })
+
+    axios.all([this.getCarInsurance(ln), this.getCarViolation(ln), this.getUsed(ln)])
+      .then(axios.spread((insurance, violation, used) => {
+        values(this.updata(insurance, violation, used)).forEach(exec => exec())
+        this.isLoad = true
+        this.$nextTick(() => this.$refs.myScroller.reset())
+      }))
+      .catch(err => {
+        console.info(err)
+      })
+  }
+}
+</script>

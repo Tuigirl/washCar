@@ -1,0 +1,162 @@
+@import '../../util.styl'
+
+/**
+* Const
+*/
+info-color = #793F00
+title-color = #FFC82F
+cell-odd-bg-color = #F7F7F7
+cell-even-bg-color = #FCFCFC
+cell-border-color = #D8D8D8
+
+#printDetails[wechat-vessel]
+  margin 0
+  padding 1.154rem 1rem 2.154rem 1rem
+  background #FFC82F url(../../../img/wechat/zebra.png) no-repeat 12% -1% local
+  background-size to-rem(40px 270px)
+  &:after
+    content ''
+    display block
+    height 6px
+    background transparent url(../../../img/wechat/white-triangle.png) repeat no-repeat
+    background-size auto 100%
+    margin-top -1px
+  .car_info
+    padding-left 0
+    padding-bottom to-rem(7)
+    background-color transparent
+    position relative
+    &:before, &:after
+      content ''
+      display block
+      position absolute
+      top 96.5%
+    &:before
+      left -2%
+      right -2%
+      background-color #823C00
+      height to-rem(14)
+      border-radius 8px
+    &:after
+      margin-top to-rem(4)
+      left -1%
+      right -1%
+      background-color #603200
+      height to-rem(6)
+      border-radius 3px
+    .monkey
+      display block
+      margin 0 auto
+      width to-rem(151)
+      height to-rem(91)
+      overflow hidden
+      img
+        height to-rem(121)
+    .car
+      border none
+      margin 0 auto
+      align-items center
+      width to-rem(167)
+      height to-rem(58)
+      background url(../../../img/wechat/wire.png) no-repeat
+      background-size 100%
+      div
+        color info-color
+        &:first-child
+          font-size to-rem(19)
+        &:last-child
+          margin-top -2px
+          font-size to-rem(10)
+          width 8rem
+          text-ellipsis()
+    .info
+      margin-left 27%
+      color info-color
+      div
+        solid-dot(info-color)
+  h5, .card
+    padding 0 to-rem(12)
+  h5
+    margin-top 0
+    background-color white
+    line-height to-rem(46)
+    position relative
+    &:not(:nth-of-type(1)):before
+      content ''
+      display block
+      width 95%
+      height 1px
+      top 0
+      left 2.5%
+      border-top 1px dashed #ccc
+      position absolute
+    span
+      color title-color
+      solid-dot(title-color)
+    button
+      color white
+      border-color transparent
+      background-color title-color
+      width to-rem(41)
+      height to-rem(21)
+  article.card
+    padding-bottom to-rem(15)
+    strong
+      font-size to-rem(14)
+    section
+      padding 0
+      ul
+        padding 0 to-rem(15)
+        min-height to-rem(25)
+      &.up_container:after
+          display none
+    &:not(.car_insurance) section
+      border-left 1px solid cell-border-color
+      border-right 1px solid cell-border-color
+      border-bottom 1px solid cell-border-color
+      &.up_container
+        border-top 1px solid cell-border-color
+        background-color cell-even-bg-color
+      &.down_container
+        background-color cell-odd-bg-color
+      .nm
+        padding-top pt = 5px
+        padding-bottom pt
+        .fact
+          padding-top pt
+    &.car_insurance
+      .up_container ul
+        margin-top 0
+        display flex
+        justify-content center
+        border-left 1px solid cell-border-color
+        border-top 1px solid cell-border-color
+        border-right 1px solid cell-border-color
+        &:last-child
+          border-bottom 1px solid cell-border-color
+        &:nth-child(odd)
+          background-color cell-odd-bg-color
+        &:nth-child(even)
+          background-color cell-even-bg-color
+        li span:first-child
+          color #B7B7B7
+      .down_container
+        flex-direction row
+        justify-content space-around
+        ul
+          flex-direction column
+          margin-top 0
+          li
+            margin-right 0
+            margin-top 5px
+    &.car_violation
+      .up_container ul
+        &:not(:first-child)
+          margin-top 5px
+        &:first-child
+          margin-top 2px
+        &:last-child
+          margin-bottom 6px
+    &.car_used
+      .up_container ul
+        text-ellipsis()

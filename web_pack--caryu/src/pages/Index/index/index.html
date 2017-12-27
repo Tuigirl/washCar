@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<include file="Common:head-css" />
+	<title>驾遇快洗后台管理系统</title>
+	<script type="text/template" id="menu-data">
+		<?php echo json_encode($meau) ?>
+	</script>
+</head>
+	<include file="Common:head-js" />
+	<include file="Common:formvalidator" />
+	<script type="text/javascript">
+		var layout = null, tab = null, accordion = null, tree = null;
+		var topHeight = 84, leftWidth = 160;
+		$(function() {
+			//页面布局
+			layout = $("#global_layout").ligerLayout({
+				topHeight: topHeight,
+				leftWidth: leftWidth,
+				height: '100%',
+				bottomHeight: 0,
+				allowTopResize: false,
+				allowLeftResize: false,
+				allowBottomResize: false,
+				allowLeftCollapse: false,
+				// isLeftCollapse: true,
+				space: 0,
+				onHeightChanged: f_heightChanged
+			});
+			var height = $(".l-layout-center").height();
+			$("#divHome").height(height);
+			//Tab
+			$("#gl-center").ligerTab({
+				height : height
+			});
+			//左边导航面板
+			$("#gl-left-nav").ligerAccordion({
+				height : height - 0,
+				speed : null
+			});
+
+			tab = $("#gl-center").ligerGetTabManager();
+			accordion = $("#gl-left-nav").length?$("#gl-left-nav").ligerGetAccordionManager():0;
+			// tree.expandAll(); //默认展开所有节点
+			$("#pageloading_bg,#pageloading").hide();
+
+			$('.l-layout-center').width( $('.l-layout-center').width() + 7 )
+
+			//配置修改 和 门店维护冲突解决
+			// $('a:contains(门店维护)').attr('href', "javascript:f_addTab('index100','门店维护','../index.php/Caryu/Store/index')")
+
+			$(window).resize(function() {
+				$('.l-layout-center').width($(window).width() - $('.l-layout-left').width())
+				$('iframe').each((i, el) => {
+					el.contentWindow.$('#data_list').datagrid('resize', { width: el.contentWindow.innerWidth })
+				})
+			})
+
+			// 时时检测当前激活tab
+			setInterval(function() {
+				var selectedTabID = tab.getSelectedTabItemID()
+				if (tab.getTabItemCount() && selectedTabID != 'home') {
+					$('li[menuitem='+ selectedTabID +']').addClass('is-active')
+					$('li[menuitem]').not('[menuitem='+ selectedTabID +']').removeClass('is-active')
+				} else {
+					$('li.el-menu-item').removeClass('is-active')
+				}
+			}, 300)
+		});
+		//退出登录
+		function logout(){
+			$.messager.confirm('提示信息', '确定要退出登录吗？', function(result){
+				if(result) window.location.href = '<{:U("Index/logout")}>';
+			});
+		}
+
+		function f_heightChanged(options) {
+			if (tab)
+				tab.addHeight(options.diff);
+			if (accordion && options.middleHeight - 24 > 0)
+				accordion.setHeight(options.middleHeight - 24);
+		}
+		//添加Tab，可传3个参数
+		function f_addTab(tabid, text, url, iconcss) {
+			if (arguments.length == 4) {
+				tab.addTabItem({
+					tabid : tabid,
+					text : text,
+					url : url,
+					iconcss : iconcss
+				});
+			} else {
+				tab.addTabItem({
+					tabid : tabid,
+					text : text,
+					url : url
+				});
+			}
+		}
+
+		//提示Dialog并关闭Tab
+		function f_errorTab(tit, msg) {
+			$.ligerDialog.open({
+						isDrag : false,
+						allowClose : false,
+						type : 'error',
+						title : tit,
+						content : msg,
+						buttons : [ {
+							text : '确定',
+							onclick : function(item, dialog, index) {
+								//查找当前iframe名称
+								var itemiframe = "#gl-center .l-tab-content .l-tab-content-item";
+								var curriframe = "";
+								$(itemiframe).each(function() {
+									if ($(this).css("display") != "none") {
+										curriframe = $(this).attr("tabid");
+										return false;
+									}
+								});
+								if (curriframe != "") {
+									tab.removeTabItem(curriframe);
+									dialog.close();
+								}
+							}
+						} ]
+					});
+		}
+		//退出登录
+		function loginout(){
+			var checkFlag = window.confirm("是否要退出登录？");
+			  if(checkFlag==true){
+				  window.location.href = "../index.php/Caryu/Index/logout";
+			  }
+		}
+
+
+	</script>
+<body>
+	<div id="global_layout" class="layout l-layout" v-cloak v-loading.fullscreen.lock="fullscreenLoading">
+
+		<!--头部-->
+		<div position="top" id="gl-header">
+			<div id="logo">
+				<img src="../../../assets/img/logo.png">
+				<span>后台管理系统</span>
+			</div>
+			<div id="user_box" title="<{$username}>">
+				<el-dropdown
+					trigger="click"
+					@command="accountSelectHandle"
+					@visible-change="accountMenuToggle">
+					<span class="el-dropdown-link">
+						<i class="el-icon-user el-icon--left"></i><{$username}>
+						<i class="el-icon-caret-bottom el-icon--right" :class="{rotate180: isRotate}"></i>
+					</span>
+					<el-dropdown-menu slot="dropdown">
+						<el-dropdown-item command="edit_pswd">修改密码</el-dropdown-item>
+						<el-dropdown-item command="logout" :divided="true">退出</el-dropdown-item>
+					</el-dropdown-menu>
+				</el-dropdown>
+			</div>
+		</div>
+
+		<!--左边  -->
+		<div position="left" id="gl-left-nav">
+			<el-menu
+				theme="dark"
+				default-active="2"
+				:unique-opened="true"
+				:collapse="isCollapse"
+				class="el-menu-vertical-demo"
+			>
+				 <template v-for="v-for=(menuItem, index) in menuItems">
+					<el-menu-item
+						v-if="menuItem.name === 'Meau/AdminPage'"
+						class="el-submenu__title"
+						index="1000"
+						@click="menuItemClick"
+						home>
+						<i class="el-icon-sy"></i><span slot="title">{{ menuItem.child[0].title }}</span>
+					</el-menu-item>
+					<el-submenu
+						v-else
+						:key="index"
+						:index="toString(index)">
+						<template slot="title">
+							<i :class="menuItem.meau_pic && ('el-icon-' + menuItem.meau_pic.replace('.png', '') )"></i>{{ menuItem.title }}
+						</template>
+						<template v-for="(childMenuItem, childIndex) in menuItem.child">
+							<el-menu-item
+								:menuitem="childMenuItem.method"
+								@click="menuItemClick"
+								:index="index +'-'+ childIndex">
+									{{ childMenuItem.title }}
+							</el-menu-item>
+						</template>
+					</el-submenu>
+				</template>
+			</el-menu>
+			<svg @click="menuToggle" :class="{'is-active': isActive}" id="icon-arrow" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<path d="M12.586 27.414l-10-10c-0.781-0.781-0.781-2.047 0-2.828l10-10c0.781-0.781 2.047-0.781 2.828 0s0.781 2.047 0 2.828l-6.586 6.586h19.172c1.105 0 2 0.895 2 2s-0.895 2-2 2h-19.172l6.586 6.586c0.39 0.39 0.586 0.902 0.586 1.414s-0.195 1.024-0.586 1.414c-0.781 0.781-2.047 0.781-2.828 0z"></path>
+			</svg>
+		</div>
+
+		<!--内容  -->
+		<div position="center" id="gl-center" class="liger-tab">
+			<div id="divHome" tabid="home" title="首页" iconcss="tab-icon-home">
+				<!--欢迎页  -->
+				<transition name="el-fade-in" @before-enter="showWelcome" @after-leave="hideWelcome">
+					<div id="welcome">
+						<ul>
+							<li>
+								<h2>欢迎</h2>
+								<h3>使用驾遇快洗后台管理系统</h3>
+							</li>
+							<li><img src="../../../assets/img/loading-icon.png"></li>
+						</ul>
+					</div>
+				</transition>
+			</div>
+		</div>
+
+		<el-dialog title="修改密码" :visible.sync="dialogFormVisible" size="tiny" @close="dialogCloseHandle">
+			<el-form :model="form">
+				<el-form-item label="原密码" label-width="120px">
+					<el-input v-model="form.old_pswd" placeholder="请输入原密码" auto-complete="off"></el-input>
+				</el-form-item>
+				<el-form-item label="新密码" label-width="120px">
+					<el-input v-model="form.new_pswd" placeholder="请输入新密码" auto-complete="off"></el-input>
+				</el-form-item>
+				<div class="pswd-tooltip">请输入由字母,数字任意组合的6-18位密码</div>
+			</el-form>
+			<div slot="footer" class="dialog-footer">
+				<el-button type="warning" plain @click="dialogFormVisible = false">取 消</el-button>
+				<el-button type="warning" @click="changePswdOk">确 定</el-button>
+			</div>
+		</el-dialog>
+
+		<div class="l-layout-lock"></div>
+		<div style="display: block; top: 50px; width: 1366px;" class="l-layout-drophandle-top"></div>
+		<div class="l-layout-dragging-xline"></div>
+		<div class="l-layout-dragging-yline"></div>
+		<div class="l-layout-collapse-left" style="display: none;">
+			<div class="l-layout-collapse-left-toggle"></div>
+		</div>
+		<div class="l-layout-collapse-right" style="display: none;">
+			<div class="l-layout-collapse-right-toggle"></div>
+		</div>
+	</div>
+</body>
+
+</html>

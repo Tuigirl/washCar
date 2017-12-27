@@ -1,0 +1,81 @@
+<style lang="stylus" scoped>
+.down_container > div
+  display block
+.card.car_violation .nm
+  position: relative
+  & > div
+    word-break: break-all
+    // width: calc(100% - 5em)
+    min-width: 18em
+    &.fact
+      position: absolute
+      top: 0
+      left: 5em
+    &.perch
+      visibility: hidden
+      margin-top: calc(-1em - 8px)
+</style>
+
+<template>
+  <section v-if="isShowViolation">
+    <div class="h5">
+      <span>违章</span>
+      <button @click="goToPage('CarViolation__List')" v-if="WebViewConfig.is_show === 1">办理</button>
+    </div>
+
+    <div class="card car_violation">
+      <div class="up_container">
+        <div class="list">
+          <div>最近违章时间：{{ _Time }}</div>
+        </div>
+        <div class="list">
+          <div class="nm">
+            违章信息：
+            <div class="fact">{{ carViolation.newest.Reason }}</div>
+            <div class="perch">{{ carViolation.newest.Reason }}</div>
+          </div>
+        </div>
+        <div class="list">
+          <div style="margin-top: 25rpx">
+            罚款{{ carViolation.newest.count }}元 扣{{ carViolation.newest.Degree }}分 {{ carViolation.newest.status==0 ? '未处理' : '已处理' }}
+          </div>
+        </div>
+      </div>
+      <div class="down_container">
+        <div class="list nm">
+          <div>
+            {{ _addTime }}至今，共违章
+            <span class="c_yellow">{{ carViolation.total_time }}</span>次，共扣分
+            <span class="c_yellow">{{ carViolation.total_degree }}</span>次，共罚款
+              <span class="c_yellow">{{ carViolation.total_money }}</span> 元。
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</template>
+
+<script>
+import mixin from '@/mixins/print-details.js'
+
+export default {
+  name: 'PrintDetails__CarViolation',
+
+  mixins: [mixin],
+
+  props: ['WebViewConfig'],
+
+  computed: {
+    _Time() {
+      let temp = this.carViolation
+      if (temp && temp.newest && temp.newest.Time)
+        return this.formatTime(temp.newest.Time)
+      return ''
+    },
+    _addTime() {
+      return this.formatTime(new Date().toLocaleDateString(), true)
+    }
+  }
+}
+</script>

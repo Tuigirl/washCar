@@ -1,0 +1,189 @@
+h4{
+    margin: 0;
+    padding: 0;
+}
+.con{
+    padding: .769rem 0;
+    margin: 0 .769rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.con > ul{
+    border: 1px solid #EAEAEA;
+}
+.con > ul:empty{
+    border:none;
+}
+/*#MsgList, #NoMsg, #MsgDetails{
+    display: none;
+}*/
+li[data-anime="transition"]{
+    transition: all .15s ease-in;
+}
+#MsgList{
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+}
+#MsgList li{
+    width: 100%;
+    border-left: 1px solid #EAEAEA;
+    border-right: 1px solid #EAEAEA;
+    border-top: 1px solid #F0F0F0;
+}
+#MsgList li:first-child{
+    border-top: 1px solid #F0F0F0;
+}
+#MsgList li:last-child{
+    border-bottom: 1px solid #EAEAEA;
+}
+#MsgList section{
+    min-height: 77px;
+    background-color: white;
+    padding: 16.5px 1.154rem 16.5px 1.769rem;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    position: relative;
+    background-color: #FFFCF2;
+}
+#MsgList .lists:last-child section{
+    border-bottom: none;
+}
+#MsgList section.MarkRead{/*已读*/
+    background-color: white;
+}
+#MsgList .MarkRead .title{
+    color: #A1A1A1;
+}
+#MsgList .MarkRead .isRead{
+    color: white;
+    background-color: #C3C3C3;
+}/*已读---end*/
+/*消息标头*/
+.mastHead, .MsgHead{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.mastHead .title{
+    -webkit-box-flex: .225;/* OLD - iOS 6-, Safari 3.1-6, android 2.1-4.3*/
+    -webkit-flex: .225;
+    flex: .225;
+    width: 1%;
+    font-size: 1rem;
+    /*font-weight: lighter;*/
+}
+.mastHead .isRead{
+    -webkit-box-flex: .114;/* OLD - iOS 6-, Safari 3.1-6, android 2.1-4.3*/
+    -webkit-flex: .114;
+    flex: .114;
+    width: 1%;
+    text-align: center;
+    font-size: 0.769rem;
+    color: #2D3841;
+    background-color: #FB0;
+    border-radius: 2px;
+    height: 14px;
+    /*line-height: 14px;*/
+}
+.mastHead .isRead:before{
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+}
+.time{
+    text-align: right;
+    font-size: 0.846rem;
+    color: #d1d1d1;
+    position: relative;
+    width: 1%;
+}
+.time:before{
+    content: "";
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    background: url("../../../img/api/NewPush.png") center center no-repeat;
+    background-size: 0.769rem;
+    top: 50%;right: 4.65rem;
+    margin-top: -0.5rem;
+}
+.mastHead > div.time{
+    -webkit-box-flex: .697;/* OLD - iOS 6-, Safari 3.1-6, android 2.1-4.3*/
+    -webkit-flex: .697;
+    flex: .697;
+}
+/*消息内容*/
+.content{
+    font-size: 0.923rem;
+}
+.lists .content{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-top: 10px;
+    color: #A1A1A1;
+}
+/*删除按钮*/
+.lists .del{
+    width: 4.923rem;
+    position: absolute;
+    left: 100%;
+    top: -1px;
+    bottom: -1px;
+    background-color: #FF5A60;
+    color: white;
+    font-size: 0.923rem;
+    line-height: 77px;
+    text-align: center;
+    /*font-weight: lighter;*/
+}/*---消息列表end*/
+
+/*消息详情---start*/
+#MsgDetails{
+    padding: 19px 1.154rem 65px 1.769rem;
+    background-color: white;
+    overflow: hidden;
+}
+#MsgDetails h4{
+    -webkit-box-flex: .763;/* OLD - iOS 6-, Safari 3.1-6, android 2.1-4.3*/
+    -webkit-flex: .763;
+    flex: .763;
+    width: 1%;
+    font-size: 1.231rem;
+    color: #393939;
+}
+#MsgDetails .time{
+    -webkit-box-flex: .237;/* OLD - iOS 6-, Safari 3.1-6, android 2.1-4.3*/
+    -webkit-flex: .237;
+    flex: .237;
+}
+#MsgDetails .content{
+    margin-top: 35px;
+    color: #595959;
+    line-height: 22.5px;
+    text-align: justify;
+    word-wrap: break-word;
+}
+/*消息详情---end*/
+
+
+/*无消息的展示---start*/
+#NoMsg{
+    border: none;
+    padding-top: 30%;
+}
+#NoMsg li{
+    width: 28%;
+    margin: 0 auto;
+}
+#NoMsg li img{
+    width: 100%;
+}
+/*无消息的展示---end*/

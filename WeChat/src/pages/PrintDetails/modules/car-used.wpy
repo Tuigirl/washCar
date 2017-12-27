@@ -1,0 +1,61 @@
+<style lang="stylus" scoped>
+.card.car_used
+  .list div
+    flex: 1
+    display flex
+    align-items center
+    .strong
+      line-height 0
+</style>
+
+<template>
+  <section v-if="isShowUsed">
+    <div class="h5">
+      <span>二手车估值</span>
+      <button @click="goToPage('CarUsed')" v-if="WebViewConfig.is_show === 1">办理</button>
+    </div>
+    <div class="card car_used">
+      <div class="up_container no-after">
+        <div class="list">
+          <div>车辆型号：{{ car_model }}</div>
+        </div>
+      </div>
+      <div class="down_container">
+        <div class="list">
+          <div>
+            本车预计估值：
+            <span class="strong c_yellow">
+              {{ _min }}元-{{ _max }}元
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script>
+import mixin from '@/mixins/print-details.js'
+import { numberComma } from 'vux'
+
+export default {
+  naem: 'PrintDetails__CarUsed',
+
+  mixins: [mixin],
+
+  props: ['WebViewConfig'],
+
+  computed: {
+    _min() {
+      if (this.isShowUsed && this.carUsed)
+        return this.f(numberComma(this.carUsed.min))
+      return ''
+    },
+    _max() {
+      if (this.isShowUsed && this.carUsed)
+        return this.f(numberComma(this.carUsed.max))
+      return ''
+    }
+  }
+}
+</script>

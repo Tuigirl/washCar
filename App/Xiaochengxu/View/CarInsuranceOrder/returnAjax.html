@@ -1,0 +1,183 @@
+<head><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/./js/vendor.63bfe990.js"></script><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/js/CarInsuranceOrder\returnAjax.3d25c599.js"></script></head><foreach name='order' item='vo' key="k">
+    <!-- 订单 -->
+    <div class="order">
+
+        <if condition = "$vo['status'] eq 2 || $vo['status'] eq 4 || $vo['status'] eq 1">
+        <if condition='$search_type eq "" '>
+        <a class="aJump" href='<{:U("CarInsurance/selectInsuranceCompany?session_id=$id&type=list&order_sn=".$vo["order_sn"])}>'>
+        <else/>
+        <a class="aJump" href='<{:U("CarInsurance/selectInsuranceCompany?session_id=$id&type=list&search_type=".$search_type."&order_sn=".$vo["order_sn"])}>'>
+        </if>
+        <else/>
+        <a class="aJump" href='<{:U("CarInsuranceOrder/orderDetail?session_id=$id&type=list&search_type=".$search_type."&order_sn=".$vo["order_sn"])}>'>
+        </if>
+
+        <div class="order_top">
+            <div class="brand_number">
+                <{$vo.license_number}>
+            </div>
+            <div class="count_down">
+                <{$vo.s_dec}>
+            </div>
+
+        </div>
+        <div class="order_con">
+            <div class="order_items">
+              <if condition="$vo[insured_eq_applicant] eq 1">
+                <section>
+                  <div class="person">投保人/受益人</div>
+                  <div class="person_name"><{$vo.applicant}></div>
+                </section>
+              <else/>
+                <section class="two-person">
+                  <div class="person">投保人</div>
+                  <div class="person_name"><{$vo.applicant}></div>
+                </section>
+                <section class="two-person">
+                  <div class="person">受益人</div>
+                  <div class="person_name"><{$vo.insured}></div>
+                </section>
+              </if>
+            </div>
+          <if condition="$vo[insured_eq_applicant] eq 1">
+            <div class="choosed_insur">
+          <else/>
+            <div class="choosed_insur two">
+          </if>
+                <div class="left">投保险种</div>
+                <div class="right">
+                    <if condition="$vo.force_tax neq 0">
+                        <div class="img_p">交强险/车船税</div>
+                    </if>
+                    <if condition="$vo.biz_num neq 0">
+                        <div class="img_p">商业险 ×<{$vo.biz_num}></div>
+                    </if>
+                </div>
+            </div>
+            <foreach name='vo.insurance' item ='v' key='i'>
+            <if condition=' $i eq 4 '>
+            <div class="choosed_insur">
+                <div class="left"></div>
+                <div class="right omit">
+                    ......
+                </div>
+            </div>
+            </if>
+            </foreach>
+        </div>
+        </a>
+        <div class="offer_wrap">
+
+            <if condition = "$vo['status'] eq 2 || $vo['status'] eq 4 || $vo['status'] eq 1">
+                <if condition='$search_type eq "" '>
+                <a class="aJump" href='<{:U("CarInsurance/selectInsuranceCompany?session_id=$id&type=list&order_sn=".$vo["order_sn"])}>'>
+                <else/>
+                <a class="aJump" href='<{:U("CarInsurance/selectInsuranceCompany?session_id=$id&type=list&search_type=".$search_type."&order_sn=".$vo["order_sn"])}>'>
+                </if>
+            <else/>
+            <a class="aJump" href='<{:U("CarInsuranceOrder/orderDetail?session_id=$id&type=list&search_type=".$search_type."&order_sn=".$vo["order_sn"])}>'>
+            </if>
+            <img class="or_li" src="/Public/static/packaged-assets/Xiaochengxu/img/or_ar-914a1825.png" alt="" />
+            <if condition='$vo["status"] eq 2 '>
+                <div class="top_status waitPay">
+                    <div style="color:#68a944"><{$vo.status_dec}></div>
+                    <div class="count_down"  id="dec<{$k}>">
+                        <script>
+                            timer(parseInt("<{$vo.expire_int}>"),'dec<{$k}>');
+                        </script>
+                    </div>
+                </div>
+                <elseif condition = " $v['status'] eq  6 AND $v['underwri_status'] eq -1"/>
+                <div class="top_status">
+                    <font class="red">已失效</font>
+                </div>
+                <else/>
+                <div class="top_status yellow" data-console="<{$v['status']}>,<{$v['underwri_status']}>">
+                    <{$vo.status_dec}>
+                </div>
+            </if>
+            <foreach name='vo.insurance_type' item ='v' key='i'>
+            <div class="offer_price">
+                <div class="offer_pr_l">
+                    <{$v.InsuranceCompany}>
+                </div>
+
+                <div class="offer_pr_m">
+                    ......
+                </div>
+
+                <if condition=" $v['status'] eq  1 ">
+                <div class="offer_pr_r yellow" >
+                    信息有误，报价失败
+                </div>
+                <else/>
+
+
+                <div class="offer_pr_r discount-price-html black_txt">
+
+                    <div class="pay1" data-console="<{$v['status']}>,<{$v['underwri_status']}>">
+                        <section class="cai fl"><div>保</div></section>
+                        <div class="tarPrice fl" data-price="<{$v.total_amount}>">
+                            <if condition="$v.total_amount eq 0.00">
+                            <span class="total_number" style="color:#a1a1a1;letter-spacing:0.165rem">----.--</span>
+                            <else/>
+                            <span class="total_number"><{$v.total_amount}></span>
+                            </if>
+                        </div>
+                    </div><!--我是保单-->
+                <!-- model=2有眼睛 -->
+                <if condition="$model eq 2">
+                    <div class="pay2 d-n">
+                  <else/>
+                    <div class="pay2 d-n mt">
+                </if>
+                      <section class="cai fl"><div>售</div></section>
+                      <div class="tarPrice fl">
+                        <if condition="$v.total_amount eq 0.00">
+                        <span class="total_number" style="color:#a1a1a1;letter-spacing:0.165rem">----.--</span>
+                        <else/>
+                        <span class="total_number"><{$v.shopPay}></span>
+                        </if>
+                      </div>
+                    </div><!--我是折扣-->
+                </div>
+              <!-- 待核保 =》未核保 -->
+              <if condition = " $v['status'] eq  2 ">
+                 <div class="insuranceStatus fl status_blue">
+                     <span>未核保</span>
+                 </div>
+              <!-- 报价失败 -->
+              <elseif condition = " $v['status'] eq  3 AND $v['underwri_status'] eq -1"/>
+                 <div class="insuranceStatus fl status_gray">
+                     <span>报价失败</span>
+                 </div>
+              <!-- 未到投保期 -->
+              <elseif condition = " $v['status'] eq  6 AND $v['underwri_status'] eq -1"/>
+                 <div class="insuranceStatus fl status_gray">
+                     <span>未到期</span>
+                 </div>
+              <!--核保失败 -->
+              <elseif condition = " $v['status'] eq  3 AND $v['underwri_status'] neq -1"/>
+                 <div class="insuranceStatus fl status_red">
+                     <span>核保失败</span>
+                 </div>
+              <!-- 已失效 -->
+              <elseif condition = " $v['status'] eq  6 AND $v['underwri_status'] neq -1"/>
+                 <div class="insuranceStatus fl status_gray">
+                     <span>已失效</span>
+                 </div>
+              <!-- 待支付 =》已核保 -->
+              <elseif condition = " $v['status'] eq  4 "/>
+                 <div class="insuranceStatus fl status_green">
+                     <span>已核保</span>
+                 </div>
+              </if>
+                </if>
+            </div>
+            </foreach>
+            </a>
+        </div>
+    </div>
+
+    </if>
+</foreach>

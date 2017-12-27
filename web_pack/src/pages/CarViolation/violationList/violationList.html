@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>违章查询结果</title>
+  <%- include src/components/header/ViolationHeader %>
+</head>
+<body>
+    <div id="all-box" v-cloak>
+        <header></header>
+        <!-- 查询 有违章展示 -->
+        <transition-group
+          v-show="!!items.illegal_info.length"
+          tag="ul" id="wrapper" class="con"
+          appear
+          appear-active-class="animated flipInX"
+        >
+            <li
+              v-for="(item,index) in items.illegal_info"
+              :key="index"
+              @click="ViewDetails(item)"
+            >
+                <div class="cleared" v-if="isCleared(item)">
+                    <img src="../../../assets/img/api/violation/YBL_icon.png">
+                </div>
+                <section :style="{background: item.Degree > 0&&'#F8F8F8'}">
+                    <div class="address">{{ '['+item.LocationName+']' }} {{ item.Location }}</div>
+                    <div class="time"><span class="c-A1">时间：</span>{{ item.Time }}</div>
+                    <div class="reason">
+                        <span class="select" @click.stop="clk_select(index)" :class="{ no_click: item.Degree > 0||isCleared(item) }">
+                            <img src="../../../assets/img/api/violation/select_no.png" v-show="item.is_select">
+                            <img src="../../../assets/img/api/violation/select_yes.png" v-show="!item.is_select">
+                        </span>
+                        <div>
+                            <span class="c-A1">原因：</span><span class="reason-s">{{ item.Reason }}</span>
+                        </div>
+                        <span class="arrow">
+                            <img src="../../../assets/img/api/arrow_right.png">
+                        </span>
+                    </div>
+                    <div class="fine">
+                        <span class="c-A1">罚款：</span>{{ '¥ '+(item.count||'0.00') }}
+                        <template v-if="item.Degree > 0">
+                          <span class="c-A1">扣分：</span>{{ (item.Degree||0)+' 分' }}
+                        </template>
+                    </div>
+                    <div class="hint" v-if="item.Degree > 0">{{ item.CanprocessMsg }}</div>
+                </section>
+            </li>
+        </transition-group>
+        <ul class="foot_button" v-show="!!items.illegal_info.length">
+            <li class="select_all" @click="clk_selectAll">
+                <span v-show="!is_selectAll"><img src="../../../assets/img/api/violation/selectAll_no.png"></span>
+                <span v-show="is_selectAll"><img src="../../../assets/img/api/violation/selectAll_yes.png"></span>
+                <span>全选</span>
+            </li>
+            <li>违章 <animated-integer v-bind:value="payment_info[0]"></animated-integer></li>
+            <li>罚款 <animated-integer v-bind:value="payment_info[1]"></animated-integer></li>
+            <!-- <li>扣分 <animated-integer v-bind:value="payment_info[2]"></animated-integer></li> -->
+            <li role="button" @click="clk_submit">罚款代缴</li>
+        </ul>
+
+        <!-- 查询 无违章的展示 -->
+        <ul id="NoList" v-show="!items.illegal_info.length">
+            <li><img src="../../../assets/img/api/violation/no_violation.png"/></li>
+            <li>该车辆暂无违章记录</li>
+        </ul>
+    </div>
+    <input type="hidden" id="session_id" value="<{$session_id}>">
+    <div class="d-n" id="data"><{$item}></div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<style lang="stylus" scoped>
+@import '../styles/_variables'
+.x-cell
+  display flex
+  align-items center
+  justify-content space-between
+  height 52px
+  padding 0 13px
+  &:not(:nth-last-of-type(1))
+    border-bottom .5px solid border-line-color
+  .x-cell__right
+    display flex
+    align-items center
+    justify-content space-between
+
+</style>
+
+<template lang="pug">
+  div(class='x-cell', @click="tapHandler")
+    div(class="x-cell__left") {{ label }}
+    div(class="x-cell__right")
+      span {{ value }}
+      slot
+</template>
+
+<script>
+export default {
+  name: 'XCell',
+  props: {
+    label: {
+      type: String,
+      default: ''
+    },
+    value: {
+      type: String,
+      default: ''
+      // twoWay: true,
+    }
+  },
+
+  methods: {
+    tapHandler() {
+      this.$emit('tap')
+    }
+  }
+}
+</script>

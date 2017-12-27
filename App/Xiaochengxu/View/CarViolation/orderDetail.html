@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>订单详情</title>
+  <meta charset="UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/layer/layer.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/textMiddle.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/carInsurance/iscroll.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/velocity/1.4.1/velocity.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css"/>
+
+<link rel="stylesheet" href="__APIROOT__/css/api/common.css"/>
+
+<link href="/Public/static/packaged-assets/Xiaochengxu/css/CarViolation\orderDetail.3696f891.css" rel="stylesheet"><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/./js/vendor.30fdf11b.js"></script><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/js/CarViolation\orderDetail.0f067ded.js"></script></head>
+<body id="confirmOrder">
+    <div id="all-box" v-cloak>
+        <header v-show="!isWechat">
+            <div class="header_con">
+                <div class="header_top">
+                    <div class="left">
+                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/back_arrow-e95377d1.png" width="12" onclick="$.JumpURL(sessionStorage.orderList_url,{session_id:'<{$session_id}>',orderStatus:sessionStorage.orderDetail_tabIndex},'get')"/>
+                    </div>
+                    <div class="middle">
+                        <h1>订单详情</h1>
+                    </div>
+                    <div class="right"></div>
+                </div>
+            </div>
+        </header>
+        <!-- 订单详情 违章列表 -->
+        <transition-group
+          tag="ul" id="wrapper" class="con"
+          appear
+          appear-active-class="animated flipInX"
+        >
+            <li class="order-info" key>
+                <div>
+                    <h3 class="c-36">{{ format_license_number(items.CarNumber) }}</h3>
+                    <span class="c-A1">订单号:{{ items.OrderId }}</span>
+                </div>
+                <div class="t-a-r">
+                    <span v-bind:style="{color:order_status.color}">{{ order_status.text }}</span>
+                    <span class="c-A1">{{ items.CreateTime }}</span>
+                </div>
+            </li>
+
+            <li
+              class="violation-items"
+              v-for="item in items.OrderDetails"
+              v-bind:key="item.ID"
+             >
+                <section>
+                    <div class="address">{{ '['+item.LocationName+']' }} {{ item.Location }}</div>
+                    <div class="time"><span class="c-A1">时间：</span>{{ item.OccurTime }}</div>
+                    <div class="reason">
+                        <span class="c-A1">原因：</span><span class="reason-s">{{ item.Reason }}</span>
+                    </div>
+                    <div class="toll">
+                        <span class="c-A1">办理服务费：</span>{{ '¥ '+(item.Poundage||'0.00') }}
+                    </div>
+                    <div class="fine">
+                        <span class="c-A1">罚款：</span>{{ '¥ '+(item.Fine||'0.00') }}
+                        <!-- <span class="c-A1">扣分：</span>{{ (item.Degree||0)+' 分' }} -->
+                    </div>
+                </section>
+            </li>
+
+            <li class="payment-amount" key>
+                <div>支付金额：</div>
+                <div>
+                  {{ '¥ '+items.Amount }}
+                  <span
+                    class="pay_btn"
+                    v-if="order_status.code==0"
+                    @click="go_wx_pay"
+                  >
+                    支付
+                  </span>
+                </div>
+            </li>
+            <li class="payment-amount" key>
+                <div>支付方式：</div>
+                <div>{{ items.PayWay }}</div>
+            </li>
+            <li key class="c-A1 timelist">
+                <status-time-list :list="items.PayChange"></status-time-list>
+            </li>
+            <li key v-if="order_status.code==1" class="c-A1 prompt">预计3~5个工作日完成</li>
+            <li key v-else-if="order_status.code==3" class="reson">退款原因：{{ items.OrderDetails[0].RefundReson }}</li>
+        </transition-group>
+
+    </div>
+    <div id="data" class="d-n"><{$item}></div>
+    <input id="session_id" type="hidden" value="<{$session_id}>">
+    <input id="license_number" type="hidden" value="<{$license_number}>">
+</body>
+</html>

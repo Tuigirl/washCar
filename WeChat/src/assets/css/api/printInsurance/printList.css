@@ -1,0 +1,207 @@
+input::-webkit-input-placeholder{
+    text-align: center;
+    font-size: 0.846rem;
+    color: #E5E5E5;
+}
+input{
+    border: 0;
+    outline: 0;
+}
+img{
+    float: left;
+}
+ul,li,div,section,input{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.c_59{
+    color:#595959!important;
+}
+.c_A1{
+    color:#A1A1A1!important;
+}
+.c_B7{
+    color:#B7B7B7!important;
+}
+.c_FB0{
+    color:#FB0!important;
+}
+.d_b{
+  display: block!important;
+}
+.nm{
+  white-space: normal!important;
+}
+
+.header_top .right img {
+    transform: rotateZ(0deg);
+    transform-origin: 50% 50% 0;
+    transition: all .3s ease-in;
+    position: absolute;
+    right: 10px;
+    top: 17px;
+}
+.header_top .right img.rotate {
+    transform: rotateZ(180deg);
+}
+
+/*搜索框---start*/
+.search_box{
+    height: 45px;
+    background-color: #DEDEDE;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;/*等同新版justify-content*/
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.search_box form{
+    background-color: white;
+    border-radius: 25px;
+    overflow: hidden;
+    width: 87.2%;
+    height: 31px;
+    margin: 0;
+}
+.search_box form input{
+    width: 100%;
+    height: 100%;
+    padding: 0 5.5%;
+    font-size: 0.846rem;
+}
+/*搜索框---end*/
+
+.con{
+    padding: .769rem 0;
+    margin: 0 .769rem;
+}
+.con img{
+    width: 100%;
+    height: 100%;
+}
+
+#printList{
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+}
+#printList > li{
+    width: 100%;
+    margin-top: 5px;
+}
+#printList > li:first-child{
+    margin-top: 0;
+}
+#printList > li .date{
+    height: 2.231rem!important;
+    line-height: 2.231rem;
+    padding-left: 1.077rem;
+    font-size: 0.923rem;
+    color: #A1A1A1;
+    background-color: #F7F7F7;
+    opacity: 1!important;
+}
+#printList > li article:not(:nth-of-type(1)){
+    border-top: 1px solid #F0F0F0;
+}
+#printList section{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    min-height: 4.385rem;
+    background-color: white;
+    padding: 0 1.231rem;
+    font-size: 0.846rem;
+}
+#printList section > div{width: 1%;}/*三星部分机型*/
+#printList section > div:nth-child(1){
+    -webkit-box-flex: 1.29;/* OLD - iOS 6-, Safari 3.1-6, android 2.1-3.0*/
+    -webkit-flex: 1.29;
+    flex: 1.29;
+    font-size: 1.154rem;
+}
+#printList section > div:nth-child(2){
+    -webkit-box-flex: 1.76;/* OLD - iOS 6-, Safari 3.1-6, android 2.1-3.0*/
+    -webkit-flex: 1.76;
+    flex: 1.76;
+}
+#printList section > div:nth-child(3){
+    -webkit-box-flex: 0.6;/* OLD - iOS 6-, Safari 3.1-6, android 2.1-3.0*/
+    -webkit-flex: 0.6;
+    flex: 0.6;
+    text-align: right;
+    color: #a1a1a1;
+}
+/*#printList section > div:nth-child(3){
+    width: 20px;
+    height: 20px;
+}*/
+
+/*无打印历史的展示---start*/
+#NoList{
+    border: none;
+    padding-top: 35%;
+}
+#NoList li{
+    width: 32.5%;
+    margin: 0 auto;
+    white-space: nowrap;
+    text-align: center;
+    text-indent: -0.6em;
+    color: #AEAEAE;
+}
+#NoList li:first-child{
+    padding: 1.846rem 2.308rem;
+    min-height: 118px;
+}
+#NoList img{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+/*无打印历史的展示---end*/
+
+
+/**
+ * 上拉加载 样式
+ */
+.loading {
+    margin-top: 0!important;
+    height:75px;
+    color:#A1A1A1;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    display: none;
+}
+.loading.flex{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.loading .pullUpIcon {
+    display: block;
+    width: 20px;
+    height:20px;
+    background: url(../../../img/api/pull-icon@2x.png) 0 100% no-repeat;
+    background-size: 20px 40px;
+    -webkit-transform:rotate(0deg) translateZ(0);
+    -webkit-transition-duration:0ms;
+    -webkit-animation-name:loading;
+    -webkit-animation-duration:2s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+}
+
+@-webkit-keyframes loading {
+    from { -webkit-transform:rotate(0deg) translateZ(0); }
+    to { -webkit-transform:rotate(360deg) translateZ(0); }
+}

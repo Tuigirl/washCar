@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>车险订单</title>
+  <meta charset="UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/layer/layer.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/textMiddle.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/carInsurance/iscroll.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/velocity/1.4.1/velocity.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.0.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css"/>
+
+<link rel="stylesheet" href="__APIROOT__/css/api/carInsurance/common.css"/>
+
+<link href="/Public/static/packaged-assets/Xiaochengxu/css/CarInsuranceOrder\order.2017e3d1.css" rel="stylesheet"><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/./js/vendor.63bfe990.js"></script><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/js/CarInsuranceOrder\order.eae41d33.js"></script></head>
+<script>
+function timer(intDiff,dec){
+  window.setInterval(function(){
+    var day=0,
+    hour=0,
+    minute=0,
+    second=0;//时间默认值
+    if(intDiff > 0){
+      day = Math.floor(intDiff / (60 * 60 * 24));
+      hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+      minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+      second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+    }
+    if (minute <= 9) minute = '0' + minute;
+    if (second <= 9) second = '0' + second;
+    var html ="(剩余时间 "+hour+':'+minute+':'+second+')',
+    sum = hour + minute + second;
+    if(hour==0 && minute==0 && second==0){
+      var mydate = new Date();
+      var Y=mydate.getFullYear(); //获取完整的年份(4位,1970-????)
+      var M=mydate.getMonth()+1; //获取当前月份(0-11,0代表1月)
+      var D=mydate.getDate(); //获取当前日(1-31)
+      var H=mydate.getHours(); //获取当前小时数(0-23)
+      var Ms=mydate.getMinutes(); //获取当前分钟数(0-59)
+      html=Y+"/"+M+"/"+D+" "+H+":"+Ms;
+    }
+    $("#"+dec).html(html);
+    if (sum<=0) {
+      $("#"+dec).hide().parents('.order').find('.top_status').children().html('<font class="red">已失效</font>');
+    }
+    intDiff--;
+  }, 1000);
+}
+</script>
+<body>
+    <div class="gray"></div>
+    <header>
+        <div class="header_con">
+            <div class="left">
+                <img src="/Public/static/packaged-assets/Xiaochengxu/img/back_arrow-e95377d1.png" width="12px" @click="close"/>
+            </div>
+
+            <div class="middle"><h1>车险订单</h1></div>
+
+            <if condition='$model eq 2'>
+            	<div class="right" id="eye">
+                <img
+                  src="/Public/static/packaged-assets/Xiaochengxu/img/closeEye-8acdd3a5.png"
+                  data-on="/Public/static/packaged-assets/Xiaochengxu/img/openEye-50ac8166.png"
+                  data-off="/Public/static/packaged-assets/Xiaochengxu/img/closeEye-8acdd3a5.png"
+                  data-status='off'
+                />
+              </div>
+            </if>
+
+                <div class="choose-items">
+                    <!-- <a href='<{:U("CarInsuranceOrder/orderList?session_id=$id")}>'> -->
+                    <dl>
+                        <if condition ="$_GET['search_type'] == 2||$_GET['search_type'] == 3||$_GET['search_type'] == 4">
+                        <dt>全部</dt>
+                        <else/>
+                        <dt class="yellow">全部</dt>
+                        </if>
+                    </dl>
+                    <!-- </a> -->
+                    <!-- <a href='<{:U("CarInsuranceOrder/orderList?session_id=$id&search_type=2")}>'> -->
+                    <dl>
+                        <if condition =" $_GET['search_type'] == 2">
+                            <dt style="position:relative;" class="yellow">待支付
+                            <if condition ="$num neq 0">
+                            <div class="unpay-circle"></div>
+                            </if>
+                            </dt>
+                        <else/>
+                            <dt style="position:relative;">待支付
+                            <if condition ="$num neq 0">
+                            <div class="unpay-circle"></div>
+                            </if>
+                            </dt>
+                        </if>
+                    </dl>
+                    <!-- </a> -->
+                    <!-- <a href='<{:U("CarInsuranceOrder/orderList?session_id=$id&search_type=3")}>'> -->
+                    <dl>
+                        <if condition =" $_GET['search_type'] == 3">
+                        <dt class="yellow">已完成</dt>
+                        <else/>
+                        <dt>已完成</dt>
+                        </if>
+                    </dl>
+                    <!-- </a> -->
+                    <!-- <a href='<{:U("CarInsuranceOrder/orderList?session_id=$id&search_type=4")}>'> -->
+                    <dl>
+                        <if condition =" $_GET['search_type'] == 4">
+                        <dt class="yellow">已失效</dt>
+                        <else/>
+                        <dt>已失效</dt>
+                        </if>
+                    </dl>
+                    <!-- </a> -->
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="con" id="wrapper">
+
+            <div id="scroller">
+                <!-- 下拉刷新 -->
+                <div id="pullDown">
+                    <span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新...</span>
+                </div>
+
+                <if condition ="$num neq 0">
+                <div class="unpay-warning">
+                    <div><img src="/Public/static/packaged-assets/Xiaochengxu/img/speaker-d7ec592c.png"/></div>
+                    <div>
+                        您有新的待支付订单需要支付！<span>点击查看</span>
+                    </div>
+                    <div class="close-warning">
+                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/close-13bbdccd.png"/>
+                    </div>
+                </div>
+                </if>
+
+                <!-- 订单内容 -->
+                <div id="pullCon"></div>
+
+                <!-- 上拉加载 -->
+                <div id="pullUp">
+                    <span class="pullUpIcon"></span><span class="pullUpLabel">加载更多...</span>
+                </div>
+            </div>
+
+            <div class="order-wrap">
+                <if condition ="$num neq 0">
+                <div class="unpay-warning">
+                    <div><img src="/Public/static/packaged-assets/Xiaochengxu/img/speaker-d7ec592c.png"/></div>
+                    <div>
+                        您有新的待支付订单需要支付！<span>点击查看</span>
+                    </div>
+                    <div class="close-warning">
+                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/close-13bbdccd.png"/>
+                    </div>
+                </div>
+                </if>
+                <div class="no_order">
+                    <img src="/Public/static/packaged-assets/Xiaochengxu/img/no_order-af5207b6.png" />
+                    <p class="no_order_txt">您当前没有订单哦</p>
+                </div>
+            </div>
+
+    </div>
+<body>
+<script type="text/javascript">
+    var myScroll,
+        pullDownEl, pullDownOffset, pullDownLabel,
+        pullUpEl, pullUpOffset, pullUpLabel, pullUp_spaceHold = 10;
+    var search_type = 1,/*传值类型:1全部2待支付3已完成4已失效*/
+        page = 1, num = 6;/*page:分页, num:数据条数*/;
+
+    var pathName = location.pathname.indexOf('search_type/');
+    if (pathName > 0) {
+
+        search_type = ~~location.pathname.substr(pathName+'search_type/'.length, 1);
+    }
+    /**
+     * 下拉刷新
+     */
+    function pullDownAction () {
+        var refreshNum = $('#pullCon').children('.order').size();
+            refreshNum = refreshNum<6 ? num : refreshNum;
+
+        setTimeout(function () {
+
+            loadData(1, refreshNum, true);/*刷新请求的分页 永远是1*/
+        }, 1000);
+    }
+
+    /**
+     * 上拉加载
+     */
+    function pullUpAction () {
+        setTimeout(function () {
+
+            loadData(++page, num);
+        }, 1000);
+    }
+
+    /**
+     * 初始化iScroll控件
+     */
+    function loaded() {
+        pullDownEl = document.getElementById('pullDown');
+        pullDownOffset = pullDownEl.offsetHeight;
+        pullUpEl = document.getElementById('pullUp');
+        pullUpOffset = pullDownOffset;
+        pullDownLabel = pullDownEl.querySelector('.pullDownLabel');
+        pullUpLabel = pullUpEl.querySelector('.pullUpLabel');
+
+
+        myScroll = new iScroll('wrapper', {
+            // scrollbarClass: 'myScrollbar', /* 滚动条样式 */
+            // checkDOMChanges: true, /*Dom改变 自动刷新Scroll*/
+            vScrollbar:false,  /*隐藏竖向滚动条*/
+            useTransition: true, /* 此属性不知用意 */
+            topOffset: pullDownOffset,
+            onRefresh: function () {
+                var _this = this;
+                if (pullDownEl.className.match('loading')) {
+                    pullDownEl.className = '';
+                    pullDownLabel.innerHTML = '刷新成功';
+                    setTimeout(function () {/*刷新成功停留一段时间 用来展示*/
+                        _this.options.topOffset = pullDownOffset;
+                        _this.refresh();
+                    }, 350);
+                } else if (pullUpEl.className.match('loading')) {
+                    pullUpEl.className = '';
+                    pullUpLabel.innerHTML = '加载更多...';
+                } else if (pullDownEl.className == '') {
+                    setTimeout(function () {
+                        pullDownLabel.innerHTML = '下拉刷新...';
+                    }, 350);
+                }
+                //设置最大可滚动值来隐藏 上拉DIV
+                this.maxScrollY = this.maxScrollY + pullUpOffset -pullUp_spaceHold;
+            },
+            onScrollMove: function () {
+                if (this.y > 0 && !pullDownEl.className.match('flip')) {
+                    pullDownEl.className = 'flip';
+                    pullDownLabel.innerHTML = '松手开始刷新...';
+                    this.minScrollY = 0;
+                } else if (this.y < 0 && pullDownEl.className.match('flip')) {
+                    pullDownEl.className = '';
+                    pullDownLabel.innerHTML = '下拉刷新...';
+                    this.minScrollY = -pullDownOffset;
+                } else if ($('#pullCon').children('.order').size() > 1){
+
+                    if(this.y < this.absStartY && this.y <= (this.maxScrollY-pullUpOffset*0.75) && !pullUpEl.className.match('flip')) {
+                        pullUpEl.className = 'flip';
+                        pullUpLabel.innerHTML = '松手开始加载...';
+                        $(pullUpEl).css('visibility', 'visible');
+                    } else if (this.y > (this.maxScrollY-pullUpOffset*0.75) && pullUpEl.className.match('flip')) {
+                        pullUpEl.className = '';
+                        pullUpLabel.innerHTML = '加载更多...';
+                    }else if (this.y < this.maxScrollY) {
+                        $(pullUpEl).css('visibility', 'visible');
+                    }
+                }
+            },
+            onBeforeScrollEnd: function () {
+                if (pullUpEl.className.match('flip')) {
+                    //设置最大可滚动值来显示 上拉DIV
+                    this.maxScrollY = this.maxScrollY - pullUpOffset +pullUp_spaceHold;
+                }
+            },
+            onScrollEnd: function () {
+                if (pullDownEl.className.match('flip')) {
+                    pullDownEl.className = 'loading';
+                    pullDownLabel.innerHTML = '加载中...';
+                    pullDownAction();   // Execute custom function (ajax call?)
+                } else if (pullUpEl.className.match('flip')) {
+                    pullUpEl.className = 'loading';
+                    pullUpLabel.innerHTML = '加载中...';
+                    pullUpAction(); // Execute custom function (ajax call?)
+                }
+            }
+        });
+
+        $('.aJump').on('click', function () {
+            var addr = $(this).attr('href');
+            location.href = addr;
+
+        });
+    }
+
+    //初始化绑定iScroll控件-----start
+    $('#wrapper').on({
+        touchmove: function (e) { e.preventDefault(); }
+    });
+    if ($('#scroller').size()) {
+        document.addEventListener('DOMContentLoaded', loaded, false);
+    }//---------end
+
+    $(function(){
+
+        $('.unpay-warning').animate({height:'50px'},500,function  () {
+            if (!$(this).next().hasClass('no_order')) {
+
+                myScroll.refresh();/*调用iScroll界面更新方法*/
+            }
+        }).click(function (e) {/*跳转待支付 页*/
+            $('.unpay-warning').animate({height:'0px'},500,function () {/*新的待支付订单查看过后 不在显示*/
+                if (!$(this).next().hasClass('no_order')) {
+                    $('.unpay-circle').hide();
+                    myScroll.refresh();/*调用iScroll界面更新方法*/
+                }
+            });
+
+            $('.choose-items dl dt').removeClass('yellow').eq(1).addClass('yellow');
+
+            search_type = 2;/*改变筛选*/
+            page = 1;/*分页重置*/
+            layer.open({type: 2,shadeClose:false});/*过渡*/
+            loadData(page, num, false, true);/*tap加载*/
+            // location.href='<{:U("CarInsuranceOrder/orderList?search_type=2&session_id=$id")}>';
+        });
+
+        $('.close-warning').on('click',function(e){
+            e.stopPropagation();
+            $('.unpay-warning').animate({height:'0px'},500,function () {
+                if (!$(this).next().hasClass('no_order')) {
+
+                    myScroll.refresh();/*调用iScroll界面更新方法*/
+                }
+            });
+        });
+
+        $('.choose-items dl').click(function(){/*TAP切换*/
+
+            if (!$(this).find('dt').hasClass('yellow')) {/*非当前选中的才可以*/
+                var i = $(this).index();
+
+                if (i == 1) {
+                    $('.unpay-warning').animate({height:'0px'},500,function () {/*新的待支付订单查看过后 不在显示*/
+                        if (!$(this).next().hasClass('no_order')) {
+                            $('.unpay-circle').hide();
+                            myScroll.refresh();/*调用iScroll界面更新方法*/
+                        }
+                    });
+                }
+
+                $('.choose-items dl dt').removeClass('yellow').eq(i).addClass('yellow');
+
+                search_type = i +1;/*改变筛选*/
+                page = 1;/*分页重置*/
+                layer.open({type: 2,shadeClose:false});/*过渡*/
+                loadData(page, num, false, true);/*tap加载*/
+            }
+        });
+
+    });
+
+    var model="<{$model}>";
+    loadData(page, num);/*首次加载*/
+
+    /**
+     * 请求数据pageIndex:分页,pageNum:返回数量
+     */
+    function loadData (pageIndex, pageNum, refreshFlag, reLoadFlag) {
+
+        // if(!!$('#statu').val()) return;no_order
+
+        var sendJson = {page:pageIndex,num: pageNum,is_ajax:1,session_id:'<{$id}>'},
+            requestTime = Date.now(), transitionTime = 250;
+        if (search_type != 1) {
+            sendJson.search_type = search_type;
+        }
+
+        $.ajax({
+            url: '<{:U("CarInsuranceOrder/orderList")}>',
+            type: 'post',
+            data: sendJson,
+            dataType: 'html',
+            success:function(data){
+                if(reLoadFlag) {/*来自tap切换*/
+                    $('#pullCon').html('');/*清空旧数据*/
+                    $('#scroller').show();
+                    $('.order-wrap').hide();
+
+                    if (Date.now()-requestTime>=transitionTime) {
+                        layer.closeAll();/*关闭过渡*/
+                    }else {/*延时关闭过渡 防止突兀的效果*/
+                        setTimeout(function () {layer.closeAll();}, transitionTime);/*关闭过渡*/
+                    }
+                }
+                if (refreshFlag) {/*来自下拉刷新*/
+                    $('#pullCon').html('');/*清空旧数据*/
+                    myScroll.options.topOffset = 0;
+                }
+
+                $('#pullCon').append(data);//插入数据
+                $(pullDownEl).css('visibility', 'visible');
+
+                var data_size = $('#pullCon').children('.order').size();/*展示中的订单条数*/
+                if(data_size == 1){
+                    $(pullUpEl).css('visibility', 'hidden');
+                } else if (data_size < 1){
+                    $('#scroller').hide();
+                    $('.order-wrap').show();
+                }
+
+            },
+            complete: function (data) {
+
+                /*model==1无眼睛||eyeStatus == 'on'眼睛睁开 需要显示折扣*/
+                var eyeStatus = $('#eye img').attr('data-status');
+                if(model==1){
+                  $(".pay1").show();
+                  $(".pay2").removeClass('d-n');
+                }else if (eyeStatus == 'on') {
+                  $(".pay1").hide();
+          				$(".pay2").removeClass('d-n');
+                }
+
+                priceRecombine($('.total_number'));/*价格拆分重组*/
+                myScroll.refresh(); // 数据加载完成后，调用iScroll界面更新方法
+
+                if(reLoadFlag) {/*来自tap切换*/
+                    $('#scroller').css('transform', 'matrix(1, 0, 0, 1, 0, -75)');/*tap切换之后 自动滚到顶*/
+                }
+                if (!data.responseText) {/*适用于上拉加载 没有返回数据*/
+                    $(pullUpLabel).text('暂无更多数据');
+                }
+            }
+        });
+    }
+</script>
+</html>

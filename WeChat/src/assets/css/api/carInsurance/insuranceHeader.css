@@ -1,0 +1,96 @@
+.insur-head{
+    width:100%;
+    background:#f0f0f0;
+    height:109px;
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+}
+.insur-head .left,.insur-head .middle,.insur-head .right{
+    width:33.3%;
+    height:109px;
+    overflow:hidden;
+    float:left;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient:vertical;
+    -webkit-box-lines:multiple;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-align-content: center;
+    align-content: center;
+}
+.insur-head .middle{
+    width:33.4%;
+}
+.left .l-l,.middle .m-l,.right .r-l{
+    width:35%;
+    float: left;
+}
+.left .l-m,.middle .m-m,.right .r-m{
+    width:30%;
+    float: left;
+}
+.left .l-r,.middle .m-r,.right .r-r{
+    width:35%;
+    float: left;
+}
+.left .l-r{
+
+}
+.insur-head p{
+    text-align:center;
+    color:#a1a1a1;
+    font-size:1.0769rem;
+    height:20px;
+    width:100%;
+}
+.circle{
+    height:50px;
+    overflow:hidden;
+    width:100%;
+}
+.insur-body{
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    width:92%;
+    margin:0 auto;
+    color:#adb6ba;
+}
+.same-height{
+    border:2px solid #adb6ba;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    color:#adb6ba;
+    text-align:center;
+    font-weight:bold;
+    border-image-width:0;
+    font-size:1.23077rem;
+}
+
+.insur-line{
+    width:100%;
+    height:2px;
+    background:#dbdbdb;
+    margin-top:24px;
+}
+.bg-yellow{
+    background:#fb0 !important;;
+}
+.bd-yellow{
+    border-color:#fb0;
+}
+.font-yellow{
+    color:#fb0 !important;
+}
+.font-white{
+    color:#fff;
+}

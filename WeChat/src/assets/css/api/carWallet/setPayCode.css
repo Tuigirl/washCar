@@ -1,0 +1,129 @@
+body {
+    background: #F0F0F0;
+}
+
+input {
+    padding: 0;
+}
+.header_con .left{
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    padding-top: 0;
+}
+
+.container {
+    padding: 0 10px;
+    overflow: hidden;
+    color: #a1a1a1;
+}
+
+.container h6 {
+    margin: 0.7rem 0;
+    font-weight: 400;
+    font-size: 0.923rem;
+}
+
+.input-cell {
+    position: relative;
+    background: white;
+    padding-right: 3.2%;
+    padding-left: 6%;
+    position: relative;
+}
+
+.input-cell:not(:last-child):before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 94%;
+    background: #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    pointer-events: none;
+}
+
+.input-box[name="verifyCode"] + .getVerifyCode {
+    position: absolute;
+    right: 3.2%;
+    top: 0;
+    line-height: 3.846rem;
+    font-size: 0.923rem;
+}
+
+.c_blue {
+    color: #349AE8;
+}
+
+
+/*.input-cell:nth-last-child(1){
+    margin-top: 10px;
+}*/
+
+.input-label {
+    font-size: 0.923rem;
+    float: left;
+    line-height: 3.846rem;
+    height: 3.846rem;
+    width: 5rem;
+}
+
+.input-box {
+    width: 192px;
+    float: left;
+    outline: 0;
+    border: 0;
+    height: 3.846rem;
+    color: #595959;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #A1A1A1;
+    font-size: 0.923rem;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #A1A1A1;
+    font-size: 0.923rem;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #A1A1A1;
+    font-size: 0.923rem;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #A1A1A1;
+    font-size: 0.923rem;
+}
+
+.addBank {
+    left: 11px;
+    right: 11px;
+    position: absolute;
+    bottom: 10px;
+    background: #FFBB00;
+    height: 19px;
+    text-align: center;
+    color: white;
+    padding: 15px 0;
+}
+
+.comfirm {
+    position: relative;
+    display: inline-block;
+}
+
+.comfirm img {
+    position: absolute;
+    left: -20px;
+    top: 2px;
+}

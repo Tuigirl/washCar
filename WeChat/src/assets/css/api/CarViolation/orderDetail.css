@@ -1,0 +1,105 @@
+/**
+*以下属于订单详情页面
+*基于违章列表页样式修改
+*/
+#wrapper li{
+	margin-top: 0;
+	border: none;
+}
+#wrapper .order-info{
+    padding: 1rem 1.462rem 1.231rem 1.154rem ;
+    line-height: 0.923rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#wrapper .order-info ~ li.violation-items{
+    position: relative;
+}
+#wrapper .order-info ~ li.violation-items section:before{
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    width: 7.2rem;
+    height: 8.6rem;
+    margin-top: -25%;
+    margin-left: -3.6rem;
+    background-image: url('../../../img/api/violation/wz-bj.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+#wrapper .order-info ~ li.timelist:before,
+#wrapper .order-info ~ li.violation-items:before,
+#wrapper .order-info ~ li.violation-items:after{
+	content: "";
+	position: absolute;
+	border-top: 1px solid #EAEAEA;
+	left: 1.25rem;
+	right: 1.25rem;
+}
+#wrapper .order-info ~ li.timelist:before,
+#wrapper .order-info ~ li.violation-items:before{
+    top: 0
+}
+#wrapper .order-info ~ li.violation-items:after{
+    bottom: 0
+}
+#wrapper .address{
+    white-space: normal;
+    text-align: justify;
+}
+#wrapper .reason-s{
+    -webkit-line-clamp: inherit;
+}
+#wrapper .order-info span:last-child{
+    font-size: 0.769rem;
+    padding-top: 0.769rem;
+}
+#wrapper .order-info h3{
+    font-size: 1.308rem;
+}
+#wrapper .order-info >div{
+    display: inherit;
+    -webkit-box-orient:vertical;
+    flex-direction: column;
+}
+#wrapper .toll{
+    background-color: transparent!important;
+}
+#wrapper section > div {
+    padding-left: 1.385rem!important;
+}
+#wrapper .payment-amount .pay_btn{
+  color: #DE4E4E;
+  border: 1px solid #C14343;
+  border-radius: 2px;
+  line-height: 1.615rem;
+  width: 3.077rem;
+  display: inline-block;
+    margin-left: 1.154rem;
+  text-align: center;
+}
+#wrapper .payment-amount ~ li{
+	min-height: 3.923rem;
+	line-height: 3.923rem;
+	padding: 0 1.385rem;
+	background-color: white;
+}
+#wrapper .payment-amount ~ li.prompt{
+	text-align: center;
+	background-color: #F8F8F8;
+}
+#wrapper .payment-amount ~ li.timelist{
+    line-height: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: .769rem;
+}
+#wrapper .payment-amount ~ li.timelist .timevalue:not(:first-child){
+    margin-top: 5px;
+}
+/*--------END*/

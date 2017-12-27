@@ -1,0 +1,53 @@
+@import './util'
+@import './reset'
+
+_gray = #fbfdff
+_yellow = #FFBB00
+glo-pl = 20px
+
+#global_layout,
+.gl-c-header,
+.gl-content
+  min-width: 1095px
+.rotate180
+  transform: rotateZ(180deg)!important
+.el-dropdown-menu__item
+  text-align: center
+.gl-content
+  h2
+    padding-left: glo-pl
+    padding-top: 8px
+    padding-bottom: 8px
+    clear: both
+.gl-c-header
+  height: 4em
+  background-color: _gray
+  position: fixed
+  top: 0
+  width: 100%
+  border-bottom: #E5E5E5 solid 1px
+  .gl-c-child
+    display: inline-block
+    padding-left: glo-pl
+  .el-form-item
+    margin-bottom 0
+  & > .el-button
+    margin-right 20px
+
+
+.gl-content
+  position: fixed
+  top: 4em
+  bottom: 32px
+  left: 0
+  right: 0
+  overflow-y: auto
+.el-pagination
+  position: fixed
+  width: 100%
+  bottom: 0
+
+.el-table .warning-row
+  background: oldlace
+.el-table .success-row
+  background: #f0f9eb

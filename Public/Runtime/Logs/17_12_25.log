@@ -1,0 +1,33 @@
+[ 2017-12-25T11:02:06+08:00 ] 127.0.0.1 /Xiaochengxu/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.040960s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined E:\phpstudy\WWW\Xiaochengxu\App\Common\Conf\config_weixin.php 第 3 行.
+NOTIC: [8] Constant G_HTTP already defined E:\phpstudy\WWW\Xiaochengxu\App\Common\Conf\config_weixin.php 第 4 行.
+NOTIC: [8] Constant WEB_PATH already defined E:\phpstudy\WWW\Xiaochengxu\App\Common\Conf\config_weixin.php 第 5 行.
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.019954s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.020029s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined E:\phpstudy\WWW\Xiaochengxu\App\Caryu\Controller\CommonController.class.php 第 5 行.
+NOTIC: [8] Constant G_HTTP already defined E:\phpstudy\WWW\Xiaochengxu\App\Caryu\Controller\CommonController.class.php 第 6 行.
+NOTIC: [8] Constant WEB_PATH already defined E:\phpstudy\WWW\Xiaochengxu\App\Caryu\Controller\CommonController.class.php 第 7 行.
+NOTIC: [8] Undefined variable: module E:\phpstudy\WWW\Xiaochengxu\Libs\ThinkPHP\Common\functions.php 第 838 行.
+NOTIC: [8] Undefined variable: var E:\phpstudy\WWW\Xiaochengxu\Libs\ThinkPHP\Common\functions.php 第 838 行.
+NOTIC: [2] array_reverse() expects parameter 1 to be array, null given E:\phpstudy\WWW\Xiaochengxu\Libs\ThinkPHP\Common\functions.php 第 838 行.
+NOTIC: [2] http_build_query(): Parameter 1 expected to be Array or Object.  Incorrect value given E:\phpstudy\WWW\Xiaochengxu\Libs\ThinkPHP\Common\functions.php 第 838 行.
+
+[ 2017-12-25T11:02:06+08:00 ] 127.0.0.1 /Xiaochengxu/index.php?m=&&m=&c=Index&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000340s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined E:\phpstudy\WWW\Xiaochengxu\App\Common\Conf\config_weixin.php 第 3 行.
+NOTIC: [8] Constant G_HTTP already defined E:\phpstudy\WWW\Xiaochengxu\App\Common\Conf\config_weixin.php 第 4 行.
+NOTIC: [8] Constant WEB_PATH already defined E:\phpstudy\WWW\Xiaochengxu\App\Common\Conf\config_weixin.php 第 5 行.
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000446s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000504s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined E:\phpstudy\WWW\Xiaochengxu\App\Caryu\Controller\CommonController.class.php 第 5 行.
+NOTIC: [8] Constant G_HTTP already defined E:\phpstudy\WWW\Xiaochengxu\App\Caryu\Controller\CommonController.class.php 第 6 行.
+NOTIC: [8] Constant WEB_PATH already defined E:\phpstudy\WWW\Xiaochengxu\App\Caryu\Controller\CommonController.class.php 第 7 行.
+ERR: 模板不存在:E:\phpstudy\WWW\Xiaochengxu\App\Caryu/View/Index/login.html
+

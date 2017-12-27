@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>支付成功</title>
+  <%- include src/components/header/InsuranceHeader %>
+</head>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<body>
+<div id="second_hand">
+    <header>
+        <div class="header_con">
+            <div class="header_top">
+                <div class="left">
+                    <!-- <img src="../../../assets/img/api/back_arrow.png" width="12"/> -->
+                </div>
+                <div class="middle"><h1>支付结果</h1></div>
+                <if condition='$model eq 2'>
+                <div class="right" id="eye" onclick="eyeToggle(this)">
+                  <img
+                    src="../../../assets/img/api/closeEye.png"
+                    data-on="../../../assets/img/api/openEye.png"
+                    data-off="../../../assets/img/api/closeEye.png"
+                  />
+                </div>
+                </if>
+            </div>
+        </div>
+    </header>
+
+    <div class="orders con">
+
+        <div class="paysuccess">
+          <h1><img src="../../../assets/img/api/paySuccess2.png">支付成功</h1>
+          <p>支付金额:&nbsp;&nbsp;&nbsp;￥<{$car_detil.easyPrice}></p>
+          <p>保单将会在1个工作日内寄出</p>
+        </div>
+
+        <!-- 订单 -->
+        <section>
+            <div class="tit-header">
+               <span>订单号：</span>
+               <span><{$car_detil.order_sn}></span>
+            </div>
+            <div class="con_body box">
+               <dl class="con_body_item">
+                   <dt>投保车辆</dt>
+                   <dd><span><{$car_detil.license_number}></span></dd>
+               </dl>
+            <if condition="$car_detil[insured_eq_applicant] eq 1">
+               <dl class="con_body_item">
+                   <dt>投保人\受益人</dt>
+                   <dd><span><{$car_detil.applicant}></span></dd>
+               </dl>
+            <else/>
+               <dl class="con_body_item">
+                   <dt>投保人</dt>
+                   <dd><span><{$car_detil.applicant}></span></dd>
+               </dl>
+               <dl class="con_body_item">
+                   <dt>受益人</dt>
+                   <dd><span><{$car_detil.insured}></span></dd>
+               </dl>
+             </if>
+                <input type="hidden" id='status' value="<{$status}>"/>
+            </div>
+        </section>
+
+        <!-- 保险 -->
+        <section>
+            <div class="tit-header">
+               <span>保险信息</span>
+            </div>
+            <div class="company_info" data-bizNum="<{$car_detil.biz_num}>" data-BizTotal="<{$car_detil.BizTotal}>">
+                <!-- 保险公司 -->
+                <div class="brand_name">
+                    <div>
+                        <if condition="$car_detil.InsuranceCompany_code eq 1">
+                        <img src="../../../assets/img/api/cpic_active.png">
+                        <elseif condition="$car_detil.InsuranceCompany_code eq 2"/>
+                        <img src="../../../assets/img/api/paic_active.png">
+                        <elseif condition="$car_detil.InsuranceCompany_code eq 4"/>
+                        <img src="../../../assets/img/api/picc_active.png">
+                        </if>
+                        <span>
+                            <{$car_detil.InsuranceCompany}>
+                        </span>
+                    </div>
+                </div>
+                <!-- 险种 -->
+                <div class="insur_wrap">
+                    <foreach name="car_detil.insurance" item="items" key="keys">
+                        <dl class="con_body_item">
+                            <dt>
+
+                                <if condition='$car_detil.status eq 4'>
+                                    <div class="insurance_name"><{$items.insuranceName}></div>
+                                <else/>
+                                    <div class="insurance_name"><{$items.insuranceName}></div>
+                                </if>
+                                <if condition='$items.isDeductible eq 1'>
+                                    <img class="freeIcon" src="../../../assets/img/api/free_icon.png"/>
+                                </if>
+                                <span class="price_number">
+                                    <if condition="$items.source eq 'BLX'">
+                                    <{$items.itemCode}>
+                                    <else/>
+                                    <if condition='$items.amount neq 1'>
+                                        <if condition='$items.amount eq 2000'>
+                                            <if condition="$items.insuranceCode neq 'SheShui'">
+                                                2千
+                                            </if>
+                                        <elseif condition='$items.amount eq 5000'/>
+                                        5千
+                                        <elseif condition='$items.amount eq 10000'/>
+                                        1万
+                                        <elseif condition='$items.amount eq 20000'/>
+                                        2万
+                                        <elseif condition='$items.amount eq 30000'/>
+                                        3万
+                                        <elseif condition='$items.amount eq 40000'/>
+                                        4万
+                                        <elseif condition='$items.amount eq 50000'/>
+                                        5万
+                                        <elseif condition='$items.amount eq 100000'/>
+                                        10万
+                                        <elseif condition='$items.amount eq 150000'/>
+                                        15万
+                                        <elseif condition='$items.amount eq 200000'/>
+                                        20万
+                                        <elseif condition='$items.amount eq 300000'/>
+                                        30万
+                                        <elseif condition='$items.amount eq 500000'/>
+                                        50万
+                                        <elseif condition='$items.amount eq 1000000'/>
+                                        100万
+                                        <elseif condition='$items.amount eq 1500000'/>
+                                        150万
+                                        <elseif condition='$items.amount eq 2000000'/>
+                                        200万
+                                        <elseif condition='$items.amount eq 2500000'/>
+                                        250万
+                                        </if>
+                                    </if>
+                                </if>
+                                </span>
+                            </dt>
+                            <dd data-console="<{$car_detil.status}>,<{$car_detil.underwri_status}>,<{$items['premium']}>,<{$car_detil.desc}>">
+                                <if condition='($car_detil.underwri_status eq -1 AND $items["premium"] eq 0)'>
+                                    <span  class="total_number" style="color:#a1a1a1">----.--</span>
+                                <else/>
+                                    <span class="total_number">
+                                        <{$items['premium']+$items['deductiblePremium']}>
+                                    </span>
+                                </if>
+                            </dd>
+                        </dl>
+                    </foreach>
+
+                <!-- 金额 -->
+                <div class="total_money">
+                    <div>
+                        共计 <{$insurance_count}> 个险种
+                    </div>
+                    <div>
+                        <p class="discount-price" style="display: block">
+                            <b>保单金额：</b>
+                            <span class="total_number">
+                                <{$car_detil.total_amount}>
+                            </span>
+                        </p>
+                        <p class="discount-price">
+                            <b>出售金额：</b>
+                            <span class="total_number">
+                                <{$car_detil.shopPay}>
+                            </span>
+                        </p>
+                        <p class="discount-price">
+                            <b>折扣金额：</b>
+                            <span class="total_number">
+                                <{$car_detil.payAmount}>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 邮寄信息 -->
+        <section>
+            <div class="tit-header">
+               <span>邮寄信息</span>
+            </div>
+            <div class="con_body box">
+               <dl class="con_body_item">
+                   <dt>收件人</dt>
+                   <dd><span><{$car_detil.mail_name}></span></dd>
+               </dl>
+               <dl class="con_body_item">
+                   <dt>手机号</dt>
+                   <dd><span><{$car_detil.mail_phone}></span></dd>
+               </dl>
+               <dl class="con_body_item">
+                   <dt>邮寄地址</dt>
+                   <dd id="mail_addr"><span><{$car_detil.mail_addr}></span></dd>
+               </dl>
+            </div>
+        </section>
+
+   </div>
+
+    <div class="foot_button" id="foot_end" @click="BackAppRoot">返回首页</div>
+</div>
+<script type="text/javascript">
+$(function () {
+
+    $('.insur_wrap .con_body_item').each(function (i) {/*遍历 进行样式处理*/
+        var dt = $(this).find('dt').text().trim(),
+            biz_num = $(this).parents('div.company_info').attr('data-bizNum'),/*商业险总数*/
+            bizTotal = $(this).parents('div.company_info').attr('data-BizTotal');/*商业险总额*/
+
+        var ShangYeHTML = '<dl class="con_body_item shangYe" data-flag=1><dt><div class="insurance_name">商业险<span> ×'+ biz_num +'</span></div><span class="price_number"></span></dt><dd><span class="total_number">'+ bizTotal +'</span></dd><img class="gray_arrow" src="/Public/static/image/api/smallf7.png"><img class="biz_arrow" src="/Public/static/image/api/arrow.png"></dl>';/*商业险HTML*/
+
+        if (dt == '') {
+            $(this).remove();/*移除空节点*/
+
+        }else if(dt != '交强险+车船税'){
+            $(this).attr('data-down',"biz").hide();
+        }
+
+        if (i==0&&$(this).text().indexOf('交强险')==-1) {/*判断是否有交强险,来选择插入‘商业险’节点位置*/
+            $(this).before(ShangYeHTML);/*插入商业险节点*/
+        }else if (dt == '交强险+车船税') {
+            $(this).next().before(ShangYeHTML);/*插入商业险节点*/
+        }
+    });
+
+
+    $('dl.shangYe').click(function () {/*商业险点击 展开收缩动画*/
+        var parent = $(this).parents('.company_info'),
+            type = parent.attr('data-type');
+
+        if ($(this).attr('data-flag')==1) {
+            $(this).attr('data-flag',0).parent().find('dl[data-down=biz]').slideDown(300);
+            $(this).find('img.gray_arrow').show().next('img.biz_arrow').css({transform: "rotate(90deg)"});
+        }else {
+            $(this).attr('data-flag',1).parent().find('dl[data-down=biz]').slideUp(300);
+            $(this).find('img.gray_arrow').hide().next('img.biz_arrow').css({transform: "rotate(270deg)"});
+
+        }
+    });
+
+});
+
+$(function () {
+    var mail_addr = $('dd#mail_addr');
+
+    /*地址过长时 展示效果 处理*/
+    if ( mail_addr.find('span')[0].offsetHeight >= mail_addr[0].offsetHeight ){
+        mail_addr.addClass('multi-row');
+    }
+});
+
+$(function () {
+    /*车牌号*/
+    var licenseNumber = $('dd span:first').text();
+    licenseNumber = licenseNumber.substr(0, 1) + '·' + licenseNumber.substr(1, licenseNumber.length - 1);
+    $('dd span:first').text(licenseNumber);
+
+    var model="<{$model}>";
+    if(model==1){/*没有眼睛*/
+    // if(model==2){/*有眼睛*/
+      $('.discount-price').slideToggle(0);
+    }
+
+    priceRecombine($('.total_number'));/*价格拆分 展示*/
+});
+
+function get_orderdeyil(order_sn){
+    location.href="<{:U('CarInsuranceOrder/orderDetail')}>?session_id=<{$session_id}>&order_sn="+order_sn+"&pay=pay";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+body {
+    background: #F0F0F0;
+}
+
+.list {
+    padding: 9px 11px 0px 11px;
+    overflow: hidden;
+}
+
+.bank-pre {
+    overflow: hidden;
+}
+
+.bank-cell {
+    padding: 2rem 0 2rem 1rem;
+    background: white;
+    position: relative;
+    margin-bottom: 7px;
+}
+
+.bank-cell:after {
+    display: block;
+    content: "clear";
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.fl {
+    float: left;
+}
+
+.left img {
+    display: block;
+}
+
+.right {
+    margin-left: 13px;
+    width: 75%;
+    display: block;
+}
+
+.bank-label {
+    font-size: 1rem;
+    color: #A1A1A1;
+}
+
+.bank-no {
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.bank-no-detail {
+    color: #595959;
+    font-size: 1.384rem;
+}
+
+.bank-addr-detail {
+    color: #595959;
+    font-size: 1rem;
+    display: inline-block;
+    width: 75%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+@media (max-width: 320px) {
+    .bank-no-detail {
+        font-size: 1.2rem;
+    }
+    .bank-addr-detail {}
+}
+
+.bank-del {
+    width: 105px;
+    background: #E44C4C;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: -105px;
+    height: 100%;
+    display: block;
+}
+
+.del {
+    position: absolute;
+    color: white;
+    font-size: 16px;
+    left: 50%;
+    top: 50%;
+    width: 32px;
+    height: 24px;
+    margin-top: -16px;
+    margin-left: -12px;
+}
+
+.addBank {
+    margin: 0 11px 0px 11px;
+    text-align: center;
+    background: white;
+    padding: 3.307rem;
+    color: #A1A1A1;
+    display: block;
+}
+
+.add-container {
+    font-size: 13px;
+    position: relative;
+    display: inline-block;
+}
+
+.add-icon {
+    font-size: 19px;
+    line-height: 19px;
+    position: absolute;
+    left: -15px;
+}

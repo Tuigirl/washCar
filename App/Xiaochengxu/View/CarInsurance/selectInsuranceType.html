@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>选择险种</title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/layer/layer.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/textMiddle.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/carInsurance/iscroll.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/velocity/1.4.1/velocity.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.0.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css"/>
+
+<link rel="stylesheet" href="__APIROOT__/css/api/carInsurance/common.css"/>
+
+<link href="/Public/static/packaged-assets/Xiaochengxu/css/CarInsurance\selectInsuranceType.6504fa9d.css" rel="stylesheet"><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/./js/vendor.63bfe990.js"></script><script type="text/javascript" src="/Public/static/packaged-assets/Xiaochengxu/js/CarInsurance\selectInsuranceType.6da54c34.js"></script></head>
+
+<body>
+    <form id="Fm">
+        <input type="hidden" value="<{$license_number}>" name="license_number" />
+        <input type="hidden" value="<{$session_id}>" name="session_id" />
+        <div id="second_hand">
+            <!-- 遮罩 -->
+            <div id="mask" class="mask"></div>
+            <div id="load-layer" class="mask"></div>
+            <!-- 选择三个保险公司 -->
+            <div class="load-bg icon-x" id='three'>
+                <h2 class="CPIC" style="">
+                    太平洋保险
+                    <span><img id="1three" class="loading" src="/Public/static/packaged-assets/Xiaochengxu/img/loading-4f6eb6e7.gif"/></span>
+                </h2>
+                <h2 class="PAIC">
+                    平安车险
+                    <span><img id="2three" class="loading" src="/Public/static/packaged-assets/Xiaochengxu/img/loading-4f6eb6e7.gif"/></span>
+                </h2>
+                <h2 class="PICC">
+                    人保车险
+                    <span><img id="4three" class="loading" src="/Public/static/packaged-assets/Xiaochengxu/img/loading-4f6eb6e7.gif"/></span>
+                </h2>
+                <div class='container'>
+                    <div class='bar mint active' id="progressthree" data-percent='0' data-skill='HTML'>
+                    </div>
+                </div>
+                <p>
+                    获取报价中<span id="styledthree">10%</span>
+                    <i class="layer-close-button"><img src="/Public/static/packaged-assets/Xiaochengxu/img/XX-19c3df8a.png"></i>
+                </p>
+            </div>
+            <!-- 选择两个保险公司 -->
+            <div class="load-bg icon-x" id='two'>
+                <h2 class="CPIC" id='1S'>
+                    太平洋保险
+                    <span><img id="1two" class="loading" src="/Public/static/packaged-assets/Xiaochengxu/img/loading-4f6eb6e7.gif"/></span>
+                </h2>
+                <h2 class="PAIC" id='2S'>
+                    平安车险
+                    <span><img id="2two" class="loading" src="/Public/static/packaged-assets/Xiaochengxu/img/loading-4f6eb6e7.gif"/></span>
+                </h2>
+                <h2 class="PICC" id='4S'>
+                    人保车险
+                    <span><img id="4two" class="loading" src="/Public/static/packaged-assets/Xiaochengxu/img/loading-4f6eb6e7.gif"/></span>
+                </h2>
+                <div>
+                    <div class='bar mint active' id="progresstwo" data-percent='0' data-skill='HTML'>
+                    </div>
+                </div>
+                <p>
+                    获取报价中<span id="styledtwo">10%</span>
+                    <i class="layer-close-button"><img src="/Public/static/packaged-assets/Xiaochengxu/img/XX-19c3df8a.png"></i>
+                </p>
+            </div>
+            <!-- 只选择一个保险公司 -->
+            <div class="load-bg icon-x" id='one'>
+                <h2 id='one_p'>
+                </h2>
+                <p id='one_m'>
+                    太平洋保险
+                </p>
+                <img id="one_i" class="loading" src="/Public/static/packaged-assets/Xiaochengxu/img/loading-4f6eb6e7.gif" />
+                <div>
+                    <div class='bar mint active' id="progressone" data-percent='0' data-skill='HTML'>
+                    </div>
+                </div>
+                <p>
+                    获取报价中<span id="styledone">10%</span>
+                    <i class="layer-close-button"><img src="/Public/static/packaged-assets/Xiaochengxu/img/XX-19c3df8a.png"></i>
+                </p>
+            </div>
+            <section class="emissions icon-x" id="emissions">
+                <h5>请选择您车辆的排量</h5>
+                <p>请慎重选择，错误的排量会导致报价不准确</p>
+                <ul class="emissions_options">
+                    <li data-value="1">
+                        <span>1.0升 (含) 以下</span>
+                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/static-b700e9d9.png">
+                    </li>
+                    <li data-value="1.6">
+                        <span>1.0~1.6升 (含)</span>
+                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/static-b700e9d9.png">
+                    </li>
+                    <li data-value="2">
+                        <span>1.6~2.0升 (含)</span>
+                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/static-b700e9d9.png">
+                    </li>
+                    <li data-value="2.5">
+                        <span>2.0~2.5升 (含)</span>
+                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/static-b700e9d9.png">
+                    </li>
+                    <li data-value="3">
+                        <span>2.5~3.0升 (含)</span>
+                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/static-b700e9d9.png">
+                    </li>
+                    <li data-value="4">
+                        <span>3.0~4.0升 (含)</span>
+                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/static-b700e9d9.png">
+                    </li>
+                    <li data-value="5">
+                        <span>4.0升以上</span>
+                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/static-b700e9d9.png">
+                    </li>
+                    <i class="layer-close-button"><img src="/Public/static/packaged-assets/Xiaochengxu/img/XX-19c3df8a.png"></i>
+                </ul>
+                <div class="emissions_ok">确 &nbsp; 定</div>
+            </section>
+            <!-- <section class="emissions icon-x" id="tel-fill">
+                <h5>请填写您的联系方式</h5>
+                <p>手机号作为唯一联系方式请认真填写</p>
+                <ul class="emissions_options">
+                    <li data-value="1">
+                        <input type="text" name="tel" maxlength="11">
+                    </li>
+                    <i class="layer-close-button"><img src="/Public/static/packaged-assets/Xiaochengxu/img/XX-19c3df8a.png"></i>
+                </ul>
+                <div class="emissions_ok">确 &nbsp; 定</div>
+            </section> -->
+        <if condition="$isWechat eq 'wx'">
+            <header class="d-n">
+        <else/>
+            <header>
+        </if>
+                <div class="header_con">
+                    <div class="header_top">
+                        <div class="left">
+                            <a href="javascript:;" @click="close"><img src="/Public/static/packaged-assets/Xiaochengxu/img/back_arrow-e95377d1.png" width="12px;" /></a>
+                        </div>
+                        <div class="middle">
+                            <h1>选择险种</h1>
+                        </div>
+                        <div class="right">
+                            <!-- <a href="<{:U('order')}>"><p>我的订单</p></a> -->
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="con">
+                <div class="con_body">
+                    <div class="label-name" dd="<{$openCity}>">
+                        投保公司
+                    </div>
+                    <div class="last-time-company">
+                        <if condition="$openCity eq 24||$openCity eq 12">
+                            <!-- 唐山、石家庄 [人保] 暂停服务 -->
+                            <div class="insur-company insur4">
+                                <img src="/Public/static/packaged-assets/Xiaochengxu/img/iconn2-6aedc826.png" data-on="/Public/static/packaged-assets/Xiaochengxu/img/iconn2-on-49522e81.png" data-off="/Public/static/packaged-assets/Xiaochengxu/img/iconn2-6aedc826.png"
+                                />
+                                <p>中国人保</p>
+                                <p style="font-size:0.846rem;position: absolute;bottom: 5.5%;left: 0">暂停服务</p>
+                            </div>
+                            <else/>
+                            <div class="insur-company insur4" onclick="changeCompany('4', '<{$judges}>')">
+                                <img class="" src="/Public/static/packaged-assets/Xiaochengxu/img/iconn2-6aedc826.png" data-on="/Public/static/packaged-assets/Xiaochengxu/img/iconn2-on-49522e81.png" data-off="/Public/static/packaged-assets/Xiaochengxu/img/iconn2-6aedc826.png"
+                                />
+                                <p>中国人保</p>
+                            </div>
+                        </if>
+
+                        <if condition="$openCity eq 1">
+                            <!-- 北京 [平安] 暂停服务 -->
+                            <div class="insur-company pingan insur2">
+                                <img src="/Public/static/packaged-assets/Xiaochengxu/img/iconn1-8c3bdd57.png" data-on="/Public/static/packaged-assets/Xiaochengxu/img/iconn1-on-5914f345.png" data-off="/Public/static/packaged-assets/Xiaochengxu/img/iconn1-8c3bdd57.png"
+                                />
+                                <p>平安保险</p>
+                                <p style="font-size:0.846rem;position: absolute;bottom: 5.5%;left: 0">暂停服务</p>
+                            </div>
+                            <else/>
+                            <div class="insur-company pingan insur2" onclick="changeCompany('2')">
+                                <img src="/Public/static/packaged-assets/Xiaochengxu/img/iconn1-8c3bdd57.png" data-on="/Public/static/packaged-assets/Xiaochengxu/img/iconn1-on-5914f345.png" data-off="/Public/static/packaged-assets/Xiaochengxu/img/iconn1-8c3bdd57.png"
+                                />
+                                <p>平安保险</p>
+                            </div>
+                        </if>
+
+                        <if condition="$openCity eq 15">
+                            <!-- 厦门 [太平洋] 暂停服务 -->
+                            <div class="insur-company insur1">
+                                <img src="/Public/static/packaged-assets/Xiaochengxu/img/iconn3-434bf476.png" data-on="/Public/static/packaged-assets/Xiaochengxu/img/iconn3-on-0e2c38d5.png" data-off="/Public/static/packaged-assets/Xiaochengxu/img/iconn3-434bf476.png"
+                                />
+                                <p>太平洋保险</p>
+                                <p style="font-size:0.846rem;position: absolute;bottom: 5.5%;left: 0">暂停服务</p>
+                            </div>
+                            <else/>
+                            <div class="insur-company insur1" onclick="changeCompany('1')">
+                                <img src="/Public/static/packaged-assets/Xiaochengxu/img/iconn3-434bf476.png" data-on="/Public/static/packaged-assets/Xiaochengxu/img/iconn3-on-0e2c38d5.png" data-off="/Public/static/packaged-assets/Xiaochengxu/img/iconn3-434bf476.png"
+                                />
+                                <p>太平洋保险</p>
+                            </div>
+                        </if>
+
+                    </div>
+                    <div class="icon-right car_type" onclick="popup()">
+                        <img src="/Public/static/packaged-assets/Xiaochengxu/img/right-deafc8bd.png">
+                        <span>投保人类型</span>
+                        <if condition=" $insured_Idtype eq 2 ">
+                            <span>公司</span>
+                            <else/>
+                            <span>个人</span>
+                        </if>
+                    </div>
+                    <div class="label-name">车险组合</div>
+
+                    <dl class="con_body_item" data-value="ForceTax">
+                        <dt>
+                            <div class="insurance_name">
+                                交强险+车船税
+                            </div>
+                        </dt>
+                        <dd>
+                            <div class="">
+                                <!-- <img src="/Public/static/image/api/jump.png"/> -->
+                            </div>
+                            <div class="choose" onclick="choose($(this))">
+                                <img id="required" src="/Public/static/image/api/choosed.png" />
+                                <input type="hidden" name="plan[]" value="ForceTax" data-value="ForceTax" />
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="con_body_item" data-value="CheSun">
+                        <dt>
+                            <div class="insurance_name">
+                                车辆损失险
+                            </div>
+                            <img class="freeIcon freeIcon_CheSun" src="/Public/static/image/api/free_icon.png" style="margin-top: 21.5px;" />
+                        </dt>
+                        <img src="/Public/static/image/api/small.png" class="lala" />
+                        <dd>
+                            <div class="price" id="CheSun">
+                                <input type="hidden" name="CheSun[]" value="" value-code='1' />
+                                <input type="hidden" name="CheSun[]" value="1" />
+                                <img src="/Public/static/image/api/jump.png" style="margin-top: 23px;" />
+                            </div>
+                            <div class="choose widthprice" onclick="choose($(this))">
+                                <img src="/Public/static/image/api/static.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="CheSun" />
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="con_body_item hidden" data-value="ZiRan">
+                        <dt class="borderB">
+                            <div class="insurance_name">
+                                自燃损失险
+                            </div>
+                            <img class="freeIcon freeIcon_ZiRan" src="/Public/static/image/api/free_icon.png" />
+                        </dt>
+                        <dd class="borderB">
+                            <div class="price" id="ZiRan">
+                                <!--             <span>
+                                国产
+                            </span> -->
+                                <input type="hidden" name="ZiRan[]" value="" value-code='1' />
+                                <input type="hidden" name="ZiRan[]" value="1" />
+                                <img src="/Public/static/image/api/jump.png" />
+                            </div>
+                            <div class="choose widthprice" onclick="choose($(this))">
+                                <img src="/Public/static/image/api/static.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="ZiRan" />
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="con_body_item hidden" data-value="BoLi">
+                        <dt class="borderB">
+                            <div class="insurance_name">
+                                玻璃险
+                            </div>
+                        </dt>
+                        <dd class="borderB">
+                            <div class="price" id="BoLi">
+                                <span>
+                                国产
+                            </span>
+                                <input type="hidden" name="BoLi[]" value="国产" value-code='1' />
+                                <!-- <input type="hidden" name="BoLi[]" value="0"/> -->
+                                <img src="/Public/static/image/api/jump.png" />
+                            </div>
+                            <div class="choose widthprice" onclick="choose($(this))">
+                                <img src="/Public/static/image/api/static.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="BoLi" />
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="con_body_item hidden" data-value="SheShui">
+                        <dt class="borderB">
+                            <div class="insurance_name">
+                                涉水险
+                            </div>
+                            <img src="/Public/static/image/api/free_icon.png" class="freeIcon freeIcon_SheShui" />
+                        </dt>
+                        <dd class="borderB">
+                            <div class="price" id="SheShui">
+                                <input type="hidden" name="SheShui[]" value="" value-code='1' />
+                                <input type="hidden" name="SheShui[]" value="1" />
+                                <img src="/Public/static/image/api/jump.png" />
+                            </div>
+                            <div class="choose widthprice" onclick="choose($(this))">
+                                <img src="/Public/static/image/api/static.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="SheShui" />
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="con_body_item hidden" data-value="HuaHen">
+                        <dt class="borderB">
+                            <div class="insurance_name">
+                                车身划痕险
+                            </div>
+                            <img src="/Public/static/image/api/free_icon.png" class="freeIcon freeIcon_HuaHen" />
+                        </dt>
+                        <dd class="borderB">
+                            <div class="price" id="HuaHen">
+                                <span>
+                                2千
+                            </span>
+                                <input type="hidden" name="HuaHen[]" value="2千" value-code='2000' />
+                                <input type="hidden" name="HuaHen[]" value="1" />
+                                <img src="/Public/static/image/api/jump.png" />
+                            </div>
+                            <div class="choose widthprice" onclick="choose($(this))">
+                                <img src="/Public/static/image/api/static.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="HuaHen" />
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="con_body_item hidden" data-value="HcSanFangTeYue">
+                        <dt class="borderB">
+                            <div class="insurance_name">
+                                机动车无法找到第三方特约险
+                            </div>
+                        </dt>
+                        <dd class="borderB">
+                            <div class="choose widthprice" onclick="choose($(this))" style="float:right">
+                                <img src="/Public/static/image/api/static.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="HcSanFangTeYue" />
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="con_body_item" data-value="DaoQiang">
+                        <dt>
+                            <div class="insurance_name">
+                                全车盗抢险
+                            </div>
+                            <img class="freeIcon freeIcon_DaoQiang" src="/Public/static/image/api/free_icon.png" />
+                        </dt>
+                        <dd>
+                            <div class="price" id="DaoQiang">
+                                <input type="hidden" name="DaoQiang[]" value="" value-code='1' />
+                                <input type="hidden" name="DaoQiang[]" value="1" />
+                                <img src="/Public/static/image/api/jump.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="DaoQiang" />
+                            </div>
+                            <div class="choose widthprice" onclick="choose($(this))">
+                                <img src="/Public/static/image/api/static.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="DaoQiang" />
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="con_body_item" data-value="SanZhe">
+                        <dt>
+                            <div class="insurance_name">
+                                第三者责任险
+                            </div>
+                            <img class="freeIcon freeIcon_SanZhe" src="/Public/static/image/api/free_icon.png" />
+                        </dt>
+                        <dd>
+                            <div class="price" id="SanZhe">
+                                <span>
+                                30万
+                            </span>
+                                <input type="hidden" name="SanZhe[]" value="30万" value-code='300000' />
+                                <input type="hidden" name="SanZhe[]" value="1" />
+                                <img src="/Public/static/image/api/jump.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="SanZhe" />
+                            </div>
+                            <div class="choose widthprice" onclick="choose($(this))">
+                                <img src="/Public/static/image/api/static.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="SanZhe" />
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="con_body_item" data-value="SiJi">
+                        <dt>
+                            <div class="insurance_name">
+                                司机责任险
+                            </div>
+                            <img class="freeIcon freeIcon_SiJi" src="/Public/static/image/api/free_icon.png" />
+                        </dt>
+                        <dd>
+                            <div class="price" id="SiJi">
+                                <span>
+                                1万
+                            </span>
+                                <input type="hidden" name="SiJi[]" value="1万" value-code='10000' />
+                                <input type="hidden" name="SiJi[]" value="1" />
+                                <img src="/Public/static/image/api/jump.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="SiJi" />
+                            </div>
+                            <div class="choose widthprice" onclick="choose($(this))">
+                                <img src="/Public/static/image/api/static.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="SiJi" />
+                            </div>
+                        </dd>
+                    </dl>
+                    <dl class="con_body_item" data-value="ChengKe">
+                        <dt>
+                            <div class="insurance_name">
+                                车上乘客险
+                            </div>
+                            <img class="freeIcon freeIcon_ChengKe" src="/Public/static/image/api/free_icon.png" />
+                        </dt>
+                        <dd>
+                            <div class="price" id="ChengKe">
+                                <span>
+                                1万
+                            </span>
+                                <input type="hidden" name="ChengKe[]" value="1万" value-code='10000' />
+                                <input type="hidden" name="ChengKe[]" value="1" />
+                                <img src="/Public/static/image/api/jump.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="ChengKe" />
+                            </div>
+                            <div class="choose widthprice" onclick="choose($(this))">
+                                <img src="/Public/static/image/api/static.png" />
+                                <input type="hidden" name="plan[]" value="" data-value="ChengKe" />
+                            </div>
+                        </dd>
+                    </dl>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="choose_item">
+
+        </div>
+    </form>
+
+
+    <div class="popup">
+        <div>个人车辆</div>
+        <div>公司车辆</div>
+        <div>取消</div>
+    </div>
+
+    <a href="#">
+        <div class="foot_button" type="button" onclick="is_ML();">下一步</div>
+    </a>
+
+    <script type="text/javascript">
+        var HuaHen = { '2千': '2000', '5千': '5000', '1万': '10000', '2万': '20000' },
+            SanZhe = { '5万': '50000', '10万': '100000', '15万': '150000', '20万': '200000', '30万': '300000', '50万': '500000', '100万': '1000000', '150万': '1500000' },
+            SiJi = { '1万': '10000', '2万': '20000', '3万': '30000', '4万': '40000', '5万': '50000', '10万': '100000', '20万': '200000' },
+            ChengKe = { '1万': '10000', '2万': '20000', '3万': '30000', '4万': '40000', '5万': '50000', '10万': '100000', '20万': '200000' },
+            BoLi = { '国产': '1', '进口': '2' };
+        //以下的才有不计免赔
+        var BuJiMain = ['CheSun', 'ZiRan', 'SheShui', 'HuaHen', 'DaoQiang', 'SanZhe', 'SiJi', 'ChengKe'];
+
+        var _plan = {};//报价细项data
+
+        _plan['ForceTax'] = '1';//0:单商业 ，1：商业+交强车船，默认2：单交强+车船
+        _plan['BoLi'] = '0';// 0-不投保，1国产，2进口 默认 1
+
+        _plan['CheSun'] = '0';
+        _plan['ZiRan'] = '0';
+        _plan['SheShui'] = '0';
+        _plan['HuaHen'] = '0'; //默认2000 5000 10000 20000
+        _plan['HcSanFangTeYue'] = '0';
+        _plan['DaoQiang'] = '0';
+        _plan['SanZhe'] = '0'; //50，000；100，000；150，000；200，000；默认300，000； 500，000；1，000，000；1，500，000
+        _plan['SiJi'] = '0'; //自定义 支持自定义（默认10,000-300,000)
+        _plan['ChengKe'] = '0';//自定义 支持自定义（默认10,000-300,000)
+
+        _plan['BuJiMianCheSun'] = '0';
+        _plan['BuJiMianZiRan'] = '0';
+        _plan['BuJiMianSheShui'] = '0';
+        _plan['BuJiMianHuaHen'] = '0';
+        _plan['BuJiMianDaoQiang'] = '0';
+        _plan['BuJiMianSanZhe'] = '0';
+        _plan['BuJiMianSiJi'] = '0';
+        _plan['BuJiMianChengKe'] = '0';
+        _plan['BuJiMianJingShenSunShi'] = '0'; //不计免精神损失
+
+        var win_closed = false; //控制关了窗口 不能跳转
+        var urlTime;//定时器
+        var arr1 = [];//选中的保险公司data
+        var network;//超时定时器
+        var randstr_getOffer;//报价随机验证串
+        var randstr_getsingle = [];//获取报价随机验证串
+        var ajax_getOffer;//报价ajax
+        var ajax_getsingle = [];//获取报价ajax
+
+        var company = '<{$sources}>';//上次选中的公司
+        company = eval("(" + company + ")");
+        var last_renewal = '<{$last_renewal}>';//上次投保公司
+        var tys = '<{$tys}>';//来源 1 是来源于selectInsuranceCompany的返回。需要展开
+        var insuranceArr = '<{$insuranceArr}>'; //根据续保接口默认选择上一次所选择的险种
+        insuranceArr = insuranceArr.replace(/^\"|\"$/g, '');
+        insuranceArr = eval("(" + insuranceArr + ")");
+
+        var unchoose_img = '__APIROOT__/image/api/static.png';
+        var choose_img = '__APIROOT__/image/api/choosed.png';
+        var buji_img = '__APIROOT__/image/api/free_icon.png';
+        var loading_img = '__APIROOT__/image/api/loading.gif';
+
+        var callbackfunction = function () { };//选择金额回调函数
+        var callbackfunctionBuji = function () { };//选择不计免赔回调函数
+
+        var total_num = 0;//报价保险公司个数
+        var leftNum = 0;//剩余报价保险公司个数
+        var percentTime = 0;//动画进度条定时器
+        var successOffter = 0;//成功接收到保险个数。为防止断网而中断
+        var main_order_sn;//主订单
+        var session_id = '<{$session_id}>';
+        var openCity = '<{$openCity}>';/*城市*/
+        var is_emissions = '<{$emissions}>';/*(boolean)用于判断是否需要显示排量(厦门)*/
+
+    </script>
+
+    <script>
+        //进度条动画函数
+        function changePercent(rand) {
+            var stop = 0;
+            if (rand >= 100) {
+                rand = 100;
+                stop = 1;
+            }
+            if (total_num == 1) {
+                $("#styled" + 'one').html(rand + '%');
+                $('#progress' + 'one').css('width', rand + '%');
+                $("#progress" + 'one').attr("data-percent", rand);
+            } else if (total_num == 2) {
+                $("#styled" + 'two').html(rand + '%');
+                $('#progress' + 'two').css('width', rand + '%');
+                $("#progress" + 'two').attr("data-percent", rand);
+            } else {
+                $("#styled" + 'three').html(rand + '%');
+                $('#progress' + 'three').css('width', rand + '%');
+                $("#progress" + 'three').attr("data-percent", rand);
+            }
+            if (stop == 0) {
+                if (percentTime == 0) {
+                    percentTime = setInterval(function () {
+                        if (total_num == 1) {
+                            var i = $("#progress" + 'one').attr("data-percent");
+                        } else if (total_num == 2) {
+                            var i = $("#progress" + "two").attr("data-percent");
+                        } else {
+                            var i = $("#progress" + "three").attr("data-percent");
+                        }
+                        if (i >= 90) {
+                            clearTimeout(percentTime);
+                            percentTime = 0;
+                        } else {
+                            changePercent(++i);
+                        }
+
+                    }, 300);
+                }
+            } else {
+                $('.bar').css('border-radius', '5px')
+                if (percentTime != 0) {
+                    clearTimeout(percentTime);
+                }
+            }
+        }
+        //超时
+        function outTime() {
+            if (network) {
+                clearTimeout(network);
+            }
+            network = setTimeout(function () {
+                if (successOffter > 0) {
+                    changePercent(100);/*改变进度条*/
+                    urlJump(main_order_sn, session_id);
+                } else {
+                    $(".load-bg .layer-close-button").click();
+                    layer.open({
+                        content: '请求超时',
+
+                    });
+                }
+
+            }, 90000);
+        }
+
+        function submitFm() {
+            total_num = 0;
+            win_closed = false;
+            main_order_sn = 0;
+            successOffter = 0;
+            randstr_getOffer = '';
+            randstr_getsingle = [];
+            //分别请求三家保险公司
+            //"1", "2", "4"
+            var count = 0, _SubmitGroup = 0;
+            var len = arr1.length;
+            total_num = arr1.length;
+            leftNum = arr1.length;
+            count = arr1.length;
+
+            if (len == 0) {
+                layer.open({
+                    content: '请选择保险公司',
+                    time: 2
+                });
+                return false;
+            }
+            $.each(arr1, function (i, val) {
+                _SubmitGroup += parseInt(val);
+                if (total_num == 1) {
+                    if (val == '1') {
+                        $("#one_p").addClass('CPIC');
+                        $("#one_m").html("太平洋保险");
+                    } else if (val == '2') {
+                        $("#one_p").addClass('PAIC');
+                        $("#one_m").html("平安车险");
+                    } else if (val == '4') {
+                        $("#one_p").addClass('PICC');
+                        $("#one_m").html("人保车险");
+                    }
+
+                } else if (total_num == 2 && !isWechat) {
+                    $("#" + val + "S").show();
+                }
+
+            });
+
+            //判断是否有选择险种 商业险个数
+            var biz_num = 0, flag = false;
+            $.each(_plan, function (index, data) {
+                if (data != 0) {
+                    //有险种
+                    if (index != 'ForceTax' && index.indexOf("BuJiMian") < 0) {
+                        biz_num++;
+                    }
+                    flag = true;
+
+                }
+            })
+            if (!flag) {
+                layer.open({
+                    content: '对不起，至少选择一种险种',
+                    time: 2
+                });
+                return false;
+            }
+            console.log('商业险个数', biz_num);
+
+
+            //处理_plan
+            if (_plan['ForceTax'] == 0 && biz_num > 0) {
+                _plan['ForceTax'] = '0';//单商业
+            } else if (_plan['ForceTax'] == 1 && biz_num == 0) {
+                _plan['ForceTax'] = '2';//单交强
+            } else {
+                _plan['ForceTax'] = '1';//商业+交强
+            }
+
+            var rand = Math.round(Math.random() * 10);
+            changePercent(rand);
+            randstr_getOffer = randomString(32);
+            window.JSON1 = { plan: JSON.stringify(_plan), license_number: '<{$license_number}>', insuranceCode: _SubmitGroup, SubmitGroup: _SubmitGroup, session_id: '<{$session_id}>', biz_num: biz_num, randstr: randstr_getOffer };
+
+            if (isWechat) return;
+
+            outTime();
+            /*报价动画*/
+            var H = $(window).width() * 0.7110;
+            // $('.load-bg').height(H);
+            // $('#load-layer').fadeIn(function () {
+            $('#load-layer').show();
+            if (total_num == 1) {
+                $("#one").show();
+            } else if (total_num == 2) {
+                $("#two").show();
+            } else {
+                $("#three").show();
+            }
+            $('.con').css({ overflowY: 'hidden' });//IOS会滚动
+            // });
+
+
+            if (_plan.ForceTax != 0 && !!is_emissions) {//需要传 排量[厦门车型]
+                JSON1.emissions = window.emissions;
+            }
+
+            $.each(arr1, function (i, val) {
+                if (ajax_getsingle[val] != null) {
+                    ajax_getsingle[val].abort();
+                    console.log('取消ajax_getsingle' + val);
+                }
+            });
+
+            if (ajax_getOffer != null) {
+                ajax_getOffer.abort();
+                console.log('取消ajax_getOffer');
+            }
+
+            $.ajaxSetup({
+                async: true
+            });
+            ajax_getOffer = $.post('<{:U(getOffer)}>', JSON1, function (data) {
+
+                if (data.data.randstr != randstr_getOffer) {
+                    console.log('getOffer取消');
+                    return false;
+                }
+                console.info('getOffer_MSG:', data.msg, 'Code:', data.code);
+
+                if (data.code == '1') {
+                    layer.open({
+                        content: data.msg,
+                        time: 2
+                    });
+                    $('.load-bg .layer-close-button').click();
+                    return false;
+
+                } else if (data.code == '0') {
+                    var status = 0;
+                    main_order_sn = data.data.order_sn;
+                    $.each(arr1, function (i, val) {
+                        randstr_getsingle[val] = randomString(32);
+
+                        var JSON2 = { license_number: '<{$license_number}>', QuoteGroup: val, session_id: '<{$session_id}>', order_sn: main_order_sn, 'randstr': randstr_getsingle[val] };
+                        ajax_getsingle[val] = $.ajax({
+                            type: 'POST',
+                            url: "<{:U('getSinglePrice')}>",
+                            data: JSON2,
+                            dataType: 'json',
+                            async: true,
+                            success: function (data) {
+                                console.info('getSinglePrice_MSG:', data.msg, 'data:', data);
+
+                                if (data.data.randstr != randstr_getsingle[val]) {
+                                    console.log('getsingle取消', val, data.data.randstr + '-' + randstr_getsingle[val]);
+                                    return false
+                                }
+                                successOffter++;
+                                if (win_closed) {
+                                    return false;
+                                }
+                                if (total_num == 1) {
+                                    var percent = $("#progress" + "one").attr("data-percent");
+                                } else if (total_num == 2) {
+                                    var percent = $("#progress" + "two").attr("data-percent");
+                                } else {
+                                    var percent = $("#progress" + "three").attr("data-percent");
+                                }
+
+                                var num1 = Math.floor((100 - percent * 1) / leftNum) * 1 + percent * 1;
+                                if (leftNum != 0) {
+                                    leftNum--;
+                                }
+
+                                if (total_num == 3) {/*防止选择三家保险公司的时候进度条出现NaN*/
+                                    num1 = isNaN(num1) ? 100 : num1;
+                                }
+                                changePercent(num1);/*改变进度条*/
+
+                                if (data.code == '1') {
+                                    layer.open({
+                                        content: data.msg,
+                                        time: 2
+                                    });
+                                    return false;
+                                } else if (data.code == '4') {
+                                    //获得报价失败
+
+                                    if (val == '1') {
+                                        if (total_num == 1) {
+                                            $("#one_i").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else if (total_num == 2) {
+                                            $("#1" + "two").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else {
+                                            $("#1" + "three").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        }
+
+                                    } else if (val == '2') {
+
+                                        if (total_num == 1) {
+                                            $("#one_i").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else if (total_num == 2) {
+                                            $("#2" + "two").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else {
+                                            $("#2" + "three").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        }
+                                    } else if (val == '4') {
+                                        if (total_num == 1) {
+                                            $("#one_i").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else if (total_num == 2) {
+                                            $("#4" + "two").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else {
+                                            $("#4" + "three").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        }
+
+                                    }
+
+
+
+                                } else if (data.code == '0') {
+
+
+                                    if (val == '1') {
+                                        if (total_num == 1) {
+                                            $("#one_i").attr("src", "__APIROOT__/image/api/sus.png");
+                                        } else if (total_num == 2) {
+                                            $("#1" + "two").attr("src", "__APIROOT__/image/api/sus.png");
+                                        } else {
+                                            $("#1" + "three").attr("src", "__APIROOT__/image/api/sus.png");
+                                        }
+
+                                    } else if (val == '2') {
+
+                                        if (total_num == 1) {
+                                            $("#one_i").attr("src", "__APIROOT__/image/api/sus.png");
+                                        } else if (total_num == 2) {
+                                            $("#2" + "two").attr("src", "__APIROOT__/image/api/sus.png");
+                                        } else {
+                                            $("#2" + "three").attr("src", "__APIROOT__/image/api/sus.png");
+                                        }
+                                    } else if (val == '4') {
+                                        if (total_num == 1) {
+                                            $("#one_i").attr("src", "__APIROOT__/image/api/sus.png");
+                                        } else if (total_num == 2) {
+                                            $("#4" + "two").attr("src", "__APIROOT__/image/api/sus.png");
+                                        } else {
+                                            $("#4" + "three").attr("src", "__APIROOT__/image/api/sus.png");
+                                        }
+
+                                    }
+
+
+                                } else if (data.code == 2) {
+                                    //接口请求无返回
+                                    status = status + data.code;
+                                    if (val == '1') {
+                                        if (total_num == 1) {
+                                            $("#one_i").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else if (total_num == 2) {
+                                            $("#1" + "two").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else {
+                                            $("#1" + "three").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        }
+
+                                    } else if (val == '2') {
+
+                                        if (total_num == 1) {
+                                            $("#one_i").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else if (total_num == 2) {
+                                            $("#2" + "two").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else {
+                                            $("#2" + "three").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        }
+                                    } else if (val == '4') {
+                                        if (total_num == 1) {
+                                            $("#one_i").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else if (total_num == 2) {
+                                            $("#4" + "two").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        } else {
+                                            $("#4" + "three").attr("src", "__APIROOT__/image/api/wrong.png");
+                                        }
+
+                                    }
+                                }
+
+                                if (total_num == 1) {
+                                    if (leftNum == 0 && status != 2) {
+                                        //arr1.length = 0
+                                        urlJump(main_order_sn, session_id);
+
+                                    }
+                                } else if (total_num == 2) {
+                                    if (leftNum == 0 && status != 4) {
+                                        //arr1.length = 0
+                                        urlJump(main_order_sn, session_id);
+
+                                    }
+                                } else if (total_num == 3) {
+                                    if (leftNum == 0 && status != 6) {
+                                        //arr1.length = 0
+                                        urlJump(main_order_sn, session_id);
+
+                                    }
+                                }
+
+
+
+                                if ((total_num == 2 && status == 4) || (status == 6 && total_num == 3) || (status == 2 && total_num == 1)) {
+
+                                    $(".load-bg .layer-close-button").click();
+                                    layer.open({
+                                        content: '请求超时请重新提价',
+                                    });
+
+                                    return false;
+                                }
+
+
+
+                            }//Success结束
+                        });//ajax2结束
+
+                    });
+
+                }
+            }, 'json');//ajax1结束
+
+
+        }//submitFM()结束
+
+        function urlJump(order_sn, session_id) {
+            urlTime = setInterval(function () {
+                if (total_num == 1) {
+                    var percent = $("#progress" + "one").attr("data-percent");
+                } else if (total_num == 2) {
+                    var percent = $("#progress" + "two").attr("data-percent");
+                } else {
+                    var percent = $("#progress" + "three").attr("data-percent");
+                }
+
+                if (percent >= 100 && !win_closed) {
+                    clearTimeout(urlTime);
+
+                    location.href = '<{:U(selectInsuranceCompany)}>?' + 'order_sn=' + order_sn + '&session_id=' + session_id + '&sources=' + arr1;
+
+                }
+            }, 1200);
+
+        }
+    </script>
+
+</html>

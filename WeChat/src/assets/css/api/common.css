@@ -1,0 +1,136 @@
+/* reset css */
+body{
+	color:#595959;
+	min-width:320px;
+	font-family:PingFang,Helvetica Neue,Noto,'微软雅黑',Tahoma,Arial,sans-serif;
+	font-weight:normal;
+	background: #f0f0f0;
+}
+a,a:hover{
+	text-decoration:none;
+}
+a{
+	color:#333;
+}
+select{
+	background: #fff;
+}
+input{
+	font-family:Helvetica Neue,'微软雅黑',Tahoma,Arial,sans-serif;
+	height:25px;
+	line-height: 25px;
+}
+input::-webkit-input-placeholder{
+    color:#a1a1a1;
+    font-family:Helvetica Neue,'微软雅黑',Tahoma,Arial,sans-serif;
+}
+textarea::-webkit-input-placeholder{
+    color:#a1a1a1;
+    font-family:Helvetica Neue,'微软雅黑',Tahoma,Arial,sans-serif;
+}
+textarea{
+    font-family:Helvetica Neue,'微软雅黑',Tahoma,Arial,sans-serif;
+    color:#595959 !important;
+}
+button{
+	background:none;
+	border:none;
+	padding:0;
+	margin:0;
+
+}
+.clearfix:after{
+	clear:both;
+	content:'';
+	font-size:0;
+	display:block;
+	visibility:hidden;
+	height:0;
+}
+.yellow{color:#fb0!important}
+.red{color:#e4393c!important}
+.green{color:#64c54a!important}
+.gray{color:#a1a1a1!important}
+.c-59{color:#595959!important}
+.c-E5{color:#E5E5E5!important}
+.c-36{color:#363636!important}
+.c-A1{color:#A1A1A1!important}
+.c-B7{color:#B7B7B7!important}
+.t-a-l{text-align:left}
+.t-a-c{text-align:center}
+.t-a-r{text-align:right}
+.f-l{float:left}
+.f-r{float:right}
+.o-h{overflow:hidden}
+.con img, .foot_button img{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.con .con_head h2{
+	height:40px;
+	line-height: 40px;
+	padding-left: 15px;
+	font-size: 1rem;
+	border-bottom: 1px solid #f4f4f4;
+}
+.con .con_head h2 a{
+	text-decoration: underline !important;
+	margin-left: 30px;
+}
+/* 提交按钮 */
+.foot_button{
+	width:100%;
+	background: #fb0;
+	text-align:center;
+	color:#fff;
+}
+/* 箭头 */
+.right_arr{
+	position: absolute;
+	top:23px;
+	right:0px;
+}
+.down{
+	position: absolute;
+	top:23px;
+	-webkit-top:28px;
+	right:65px;
+}
+.mask{
+	background: black;
+	opacity: 0.6;
+	z-index:999;
+	position: fixed;
+	top:0;
+	bottom:0;
+	right:0;
+	left:0;
+	display: none;
+}
+/* 适配 */
+@media all and (min-width: 540px){
+	html,body,textarea,button,input,select{
+		font-size: 16px;
+	}
+}
+@media all and (min-width: 481px) and (max-width: 540px){
+	html,body,textarea,button,input,select{
+		font-size: 16px;
+	}
+}
+@media all and (min-width: 381px) and (max-width: 480px){
+	html,body,textarea,button,input,select{
+		font-size: 14px;
+	}
+}
+@media all and (min-width: 321px) and (max-width: 380px) {
+	html,body,textarea,button,input,select{
+		font-size: 13px;
+	}
+}
+@media all and (max-width: 320px){
+	html,body,textarea,button,input,select{
+		font-size: 12px;
+	}
+}

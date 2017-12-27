@@ -1,0 +1,182 @@
+@import '../../../styles/common'
+
+.el-col-3
+  width: 14.2857%
+.l-layout
+  z-index: auto
+.l-layout-left,
+.l-layout-right,
+.l-layout-center,
+.l-layout-content,
+.l-layout-top,
+.l-layout-bottom
+  border: none
+.l-layout-left
+  overflow: visible
+  padding-top: 3px
+  // z-index: 11
+.tab-icon-home
+  padding-left: 25px
+  background: url('../../../assets/img/home.png') no-repeat left 60%
+  background-size: 45%
+.l-tab-content
+  padding-left 3px
+
+.pswd-tooltip
+  text-align: center
+  margin-left: 2em
+
+theme-init(#343434, _yellow)
+
+.align-center
+  text-align: center
+
+#global_layout
+  both-space = 20px
+  #gl-header
+    min-width: 710px
+    width: 100%
+    position: absolute
+    z-index: 9999
+    height: h = 80px + 4px
+    line-height: h - 4px
+    position: relative
+    #logo
+      img-middle()
+      float: left
+      margin-left both-space
+      height: 100%
+      cursor: pointer
+      img
+        width: w = 50px
+        height: w
+      span
+        color: white
+        font-size: 1.5em
+        font-weight: 700
+        letter-spacing: 2px
+        padding-left: .8em
+    #user_box
+      float: right
+      text-align: center
+      margin-right both-space
+      .el-dropdown-link
+        color: white
+        cursor: pointer
+        .el-icon--right
+          transform: rotateZ(0deg)
+          transition: .3s
+      .el-icon-user
+        width: 1em
+        height: 1em
+        position: relative
+        top: 2px
+        left: -2px
+        background: url('../../../assets/img/user_icon.png') no-repeat center center;
+  #gl-left-nav
+    position: static
+    overflow-y: auto
+    #icon-arrow
+      fill: rgba(255, 255, 255, .8)
+      position: absolute
+      top: 95%
+      left: 50%
+      display: inline-block
+      width: w = 24px
+      height: 30px
+      margin-left: -(w/2)px
+      cursor: pointer
+      transform: rotate(0deg) scale(1, .8)
+      transition: .38s
+      transform-origin: 50% 50%
+      _scale = 1.125
+      _rotate = 180deg
+      &:hover
+        fill: rgba(255, 255, 255, 1)
+      &.is-active
+        transform: rotate(_rotate) scale(1, .8)
+
+
+  #welcome
+    // background: url('/Public/static/image/caryu/icon/background.png')
+    color: #6C6C6C
+    height: 100%
+    position: relative
+    & > ul
+      position: absolute
+      top: 50%
+      left: 50%
+      margin-left: -313px
+      margin-top: -190px
+      & > li
+        float: left
+        &:first-child
+          margin-top 18%
+    img
+      width: 64%
+      padding-top: 15%
+      margin-left: 8%
+    h2, h3
+      font-weight: 400
+    h2
+      font-size: 4.2em
+    h3
+      margin-top: 0.825em
+      font-size: 2.1em
+  #gl-center
+    font-size: 12px
+    height: 100%
+    margin-bottom: 0px
+    #divHome
+      overflow-y: auto
+    .gl-c-header
+      background-color: _gray
+      position: static
+
+
+.el-submenu .el-menu-item
+  min-width: 105px
+  padding-right: 10px
+.el-menu--dark
+  width: 100%
+  li[home]
+    color: #bfcbd9
+.el-submenu__title
+  overflow: hidden
+  i:nth-child(1)
+    margin-left: -10px!important
+    margin-right: 8px!important
+    margin-top: -3px!important
+    &:before
+      content: ''
+      display: block
+      width: 1.15em
+      height: 1.25em
+      background-repeat: no-repeat
+      background-position: center center
+      background-size: 100%
+    &.el-icon-sy:before
+      margin-bottom: -3px
+      background-image: url('../../../assets/img/left-menu/sy.png')
+    &.el-icon-cyxx:before
+      background-image: url('../../../assets/img/left-menu/cyxx.png')
+    &.el-icon-cwgl:before
+      background-image: url('../../../assets/img/left-menu/cwgl.png')
+    &.el-icon-ddgl:before
+      background-image: url('../../../assets/img/left-menu/ddgl.png')
+    &.el-icon-hbhd:before
+      background-image: url('../../../assets/img/left-menu/hbhd.png')
+    &.el-icon-jdcd:before
+      background-image: url('../../../assets/img/left-menu/jdcd.png')
+    &.el-icon-mdgl:before
+      background-image: url('../../../assets/img/left-menu/mdgl.png')
+    &.el-icon-pzxg:before
+      background-image: url('../../../assets/img/left-menu/pzxg.png')
+    &.el-icon-sbgl:before
+      background-image: url('../../../assets/img/left-menu/sbgl.png')
+    &.el-icon-wdsc:before
+      background-image: url('../../../assets/img/left-menu/wdsc.png')
+    &.el-icon-qxgl:before
+      background-image: url('../../../assets/img/left-menu/qxgl.png')
+    &.el-icon-xxtz:before
+      background-image: url('../../../assets/img/left-menu/xxtz.png')

@@ -1,0 +1,229 @@
+[ 2017-11-22T17:44:59+08:00 ] 123.116.62.33 /wechat/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000081s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000669s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000710s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 12 行.
+NOTIC: [8] Constant G_HTTP already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 13 行.
+NOTIC: [8] Constant WEB_PATH already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 14 行.
+NOTIC: [8] Undefined variable: module /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+NOTIC: [8] Undefined variable: var /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+NOTIC: [2] array_reverse() expects parameter 1 to be array, null given /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+NOTIC: [2] http_build_query(): Parameter 1 expected to be Array or Object.  Incorrect value given /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+
+[ 2017-11-22T17:44:59+08:00 ] 123.116.62.33 /wechat/index.php?m=&&m=&c=Index&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000066s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000025s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000052s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 12 行.
+NOTIC: [8] Constant G_HTTP already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 13 行.
+NOTIC: [8] Constant WEB_PATH already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 14 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000050s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000089s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.006571s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.006603s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000156s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000188s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000642s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000683s ]
+
+[ 2017-11-22T17:45:13+08:00 ] 123.116.62.33 /wechat/index.php?m=&c=Index&a=login&dosubmit=1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000106s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000055s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000095s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 12 行.
+NOTIC: [8] Constant G_HTTP already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 13 行.
+NOTIC: [8] Constant WEB_PATH already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 14 行.
+SQL: SHOW COLUMNS FROM `admin` [ RunTime:0.000512s ]
+SQL: SHOW COLUMNS FROM `times` [ RunTime:0.000299s ]
+ERR: 1146:Table 'insurance.times' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `times`
+SQL: SELECT * FROM `admin` WHERE ( `user_name` = 'liuzhijing' ) AND ( `is_delete` = 0 ) LIMIT 1   [ RunTime:0.000303s ]
+SQL: SELECT * FROM `times` WHERE ( `username` = 'liuzhijing' ) AND ( `isadmin` = '1' ) LIMIT 1   [ RunTime:0.000088s ]
+ERR: 1146:Table 'insurance.times' doesn't exist
+ [ SQL语句 ] : SELECT * FROM `times` WHERE ( `username` = 'liuzhijing' ) AND ( `isadmin` = '1' ) LIMIT 1  
+SQL: DELETE FROM `times` WHERE ( `username` = 'liuzhijing' ) AND ( `isadmin` = '1' ) [ RunTime:0.000075s ]
+ERR: 1146:Table 'insurance.times' doesn't exist
+ [ SQL语句 ] : DELETE FROM `times` WHERE ( `username` = 'liuzhijing' ) AND ( `isadmin` = '1' )
+SQL: UPDATE `admin` SET `lastloginip`='123.116.62.33',`lastlogintime`='2017-11-22 17:45:13' WHERE ( `id` = 16 ) [ RunTime:0.001904s ]
+
+[ 2017-11-22T17:45:13+08:00 ] 123.116.62.33 /wechat/index.php?m=&c=Index&a=index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000077s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000039s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000132s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 12 行.
+NOTIC: [8] Constant G_HTTP already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 13 行.
+NOTIC: [8] Constant WEB_PATH already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 14 行.
+SQL: SHOW COLUMNS FROM `admin` [ RunTime:0.000727s ]
+SQL: SELECT `id` FROM `admin` WHERE ( `user_name` = 'liuzhijing' ) LIMIT 1   [ RunTime:0.000274s ]
+SQL: SHOW COLUMNS FROM `admin_auth_group_access` [ RunTime:0.000430s ]
+SQL: SELECT g.rules FROM `admin_auth_group_access` LEFT JOIN  admin_auth_group as g on g.id= admin_auth_group_access.group_id   WHERE ( admin_auth_group_access.uid = '16' ) LIMIT 1   [ RunTime:0.000071s ]
+SQL: SHOW COLUMNS FROM `admin_auth_rule` [ RunTime:0.000534s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = 0 ) ORDER BY sort  [ RunTime:0.000075s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '227' ) ORDER BY sort  [ RunTime:0.000064s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '74' ) ORDER BY sort  [ RunTime:0.000069s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '209' ) ORDER BY sort  [ RunTime:0.000063s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '222' ) ORDER BY sort  [ RunTime:0.000058s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '210' ) ORDER BY sort  [ RunTime:0.000060s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '187' ) ORDER BY sort  [ RunTime:0.000058s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '147' ) ORDER BY sort  [ RunTime:0.000067s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '75' ) ORDER BY sort  [ RunTime:0.000067s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '13' ) ORDER BY sort  [ RunTime:0.000063s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '76' ) ORDER BY sort  [ RunTime:0.000057s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '2' ) ORDER BY sort  [ RunTime:0.000063s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '139' ) ORDER BY sort  [ RunTime:0.000049s ]
+SQL: SHOW COLUMNS FROM `admin_city` [ RunTime:0.000494s ]
+SQL: SELECT `city_id`,`city_name` FROM `admin_city` WHERE ( `uid` = 16 ) LIMIT 1   [ RunTime:0.000071s ]
+NOTIC: [8] Undefined offset: 1 /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 299 行.
+NOTIC: [8] Undefined offset: 2 /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 299 行.
+NOTIC: [8] Undefined offset: 3 /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 299 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000126s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000183s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.005626s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.005665s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000042s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000061s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000062s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000099s ]
+
+[ 2017-11-22T17:45:23+08:00 ] 58.246.221.74 /wechat/index.php?m=&c=Index&a=index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000075s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000042s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000069s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 12 行.
+NOTIC: [8] Constant G_HTTP already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 13 行.
+NOTIC: [8] Constant WEB_PATH already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 14 行.
+NOTIC: [8] Undefined variable: module /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+NOTIC: [8] Undefined variable: var /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+NOTIC: [2] array_reverse() expects parameter 1 to be array, null given /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+NOTIC: [2] http_build_query(): Parameter 1 expected to be Array or Object.  Incorrect value given /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+
+[ 2017-11-22T17:45:23+08:00 ] 58.246.221.74 /wechat/index.php?m=&&m=&c=Index&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000076s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000031s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000067s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 12 行.
+NOTIC: [8] Constant G_HTTP already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 13 行.
+NOTIC: [8] Constant WEB_PATH already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 14 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000069s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000116s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002612s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002641s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000041s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000067s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000051s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000095s ]
+
+[ 2017-11-22T17:45:29+08:00 ] 58.246.221.73 /wechat/index.php?m=&c=index&a=index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000121s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000038s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000067s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 12 行.
+NOTIC: [8] Constant G_HTTP already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 13 行.
+NOTIC: [8] Constant WEB_PATH already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 14 行.
+NOTIC: [8] Undefined variable: module /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+NOTIC: [8] Undefined variable: var /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+NOTIC: [2] array_reverse() expects parameter 1 to be array, null given /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+NOTIC: [2] http_build_query(): Parameter 1 expected to be Array or Object.  Incorrect value given /data/htdocs/ycbb/wechat/Libs/ThinkPHP/Common/functions.php 第 838 行.
+
+[ 2017-11-22T17:45:29+08:00 ] 58.246.221.73 /wechat/index.php?m=&&m=&c=Index&a=login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000095s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000031s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000069s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 12 行.
+NOTIC: [8] Constant G_HTTP already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 13 行.
+NOTIC: [8] Constant WEB_PATH already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 14 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000060s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000102s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.002470s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.002503s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000047s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000072s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000059s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000092s ]
+
+[ 2017-11-22T17:54:31+08:00 ] 123.116.62.33 /wechat/index.php?m=&c=Index&a=index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000112s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000043s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000089s ]
+NOTIC: [8] Constant G_HTTP_HOST already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 12 行.
+NOTIC: [8] Constant G_HTTP already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 13 行.
+NOTIC: [8] Constant WEB_PATH already defined /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 14 行.
+SQL: SHOW COLUMNS FROM `admin` [ RunTime:0.000646s ]
+SQL: SELECT `id` FROM `admin` WHERE ( `user_name` = 'liuzhijing' ) LIMIT 1   [ RunTime:0.000084s ]
+SQL: SHOW COLUMNS FROM `admin_auth_group_access` [ RunTime:0.000426s ]
+SQL: SELECT g.rules FROM `admin_auth_group_access` LEFT JOIN  admin_auth_group as g on g.id= admin_auth_group_access.group_id   WHERE ( admin_auth_group_access.uid = '16' ) LIMIT 1   [ RunTime:0.000072s ]
+SQL: SHOW COLUMNS FROM `admin_auth_rule` [ RunTime:0.000609s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = 0 ) ORDER BY sort  [ RunTime:0.000077s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '227' ) ORDER BY sort  [ RunTime:0.000070s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '74' ) ORDER BY sort  [ RunTime:0.000066s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '209' ) ORDER BY sort  [ RunTime:0.000066s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '222' ) ORDER BY sort  [ RunTime:0.000129s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '210' ) ORDER BY sort  [ RunTime:0.000070s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '187' ) ORDER BY sort  [ RunTime:0.000066s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '147' ) ORDER BY sort  [ RunTime:0.000069s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '75' ) ORDER BY sort  [ RunTime:0.000068s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '13' ) ORDER BY sort  [ RunTime:0.000065s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '76' ) ORDER BY sort  [ RunTime:0.000068s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '2' ) ORDER BY sort  [ RunTime:0.000066s ]
+SQL: SELECT * FROM `admin_auth_rule` WHERE ( `meau` = '139' ) ORDER BY sort  [ RunTime:0.000064s ]
+SQL: SHOW COLUMNS FROM `admin_city` [ RunTime:0.000529s ]
+SQL: SELECT `city_id`,`city_name` FROM `admin_city` WHERE ( `uid` = 16 ) LIMIT 1   [ RunTime:0.000068s ]
+NOTIC: [8] Undefined offset: 1 /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 299 行.
+NOTIC: [8] Undefined offset: 2 /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 299 行.
+NOTIC: [8] Undefined offset: 3 /data/htdocs/ycbb/wechat/App/Caryu/Controller/CommonController.class.php 第 299 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000135s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000197s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007208s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007261s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000052s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000088s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000086s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000133s ]
+

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>订单-支付成功</title>
+  <%- include src/components/header/InsuranceHeader %>
+</head>
+<body>
+    <div id="second_hand">
+        <header style="margin:0;">
+            <div class="header_con">
+                <div class="header_top">
+                    <div class="left">
+                        <?php if($from == closed){ ?>
+                        <img @click="close" src="../../../assets/img/api/back_arrow.png" width="12"/>
+                         <?php }elseif(empty($pay)){ ?>
+                        <a href='<{:U("CarInsuranceOrder/orderList?session_id=".$id."&search_type=".$search_type)}>'><img src="../../../assets/img/api/back_arrow.png" width="12px;" alt="" /></a>
+                        <?php }else{ ?>
+                         <a href='javascript:history.go(-1)'><img src="../../../assets/img/api/back_arrow.png" width="12px;" alt="" /></a>
+                        <?php } ?>
+                    </div>
+                    <!-- 车牌号 -->
+                    <div class="middle">
+                        <h1><{$orderInfoDetail.license_number}></h1>
+                    </div>
+
+                    <if condition='$model eq 2'>
+                    <!-- 眼睛 -->
+                    <div class="right" id="eye" onclick="eyeToggle(this)">
+                      <img
+                        src="../../../assets/img/api/closeEye.png"
+                        data-on="../../../assets/img/api/openEye.png"
+                        data-off="../../../assets/img/api/closeEye.png"
+                      />
+                    </div>
+                    </if>
+                </div>
+            </div>
+        </header>
+
+        <div class="con">
+
+                <div class="tit-header">
+                   <span>订单号：</span>
+                   <span><{$orderInfoDetail.order_sn}></span>
+                </div>
+                <section>
+                    <foreach name='orderInfoDetail.insurance_type' item = 'vi'>
+                        <!-- 保险公司 -->
+                        <div class="brand_name">
+                            <if condition="$vi.InsuranceCompany_code eq 1">
+                            <img src="../../../assets/img/api/cpic_active.png">
+                            <elseif condition="$vi.InsuranceCompany_code eq 2"/>
+                            <img src="../../../assets/img/api/paic_active.png">
+                            <elseif condition="$vi.InsuranceCompany_code eq 4"/>
+                            <img src="../../../assets/img/api/picc_active.png">
+                            </if>
+                            <span><{$vi.InsuranceCompany}></span>
+                        </div>
+                        <if condition= ' $orderInfoDetail["status"] == 3  '><!-- 订单完成 -->
+                        <!-- <img src="../../../assets/img/api/status.png" alt="" height="54px"/> -->
+                        </if>
+                        <if condition=' $orderInfoDetail["status"] == 4 ' ><!-- 订单失效 -->
+                         <!-- <img src="../../../assets/img/api/invalid.png" alt="" height="54px"/> -->
+                        </if>
+                    </foreach>
+                    <!-- 险种 -->
+                    <div class="insur_wrap company_info" data-bizNum="<{$orderInfoDetail.biz_num}>" data-BizTotal="<{$orderInfoDetail.BizTotal}>">
+                        <foreach name='orderInfoDetail.insurance' item='v'>
+
+                            <dl class="con_body_item">
+                                <dt>
+                                <div class="insurance_name"><{$v.insuranceName}></div>
+                                <if condition=' $v["isDeductible"]  == 1  '>
+                                <img class="freeIcon" src="../../../assets/img/api/free_icon.png" alt=""/>
+                                </if>
+                                <if condition=' $v["insuranceCode"] == "BoLi" '>
+                                <span class="price_number"><{$v.itemCode}></span>
+                                <else/>
+                                <if condition='$v.amount neq 1'>
+                                 <if condition='$v.amount eq 2000'>
+                                    <span class="price_number">2千</span>
+
+                                        <elseif condition='$v.amount eq 5000'/>
+                                        <span class="price_number">5千</span>
+
+                                        <elseif condition='$v.amount eq 10000'/>
+                                        <span class="price_number">1万</span>
+
+                                        <elseif condition='$v.amount eq 20000'/>
+                                        <span class="price_number">2万</span>
+
+                                        <elseif condition='$v.amount eq 30000'/>
+                                        <span class="price_number">3万</span>
+
+                                        <elseif condition='$v.amount eq 40000'/>
+                                        <span class="price_number">4万</span>
+
+                                        <elseif condition='$v.amount eq 50000'/>
+                                        <span class="price_number">5万</span>
+
+                                        <elseif condition='$v.amount eq 100000'/>
+                                        <span class="price_number">10万</span>
+
+                                        <elseif condition='$v.amount eq 150000'/>
+                                        <span class="price_number">15万</span>
+
+                                        <elseif condition='$v.amount eq 200000'/>
+                                        <span class="price_number">20万</span>
+
+                                        <elseif condition='$v.amount eq 300000'/>
+                                        <span class="price_number">30万</span>
+
+                                        <elseif condition='$v.amount eq 500000'/>
+                                        <span class="price_number">50万</span>
+
+                                        <elseif condition='$v.amount eq 1000000'/>
+                                        <span class="price_number">100万</span>
+
+                                        <elseif condition='$v.amount eq 1500000'/>
+                                        <span class="price_number">150万</span>
+
+                                        <elseif condition='$v.amount eq 2000000'/>
+                                        <span class="price_number">200万</span>
+
+                                        <elseif condition='$v.amount eq 2500000'/>
+                                        <span class="price_number">250万</span>
+                                    </if>
+                                </if>
+                                </if>
+                                </dt>
+                                <dd>
+                                <span class="total_number">
+                                    <{$v['premium']+$v['deductiblePremium']}>
+                                </span>
+                                </dd>
+                            </dl>
+
+                        </foreach>
+                    </div>
+
+                    <!-- 金额 -->
+                    <div class="total_money">
+                        <div>
+                            共计 <{$insurance_count}> 个险种
+                        </div>
+                        <div class="amounts">
+                            <p class="discount-price">
+                                <b>保单金额：</b>
+                                <span class="total_number">
+                                    <{$orderInfoDetail.total_amount}>
+                                </span>
+                            </p>
+                            <p class="discount-price" style="display:none;">
+                                <b>出售金额：</b>
+                                <span class="total_number">
+                                    <{$orderInfoDetail.shopPay}>
+                                </span>
+                            </p>
+                            <p>
+                                <b>支付金额：</b>
+                                <span class="total_number total_payment">
+                                    <{$orderInfoDetail.insurance_type.0.easyPrice}>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- 邮寄信息 -->
+                <section>
+                    <div class="tit-header">
+                       <span>邮寄信息</span>
+                    </div>
+                    <div class="con_body box">
+                       <dl class="con_body_item">
+                           <dt>收件人</dt>
+                           <dd><span><{$orderInfoDetail.mail_name}></span></dd>
+                       </dl>
+                       <dl class="con_body_item">
+                           <dt>手机号</dt>
+                           <dd><span><{$orderInfoDetail.mail_phone}></span></dd>
+                       </dl>
+                       <dl class="con_body_item">
+                           <dt>邮寄地址</dt>
+                           <dd id="mail_addr"><span><{$orderInfoDetail.mail_addr}></span></dd>
+                       </dl>
+                    </div>
+                </section>
+
+        </div><!-- con结束 -->
+    </div>
+</body>
+<script type="text/javascript">
+    $(function () {
+
+        $('.insur_wrap .con_body_item').each(function (i) {/*遍历 进行样式处理*/
+            var dt = $(this).find('dt').text().trim(),
+                biz_num = $(this).parents('div.company_info').attr('data-bizNum'),/*商业险总数*/
+                bizTotal = $(this).parents('div.company_info').attr('data-BizTotal');/*商业险总额*/
+
+            var ShangYeHTML = '<dl class="con_body_item shangYe" data-flag=1><dt><div class="insurance_name">商业险<span> ×'+ biz_num +'</span></div></dt><dd><span class="total_number">'+ bizTotal +'&nbsp;</span></dd><img class="gray_arrow" src="/Public/static/image/api/smallf7.png"><img class="biz_arrow" src="/Public/static/image/api/arrow.png"></dl>';/*商业险HTML*/
+
+            if (dt == '') {
+                $(this).remove();/*移除空节点*/
+
+            }else if(dt != '交强险+车船税'){
+                $(this).attr('data-down',"biz").hide();
+            }
+
+            if (i==0&&$(this).text().indexOf('交强险')==-1) {/*判断是否有交强险,来选择插入‘商业险’节点位置*/
+                $(this).before(ShangYeHTML);/*插入商业险节点*/
+            }else if (dt == '交强险+车船税') {
+                $(this).next().before(ShangYeHTML);/*插入商业险节点*/
+            }
+        });
+
+
+        $('dl.shangYe').click(function () {/*商业险点击 展开收缩动画*/
+            var parent = $(this).parents('.company_info'),
+                type = parent.attr('data-type');
+
+            if ($(this).attr('data-flag')==1) {
+                $(this).attr('data-flag',0).parent().find('dl[data-down=biz]').slideDown(300);
+                $(this).find('img.gray_arrow').show().next('img.biz_arrow').css({transform: "rotate(90deg)"});
+            }else {
+                $(this).attr('data-flag',1).parent().find('dl[data-down=biz]').slideUp(300);
+                $(this).find('img.gray_arrow').hide().next('img.biz_arrow').css({transform: "rotate(270deg)"});
+
+            }
+        });
+    });
+
+    $(window).load(function () {
+        /*三个支付价格 左对齐效果处理*/
+        var p = $('.amounts > p');
+        p.width(Math.max(p[0].offsetWidth,p[1].offsetWidth,p[2].offsetWidth));
+    });
+
+    $(function () {
+
+        /*地址过长时 展示效果 处理*/
+        var mail_addr = $('dd#mail_addr');
+        if ( mail_addr.find('span')[0].offsetHeight >= mail_addr[0].offsetHeight ){
+            mail_addr.addClass('multi-row');
+        }
+
+        /*车牌号样式处理*/
+        var licenseNumber = $('.middle h1').text();
+        licenseNumber = licenseNumber.substr(0, 1) + '·' + licenseNumber.substr(1, licenseNumber.length - 1);
+        $('.middle h1').text(licenseNumber);
+
+        /*眼睛*/
+        var model="<{$model}>";
+        if(model==1){/*没有眼睛*/
+            $('.discount-price').slideToggle(0);
+        }
+
+        priceRecombine($('.total_number'));/*价格拆分 展示*/
+    });
+     //选择支付宝
+    function checkStatusPay(){
+        $("#hd").attr("src","__APIROOT__/image/api/not-choose.png");
+        $("#pay").attr("src","__APIROOT__/image/api/cho.png");
+        $("#payment").val(3);
+    }
+    //选择货到付款
+    function checkStatusH(){
+        $("#pay").attr("src","__APIROOT__/image/api/not-choose.png");
+        $("#hd").attr("src","__APIROOT__/image/api/cho.png");
+        $("#payment").val(1);
+    }
+
+</script>
+</html>

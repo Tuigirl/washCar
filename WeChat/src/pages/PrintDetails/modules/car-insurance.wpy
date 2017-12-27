@@ -1,0 +1,64 @@
+<style lang="stylus">
+.HcSanFangTeYue
+  width 30px!important
+</style>
+
+<template>
+  <section class="bar">
+
+    <div class="h5">
+      <span>车险</span>
+      <button @click="goToPage('carInsurance')" v-if="WebViewConfig.is_show === 1">办理</button>
+    </div>
+
+    <div class="card car_insurance" v-if="!isShowInsurance">
+      <div class="up_container">
+        <div class="list">
+          <div>未能获取到您爱车的相关车险信息，请自主办理。</div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card car_insurance" v-else>
+      <div class="up_container no-after">
+        <div class="list" v-for="(item, index) in carInsurance" :key="index">
+          <template v-if="item.insuranceCode=='JQXCCS'">
+            <div>{{ item.insuranceName }}</div>
+            <div></div>
+            <div></div>
+          </template>
+          <template v-else>
+            <div>{{ item.insuranceName }}</div>
+            <div :class="{ HcSanFangTeYue: item.insuranceCode == 'HcSanFangTeYue' }">
+              <img v-if="item.isDeductible == 1" src="../../../assets/car-insurance/free_icon.png">
+            </div>
+            <div>
+              <div v-if="item.insuranceCode == 'BoLi'" class="c_59">
+                {{ item.itemCode }}
+              </div>
+              <template v-elif="item.amount != '' && item.amount > 1000">
+                <span>投保金额：</span>
+                <span>{{ item.amountF }}</span>
+              </template>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</template>
+
+<script>
+import mixin from '@/mixins/print-details.js'
+
+export default {
+  name: 'PrintDetails__CarInsurance',
+
+  mixins: [mixin],
+
+  props: ['WebViewConfig']
+}
+</script>

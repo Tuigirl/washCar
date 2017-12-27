@@ -1,0 +1,281 @@
+html{
+    height:100%;
+}
+table,td,dd{
+    margin:0;
+    padding:0;
+}
+body{
+    background: #fff;
+    height:100%;
+}
+.con{
+    background-color: #F7F7F7;
+}
+.con_body {
+    padding: 1rem 1.2rem;
+}
+.con_body dl dt{
+    width:30%;
+}
+.con_body dl dd{
+    width:70%;
+}
+
+/* 支付成功状态 */
+.con_head{
+    height:45px;
+    background: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.con_head > div{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 1;          /* Chrome */
+    flex: 1;
+    align-content: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    width: 1%;
+}
+.paysuccess{
+    margin-bottom: 1.462rem;
+}
+.paysuccess h1{
+    margin: 2rem 0;
+    font-size: 2.308rem;
+    color: #9acd58;
+    background-size:6rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.paysuccess h1 img{
+    padding-right: 0.8rem;
+    width: 3.538rem;
+    height: 3.538rem;
+    vertical-align: middle;
+}
+.paysuccess p:nth-of-type(1){
+    font-size: 1.154rem;
+    color: #595959;
+    text-align: center;
+}
+.paysuccess p:last-child{
+    font-size: 0.923rem;
+    padding-top: 0.5rem;
+    color: #a1a1a1;
+    text-align: center;
+}
+.foot_button{
+    font-size: 1rem;
+}
+section{
+    font-size: 0.923rem;
+    border: 1px solid #E5E5E5;
+    margin: 0 0.769rem 0.846rem 0.769rem;
+}
+.tit-header{
+    color: #a1a1a1;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #FAFAFA;
+    box-sizing: border-box;
+}
+.box .con_body_item{
+    height:auto;
+    overflow: hidden;
+    line-height:30px;
+    border:none;
+}
+.box .con_body_item dt{
+    height:30px;
+    line-height:30px;
+    color:#595959;
+}
+.box .con_body_item dd{
+    height:30px;
+    overflow: hidden;
+    line-height:30px;
+}
+.box .con_body_item dd.multi-row{
+    height: auto;
+    text-align: justify;
+    word-break: break-all;
+    letter-spacing: 2px;
+    line-height: 16px;
+    padding-top: 7px;
+    text-justify:inter-ideograph;
+}
+
+.discount-price{
+    display:none;
+}
+
+.total_number{
+    color: #595959;
+    font-size: 1.34rem;
+}
+.total_number:before {
+    content: "￥";
+    display: inline-block;
+    color: #A1A1A1;
+    transform-origin: 100% 40%;
+    transform: scale(.7);
+}
+.total_number + span{
+    color: #A1A1A1;
+    display: inline-block;
+    /*transform-origin: 100% 65%;*/
+    /*transform: scale(.7);*/
+    /*float: right;*/
+}
+
+.brand_name{
+    margin:0 16px;
+    height:63px;
+    line-height:63px;
+    background-color: white;
+    border-bottom: 1px solid #E5E5E5;
+}
+.brand_name > div:nth-child(1){
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    height: 100%;
+}
+.brand_name > div:nth-child(1) img{
+    border-radius: 50%;
+    width: 2.4rem;
+    border: 1px #d2d2d2 solid;
+}
+.brand_name > div:nth-child(1) span{
+    padding-left: 1rem;
+}
+.company_info{
+    background-color: white;
+}
+.company_info dl[data-down="biz"]{
+    line-height: 40px;
+    padding-left: 45px;
+    height: 40px;
+    background: #f7f7f7;
+}
+.company_info dl[data-down="biz"] dt{
+    line-height: 40px;
+    height: 40px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.company_info dl[data-down="biz"] dd{
+    line-height: 40px;
+    height: 40px;
+}
+
+.company_info .con_body_item{
+    height:50px;
+    border:none;
+    padding-left: 16px;
+    padding-right: 28px;
+}
+.company_info .con_body_item dt{
+    width: 65%;
+    height: 50px;
+}
+.company_info .con_body_item dd{
+    width: 35%;
+    height: 50px;
+}
+.company_info .shangYe{
+    position: relative;
+}
+.company_info .shangYe img.gray_arrow{
+    display:none;
+    position: absolute;
+    height: 10px;
+    top: 100%;
+    left: 50%;
+    margin-top: -10px;
+    margin-left: -12px;
+}
+.company_info .shangYe img.biz_arrow{
+    position: absolute;
+    height: 13px;
+    top: 50%;
+    left: 95%;
+    margin-top: -6px;
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+}
+
+.insurance_name span{
+    color: #a1a1a1;
+}
+.freeIcon{
+    width: 54px;
+    height: 16px;
+    margin-left: 8px;
+    margin-top: 12px;
+}
+.price_number{
+    margin-left: 8px;
+    vertical-align: top;
+}
+
+.total_money{
+    padding:10px 28px 10px 15px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: baseline;
+    align-items: baseline;
+}
+.total_money > div{
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 1;          /* Chrome */
+    flex: 1;
+    width: 1%;
+}
+.total_money > div:last-child{
+    text-align: right;
+    -webkit-box-flex: 2;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -webkit-flex: 2;          /* Chrome */
+    flex: 2;
+}
+
+.total_money{
+    color:#a1a1a1;
+    font-size:0.846rem;
+}
+
+@media (max-width: 360px) {
+    .company_info dl[data-down="biz"]{
+        padding-left: 25px !important;
+    }
+    .total_number{
+        font-size: 1.14rem;
+    }
+    .freeIcon{
+        width:50px;
+        height: 15px;
+        margin-top: 13px;
+        margin-left:4px;
+    }
+    .price_number{
+        margin-left: 4px;
+    }
+}

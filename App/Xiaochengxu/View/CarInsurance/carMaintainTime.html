@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>系统维护</title>
+    <meta charset="UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+<meta name="format-detection" content="telephone=no"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/layer/layer.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/js/textMiddle.js"></script>
+<script type="text/javascript" src="__APIROOT__/viewJs/api/carInsurance/iscroll.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/velocity/1.4.1/velocity.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.2/animate.min.css"/>
+
+<link rel="stylesheet" href="__APIROOT__/css/api/carInsurance/common.css"/>
+
+    <style type="text/css">
+        body{
+            background-color: #FAFAFA;
+        }
+        .con{
+            width: 100%;
+            height: 100%;
+            background: url(__APIROOT__/image/api/carMaintainTime.png) no-repeat center 26%;
+            background-size: 70%;
+            color: #A1A1A1;
+            text-align: center;
+        }
+        .con #time{
+            margin-top: 86%;
+            margin-bottom: 3.5%;
+            font-size: 2.308rem;
+        }
+        .con p{
+            line-height: 1.769rem;
+            font-size: 1rem;
+        }
+        .foot_button{
+            margin: 0.846rem;
+            margin-top: 0;
+            width: auto;
+        }
+    </style>
+<script type="text/javascript" src="/Public/static/packaged-assets/Insurance/./js/vendor.94006ba4.js"></script><script type="text/javascript" src="/Public/static/packaged-assets/Insurance/js/CarInsurance\carMaintainTime.4718a368.js"></script></head>
+<body>
+
+    <div class="con">
+        <div id="time"></div>
+
+        <script type="text/javascript">
+            !function (intDiff,dec){
+
+                var timeing = setInterval(function(){
+                var day=0,
+                    hour=0,
+                    minute=0,
+                    second=0;//时间默认值
+                if(intDiff > 0){
+                        day = Math.floor(intDiff / (60 * 60 * 24));
+                        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+                        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+                }
+                if (minute <= 9) minute = '0' + minute;
+                if (second <= 9) second = '0' + second;
+                var html = hour+':'+minute+':'+second,
+                    sum = hour + minute + second;
+
+                $("#"+dec).html(html);
+                    if (sum<=0) {
+                        clearTimeout(timeing);
+                    }
+                intDiff--;
+                }, 1000);
+            }('<{$left}>', 'time');
+        </script>
+
+        <p>每日 23:00 - 7:00 为系统维护及对账时间</p>
+        <p>无法进行报价及出单</p>
+    </div>
+    <div class="foot_button" @click="close">返回首页</div>
+</body>
+</html>

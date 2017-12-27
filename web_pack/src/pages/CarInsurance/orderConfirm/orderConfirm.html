@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>确认并支付</title>
+      <%- include src/components/header/InsuranceHeader %>
+    </head>
+    <body>
+      <div id="container">
+        <div id="second_hand">
+            <div class="mask"></div>
+            <div id="tran-color"></div>
+            <header>
+                <div class="header_con">
+                    <div class="left">
+                        <a href="javascript:history.go(-1)"><img src="../../../assets/img/api/back_arrow.png" width="12" /></a>
+                    </div>
+                    <div class="middle">
+                        <h1>确认并支付</h1>
+                    </div>
+                    <if condition='$model eq 2'>
+           <!--              <div class="right" id="eye">
+                            <img src="../../../assets/img/api/closeEye.png" height="11px"/>
+                        </div> -->
+                    </if>
+                </div>
+            </header>
+            <div class="con">
+                <div class="wid-bg"></div>
+                <include file="CarInsurance/header-layout" bgC="bg-yellow" bdC="bd-yellow" fontC="font-white" bgColor="bg-yellow" bdColor="bd-yellow" fontColor="font-white" fontpcolor="font-yellow" fontpc="font-yellow" bgColorer="bg-yellow"/>
+
+                <div class="car_info">
+                    <script type="text/javascript">
+                        ~function () {/*车牌号效果处理*/
+                            var text = '<{$car_order_detail.license_number}>';
+                            $('.car_info').text(text.substr(0,1)+ '·' +text.substr(1,text.length-1));
+                        }()
+                    </script>
+                </div>
+
+                <div class="con_body" id="plan">
+                    <div class="brand_name">
+                        <!-- 太平洋 -->
+                        <if condition="$car_insurance_detil.InsuranceCompany_code eq 1">
+                        <img src="../../../assets/img/api/cpic_active.png">
+                        <!-- 平安 -->
+                        <elseif condition="$car_insurance_detil.InsuranceCompany_code eq 2"/>
+                        <img src="../../../assets/img/api/paic_active.png">
+                        <!-- 人保 -->
+                        <elseif condition="$car_insurance_detil.InsuranceCompany_code eq 4"/>
+                        <img src="../../../assets/img/api/picc_active.png">
+                        </if>
+                        <p>
+                            <span><{$car_insurance_detil.InsuranceCompany}></span>
+                            <span>
+                                <!-- 太平洋 -->
+                                <if condition="$car_insurance_detil.InsuranceCompany_code eq 1">
+                                CPIC
+                                <!-- 平安 -->
+                                <elseif condition="$car_insurance_detil.InsuranceCompany_code eq 2"/>
+                                PINGAN
+                                <!-- 人保 -->
+                                <elseif condition="$car_insurance_detil.InsuranceCompany_code eq 4"/>
+                                PICC
+                                </if>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="company_info offer_sus" data-bizNum="<{$car_order_detail.biz_num}>" data-BizTotal="<{$car_order_detail.BizTotal}>">
+
+                        <div class="insur_wrap">
+
+                            <foreach name="insurance_detil" item="items" key="keys">
+                                <!-- 交强/车船 -->
+                                <if condition="$items.insuranceCode eq 'JQXCCS'">
+                                <dl class="con_body_item" data-type="JQXCCS">
+                                <!-- 商业险 -->
+                                <else/>
+                                <dl class="con_body_item" data-type="biz">
+
+                                </if>
+                                    <dt>
+                                        <div class="insurance_name"><{$items.insuranceName}></div>
+
+                                    <if condition='$items.isDeductible eq 1'>
+                                        <img class="freeIcon" src="../../../assets/img/api/free_icon.png"/>
+                                    </if>
+
+                                    <span class="price_number">
+                                        <if condition="$items.insuranceCode eq 'BLX'">
+                                            <{$items.itemCode}>
+                                            <else/>
+                                            <if condition='$items.amount neq 1'>
+                                                <if condition='$items.amount eq 2000'>
+                                                        <if condition="$items.insuranceCode neq 'SheShui'">
+                                                            2千
+                                                        </if>
+                                                    <elseif condition='$items.amount eq 5000'/>
+                                                    5千
+                                                    <elseif condition='$items.amount eq 10000'/>
+                                                    1万
+                                                    <elseif condition='$items.amount eq 20000'/>
+                                                    2万
+                                                    <elseif condition='$items.amount eq 30000'/>
+                                                    3万
+                                                    <elseif condition='$items.amount eq 40000'/>
+                                                    4万
+                                                    <elseif condition='$items.amount eq 50000'/>
+                                                    5万
+                                                    <elseif condition='$items.amount eq 100000'/>
+                                                    10万
+                                                    <elseif condition='$items.amount eq 150000'/>
+                                                    15万
+                                                    <elseif condition='$items.amount eq 200000'/>
+                                                    20万
+                                                    <elseif condition='$items.amount eq 300000'/>
+                                                    30万
+                                                    <elseif condition='$items.amount eq 500000'/>
+                                                    50万
+                                                    <elseif condition='$items.amount eq 1000000'/>
+                                                    100万
+                                                    <elseif condition='$items.amount eq 1500000'/>
+                                                    150万
+                                                    <elseif condition='$items.amount eq 2000000'/>
+                                                    200万
+                                                    <elseif condition='$items.amount eq 2500000'/>
+                                                    250万
+                                                </if>
+                                            </if>
+                                        </if>
+                                    </span>
+                                    </dt>
+                                    <dd>
+                                        <if condition="$items.premium neq 0">
+                                        <span class="total_number">
+                                            <{$items['premium']+$items['deductiblePremium']}>
+                                        </span>
+                                        </if>
+                                    </dd>
+                                </dl>
+                            </foreach>
+
+                        </div>
+                        <!-- 支付金额 -->
+                        <section class="payPrice">
+                            <div>共选择 <{$insurance_count}> 项车险</div>
+                            <div class="payMonery">
+                                <div class="insurance_name">支付金额：</div>
+                                <div class="change">
+                                    <input id="last-price" type="number" value="<{$car_insurance_detil.total_amount}>" onblur="getTotal()" <if condition="$danger_mark eq 1" >readonly="readonly" style="border:none;box-shadow:none"</if> />
+                                    <if condition="$danger_mark eq 0" >
+                                    <span class="clear"><img src="../../../assets/img/api/yijian_clear.png" width="12"/></span>
+                                    </if>
+
+                                    <div class="wid">
+                                        <div>
+                                            <span class="wid-la">保单价</span>
+                                            <img src="../../../assets/img/api/yijian_up.png" height="15"/>
+                                            <p>
+                                                <span class="total_number">
+                                                    <{$car_insurance_detil.total_amount}>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <span class="wid-la">折扣价</span>
+                                            <img src="../../../assets/img/api/yijian_down.png" height="15"/>
+                                            <p>
+                                                <span class="total_number">
+                                                    <{$car_insurance_detil.shopPay}>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="benefit-person">
+                            <h5>投保人/受益人</h5>
+                            <div><{$car_order_detail.insured}></div>
+                            <div><{$car_order_detail.insured_phone}></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" value="<{$car_order_detail.order_sn}>"  name="order_sn" />
+        <input type="hidden" value="<{$car_order_detail.license_number}>" name="license_number" />
+
+        <!-- 确认支付button -->
+        <div class="foot_button" type="button">
+          <section class="left">
+            <span>共计:&nbsp;</span>
+            <span class="total_number" id="totalPrice">
+                <{$car_insurance_detil.total_amount}>
+            </span>
+          </section>
+           <button class="right" onclick="submitFms()">
+               确认支付
+           </button>
+        </div>
+        <!-- 支付方式 -->
+        <div class="choose_item">
+            <div class="choose_price">
+                <h1>
+                    <span class="price_tit">选择支付方式</span>
+                    <!-- <span class="hiden_div" onclick="hiden_div()">×</span> -->
+                </h1>
+                <div class="price_b clearfix">
+                     <div class="price_b_l" @click='pay("alipay")'>
+                        <div class="p_con">
+                            <img src="../../../assets/img/api/ali01.png"/>
+                            <p>支付宝支付</p>
+                        </div>
+                     </div>
+                     <div class="price_b_r" @click='pay("wipay")'>
+                        <div class="p_con">
+                            <img src="../../../assets/img/api/wei01.png"/>
+                            <p>微信支付</p>
+                        </div>
+                     </div>
+
+                    <div class="price_b_l">
+                        <div class="p_con">
+                            <img src="../../../assets/img/api/ali01.png" id='zfb'/>
+                            <p>支付宝扫码支付</p>
+                            <p>(点击放大)</p>
+                        </div>
+                    </div>
+                    <div class="price_b_r">
+                        <div class="p_con">
+                            <img src="../../../assets/img/api/wei01.png" id="wx"/>
+                            <p>微信扫码支付</p>
+                            <p>(点击放大)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="choose_button" onclick="hiden_div()">取消</div>
+            </div>
+        </div>
+        <!-- 点击二维码的放大暂存区 -->
+        <div class="erweima"><img src=""></div>
+
+        <div id="ww"></div>
+        <!--    议价价格-->
+        <input type="hidden" id="price" value="1000">
+        <!-- guoguo -->
+      </div>
+    </body>
+        <script>
+            var methods = {alipay: "<{:U('AlipayTest/mobilePay')}>", wipay: "<{:U('WxPay/goWxPay')}>"};
+            var orderId = '<{$car_insurance_detil.order_id}>';
+            function load() {
+              $('.insur_wrap').each(function (o) {/*商业险节点的插入*/
+
+                  var dl = $(this).find('.con_body_item'),
+                      biz_num = dl.parents('div.offer_sus').attr('data-bizNum'),/*商业险总数*/
+                      bizTotal = dl.parents('div.offer_sus').attr('data-BizTotal'),/*商业险总额*/
+                      bizTotal = bizTotal/1 ? bizTotal : '0.00',
+                      Color = bizTotal/1 ? '#2d3841' : '#a1a1a1';
+
+                  var ShangYeHTML = '<dl class="con_body_item shangYe" data-flag=1><dt><div class="insurance_name">商业险<span> ×'+ biz_num +'</span></div><span class="price_number"></span></dt><dd><span class="total_number" style="color:'+ Color +'">'+ bizTotal +'</span></dd><img class="gray_arrow" src="/Public/static/image/api/smallf7.png"><img class="biz_arrow" src="/Public/static/image/api/arrow.png"></dl>';/*商业险HTML*/
+
+                  if (biz_num == 0) {
+                      return false;
+                  }else if (dl.eq(0).attr('data-type') == "JQXCCS") {
+
+                      dl.eq(0).after(ShangYeHTML);
+                  }else{
+                      $(this).prepend(ShangYeHTML);
+                  }
+
+              });
+
+              $('dl.shangYe').click(function (e) {/*商业险 展开收缩动画*/
+                  e.stopPropagation();
+
+                  var type = $(this).parents('.company_info').attr('data-type');
+
+                  if ($(this).attr('data-flag')==1) {
+                      $(this).attr('data-flag',0).parent().find('dl[data-type=biz]').slideDown(300);
+                      $(this).find('img.gray_arrow').show().next('img.biz_arrow').css({transform: "rotate(90deg)"});
+                  }else {
+                      $(this).attr('data-flag',1).parent().find('dl[data-type=biz]').slideUp(300);
+                      $(this).find('img.gray_arrow').hide().next('img.biz_arrow').css({transform: "rotate(270deg)"});
+
+                  }
+              });
+
+              priceRecombine($('.total_number'));/*价格拆分展示*/
+
+              /*点击二维码放大*/
+              $('#zfb,#wx').click(function () {
+                  $('.erweima').fadeIn('solw').find('img').attr('src', $(this).attr('src'));
+                  $('.choose_item').fadeOut('fast');
+              });
+              $('.erweima,.mask').click(function () {
+                  $('.erweima').fadeOut('fast');
+                  $('.choose_item').fadeIn('fast');
+              });
+
+              var div1_offset_T = $('.benefit-person>div:eq(0)').offset().top,
+                  div2_offset_T = $('.benefit-person>div:eq(1)').offset().top;
+              /*投保人 名字是否破行*/
+              if(div2_offset_T > div1_offset_T){
+                  $('.benefit-person>div').addClass('lh22');
+              }
+
+              /*议价价格 小数点前超过5位 字体需要变小*/
+              if ($('#last-price').val().length > 6) {
+                  $('.change').addClass('_change');
+              }
+              $('#last-price').bind('keydown', function (event) {
+                  var keycode = event.which;
+                  var val = $(this).val();
+                  var point = val.indexOf(".");
+                  //console.log('dian:'+point);
+                  //console.log('l:'+val.length);
+                  if ((event.keyCode >= 48 && event.keyCode <= 57) || (event.keyCode >= 96 && event.keyCode <= 105)) {
+                      //小数点存在，最多只能输入2位小数
+                      if (point > 0 && val.length - point - 1 >= 2) {
+                          event.preventDefault();
+                          //最多5位数
+                      } else if (point < 0 && val.length >= 5) {
+                          event.preventDefault();
+                      }
+                  } else if (event.keyCode == 110 || event.keyCode == 190) {
+                      //已存在小数点 则剔除小数点
+                      if (point > 0) {
+                          event.preventDefault();
+                      }
+                  } else if (event.keyCode == "8" || event.keyCode == "13") {
+
+                  } else {
+                      event.preventDefault();
+                  }
+
+              });
+              $('.clear').click(function (e) {
+                  e.stopPropagation();
+                  $('#last-price').val('').focus();
+              });
+              $('#last-price').focus(function () {
+                var readonly = $("#last-price").attr('readonly');
+                if(readonly != 'readonly'){
+                   $('.wid-bg').show();
+                       $('.wid').show();
+                }
+
+              });
+              $('.wid-bg').click(function () {
+                  $('.wid-bg').hide();
+                  $('.wid').hide();
+              });
+              $('.wid div').click(function () {
+                  var mon = $(this).find('.total_number');
+                  $('#last-price').val(mon.text() + mon.next().text());
+                  $('#totalPrice').text(mon.text()).next().text(mon.next().text());
+                  $('.wid-bg').hide();
+                  $('.wid').hide();
+              });
+            };
+
+            function softKeyboardBlur(){
+                $("#last-price").blur();
+                $('.wid-bg').hide();
+                $('.wid').hide();
+            }
+            function getTotal() {
+                var total = $("#last-price").val();
+                var total_b = "<{$car_insurance_detil.total_amount}>";
+                var total_z = "<{$car_insurance_detil.shopPay}>";
+                if (parseFloat(total) > parseFloat(total_b)) {
+                    layer.open({
+                        content: '支付金额不能大于保单金额',
+                        time: 2
+                    });
+                    $("#last-price").val(total_b);
+                    $("#totalPrice").text(total_b).next().remove();
+                    priceRecombine($('#totalPrice'));/*价格拆分展示*/
+                    return false;
+                }
+                if (parseFloat(total) < parseFloat(total_z)) {
+                    layer.open({
+                        content: '支付金额不能低于折扣金额',
+                        time: 2
+                    });
+                    $("#last-price").val(total_b);
+                    $("#totalPrice").text(total_b).next().remove();
+                    priceRecombine($('#totalPrice'));/*价格拆分展示*/
+                    return false;
+                }
+
+                if(total == ""){/*金额为空 没有输入金额 显示默认金额*/
+                    $("#last-price").val($('#totalPrice').text()+$('#totalPrice').next().text());
+
+                }else{
+                    var y = String(total).indexOf(".") + 1;//获取小数点的位置
+                    var count = String(total).length - y;//获取小数点后的个数
+                    var arr = ['0', '00'];
+                    if(y > 0) {
+                        if (1-count >= 0) {/*小数点后位数不够2 补0*/
+                            $('#last-price').val(total+arr[1-count]);
+                        }
+                        $("#totalPrice").text(total).next().remove();
+                        priceRecombine($('#totalPrice'));/*价格拆分展示*/
+                    } else {
+
+                        $("#last-price").val(total+'.00');
+                        $("#totalPrice").text(total).next().text('.00');
+                    }
+
+                }
+
+            }
+
+            //选择支付宝
+            var pay_id = 1;//支付方式
+            function checkStatusPay() {
+                $("#hd").attr("src", "__APIROOT__/image/api/not-choose.png");
+                $("#pay").attr("src", "__APIROOT__/image/api/cho.png");
+                pay_id = 1;
+            }
+            //选择微信
+            function checkStatusH() {
+                $("#pay").attr("src", "__APIROOT__/image/api/not-choose.png");
+                $("#hd").attr("src", "__APIROOT__/image/api/cho.png");
+                pay_id = 2;
+            }
+
+
+            //支付宝支付
+            function alipay() {
+                $.post(methods.alipay, {'orderId': orderId}, function (data) {
+                    $("#ww").html(data);
+                });
+            }
+            //微信支付
+            function wipay() {
+                $.post(methods.wipay, {'orderId': orderId}, function (data) {
+                    $("#ww").html(data);
+                });
+            }
+
+            function submitFms() {
+                var total = $("#last-price").val();
+                var total_b = "<{$car_insurance_detil.total_amount}>";
+                var total_z = "<{$car_insurance_detil.shopPay}>";
+                if (parseFloat(total) > parseFloat(total_b)) {
+                    layer.open({
+                        content: '支付金额不能大于保单金额',
+                        time: 2
+                    });
+                    $("#last-price").val(total_b);
+                     $("#totalPrice").text(total_b);
+                    return false;
+                }
+                if (parseFloat(total) < parseFloat(total_z)) {
+                    layer.open({
+                        content: '支付金额不能低于折扣金额',
+                        time: 2
+                    });
+                    $("#last-price").val(total_b);
+                    $("#totalPrice").text(total_b);
+                    return false;
+                }
+
+                //把易价保存表中
+                $.post("<{:U('CarInsurance/updateEasayPrice')}>", {orderId: orderId, price: total}, function (data) {
+                	if(data['code'] != 0){
+                		layer.open({
+                            content:data.msg,
+                        });
+                		return false;
+                	}else{
+                		getQrcode();
+                		setTimeout("getPay()", 1000);
+                	}
+                },'json');
+
+            }
+            function getPay() {
+                $('.mask').show();
+                $('.hiden_div').show();
+                $('.choose_item').stop().animate({bottom: "0px"}, 200);
+            }
+        </script>
+        <script type="text/javascript">
+            function hiden_div() {
+              $('.choose_item').stop().animate({bottom: "-360px"}, 200, function () {
+                  $('.mask').fadeOut('fast');
+              });
+			        $('#ww').hide();
+            }
+            //当面服时时检测支付成功后 订单状态
+            function checkOrder() {
+                $.post(
+                    "<{:U('CarInsuranceOrder/statuPay')}>"
+                    , {'order_sn': '<{$order_sn}>'}
+                    , function (data) {
+                        if (data == 0)
+                            paySuccess()
+                    }
+                );
+            }
+
+            //获取二维码
+            function getQrcode() {
+                //微信
+                $.post(
+                    "<{:U('WxPay/goWxPay')}>"
+                    , {'orderId': orderId, type: 1}
+                    , function (data) {
+                        $("#wx").attr("src", "<{:U('CarInsurance/qrcode')}>"+'?url='+data)
+                    }
+                );
+                //支付宝
+                $.post(
+                    "<{:U('AlipayTest/mobilePay')}>"
+                    , {'orderId': orderId, type: 1}
+                    , function (data) {
+                        $("#zfb").attr("src", "<{:U('CarInsurance/qrcode')}>"+'?url='+data);
+                    }
+                );
+                setInterval("checkOrder()", 500);
+            }
+
+            //跳转支付成功
+            function paySuccess() {
+                location.href = '<{:U("paySuccess")}>?order_sn=<{$car_order_detail.order_sn}>';
+            }
+        </script>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>支付成功</title>
+  <%- include src/components/header/ViolationHeader %>
+</head>
+<body>
+    <div id="all-box" v-cloak>
+        <header></header>
+
+        <ul id="wrapper" class="con">
+            <li class="paySuccess-head">
+                <div><img src="../../../assets/img/api/violation/pay_success.png"></div>
+                <div class="c-36">支付成功</div>
+                <div class="c-A1">您还可以在微信的服务通知中查看此交易详细信息</div>
+            </li>
+            <li class="paySuccess-info">
+                <section class="order-sn">
+                    <div class="c-A1">
+                        {{ item.violation_order_id }}
+                    </div>
+                    <div class="c-A1">
+                        {{ item.add_time }}
+                    </div>
+                </section>
+                <section class="order-info">
+                    <div class="license-number">{{ item.license_number }}</div>
+                    <div class="fine-info">
+                        <div>
+                            <span class="c-A1 t-a-r">违章：</span>
+                            <span class="c-59">{{ item.num }}</span>
+                        </div>
+                        <div>
+                            <span class="c-A1 t-a-r">罚款：</span>
+                            <span class="c-59">{{ '¥ '+(item.fine||'0.00') }}</span>
+                        </div>
+                        <!-- <div>
+                            <span class="c-A1 t-a-r">扣分：</span>
+                            <span class="c-59">{{ (item.degree||0)+' 分' }}</span>
+                        </div> -->
+                        <div>
+                            <span class="c-A1 t-a-r">服务费：</span>
+                            <span class="c-59">{{ '¥ '+(item.poundage||'0.00') }}</span>
+                        </div>
+                    </div>
+                    <div class="payment-amount">
+                        <span class="c-A1">共支付</span>
+                        <span class="yellow">{{ '¥'+(item.amount||'0.00') }}</span>
+                    </div>
+                </section>
+            </li>
+            <!-- <li role="button" @click="BackHome">完成</li> -->
+        </ul>
+
+    </div>
+    <div id="data" class="d-n"><{$item}></div>
+<body>
+</html>
